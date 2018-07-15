@@ -10,6 +10,10 @@ import OuterNavbar from './outernavbar';
 
 class FrontPage extends Component {
 
+		componentWillMount() {
+				document.body.style.background = 'black';
+		}
+
 		render() {
 			return (
 				<Aux>

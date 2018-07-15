@@ -10,6 +10,7 @@
     "i": "^0.3.6",
     "npm": "^6.1.0",
     "react": "^16.4.1",
+    "react-apple-carousel": "^1.2.0",
     "react-circular-progressbar": "^1.0.0",
     "react-dom": "^16.4.1",
     "react-items-carousel": "^2.2.1",

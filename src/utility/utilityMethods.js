@@ -1,6 +1,5 @@
 export const dateFormatter = (dateStr) => {
 
-		console.log('====dateStr====', dateStr);
 		var monthNames = [
         "January", "February", "March",
         "April", "May", "June", "July",

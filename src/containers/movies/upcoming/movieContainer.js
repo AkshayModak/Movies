@@ -18,9 +18,7 @@ class MovieContainer extends Component {
 				} else {
 						this.setState({currentPage: page});
 				}
-				/* Upcoming All Movies -- /3/movie/upcoming?api_key=65324ba8898442570ac397a61cfa7f22&page=*/
-				/* Upcoming Hindi Movies -- /3/movie/upcoming?api_key=65324ba8898442570ac397a61cfa7f22&region=IN&language=hi&sort_by=popularity.desc&with_release_type=3|2&original_language=hi&page=*/
-				axios.get('/3/discover/movie?api_key=65324ba8898442570ac397a61cfa7f22&primary_release_date.gte=2018-07-14&sort_by=release_date.asc&page=' + page)
+				axios.get('/3/discover/movie?api_key=65324ba8898442570ac397a61cfa7f22&primary_release_date.gte=' + new Date().getTime() + '&sort_by=vote_average.desc&page=' + page)
         .then( response => {
             this.setState({
                 posts : response.data

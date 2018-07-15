@@ -15,6 +15,11 @@ class MovieDetails extends Component {
 				credits: null
 		}
 
+		componentWillMount() {
+				document.body.style.background = 'black';
+		}
+
+
 		componentDidMount() {
 				if (this.props.location) {
 						axios.get('/3/movie/'+ this.props.location.state.posts.id +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits')
@@ -29,6 +34,7 @@ class MovieDetails extends Component {
 				}
 				console.log('====isoLangs====', isoLangs.hi);
     }
+
 
 		render() {
 				let movieDetail = null;

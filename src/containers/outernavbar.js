@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import classes from './style.css';
 import PosterPlaceholder from '../images/poster-placeholder.png';
 import Aux from '../HOCs/Aux';
+import AppleCarousel from 'react-apple-carousel';
 
 class OuterNavbar extends Component {
 
@@ -22,7 +23,6 @@ class OuterNavbar extends Component {
 				if (this.state.movies) {
 						if (this.state.movies.length > 5) {
                 let moviesList = this.state.movies;
-                moviesList.reverse();
                 let moviePosters = 0;
                 let movieList = [];
                 moviesList.map( movie => {
@@ -32,15 +32,50 @@ class OuterNavbar extends Component {
 										}
                 });
                 if (moviesList) {
+                    const backdrop_image0 = {backgroundImage: 'url(https://image.tmdb.org/t/p/w1280/' + movieList[0].backdrop_path + ')', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}
+                    const backdrop_image1 = {backgroundImage: 'url(https://image.tmdb.org/t/p/w1280/' + movieList[1].backdrop_path + ')', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}
+                    const backdrop_image2 = {backgroundImage: 'url(https://image.tmdb.org/t/p/w1280/' + movieList[2].backdrop_path + ')', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}
+                    const backdrop_image3 = {backgroundImage: 'url(https://image.tmdb.org/t/p/w1280/' + movieList[3].backdrop_path + ')', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}
                     movieBar = (
-                        movieList.map( movie => {
-                            movie.backdrop = 'https://image.tmdb.org/t/p/w300/' + movie.backdrop_path; //'https://image.tmdb.org/t/p/original/' + movieDetails.backdrop_path
-                            return (
-                                <div className='col col-lg padding-0' key={movie.id}>
-                                  <img src={movie.backdrop} alt={movie.title} title={movie.title} className='width-100'/>
-                                </div>
-                            )
-                        })
+                        <AppleCarousel
+                          renderSlides={[
+                            ({ activeItemIndex, index }) => <div isActive={index === activeItemIndex} style={{ height: '600px' }}>
+                                  <div className="img-cover" style={backdrop_image0}>
+                                      <div className="layer">
+																				<div class="front-labels">
+                                            <h1>Welcome to Movie Cosmos!</h1>
+                                            <h3>Here you can search for details regarding all the movies.</h3>
+                                        </div>
+                                      </div>
+                                  </div>
+                            </div>,
+                            ({ slide }) => <div animationValue={slide} style={{ height: '100%' }}>
+                                  <div className="img-cover" style={backdrop_image1}/>
+                                  <div className="layer">
+                                    <div class="front-labels">
+																				<h1>Upcoming Movies</h1>
+                                    </div>
+                                  </div>
+                            </div>,
+                            () => <div style={{ height: '100%' }}>
+                                    <div className="img-cover" style={backdrop_image2}>
+		                                    <div className="layer">
+                                            <div class="front-labels">
+                                                <h1>Trending Movies</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                  </div>,
+                            () => <div  style={{ height: '100%' }}>
+                                    <div className="img-cover" style={backdrop_image3}/>
+                                    <div className="layer">
+                                      <div class="front-labels">
+                                          <h1>In Theatres Movies</h1>
+                                      </div>
+                                    </div>
+                                </div>,
+                          ]}
+                        />
                     )
                 }
             }
@@ -48,9 +83,6 @@ class OuterNavbar extends Component {
 
 				return (
 						<Aux>
-							<div className="row margin-0">
-								{movieBar}
-							</div>
 							<nav className="navbar navbar-expand-lg navbar-light bg-light">
 	              <NavLink className="navbar-brand" to="/" exact style={{ color: 'white' }}>Movie Cosmos</NavLink>
 	              <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,6 +105,9 @@ class OuterNavbar extends Component {
 	                </div>
 	              </div>
 	            </nav>
+	            <div className="row margin-0">
+              								{movieBar}
+              							</div>
             </Aux>
 				);
 		}
