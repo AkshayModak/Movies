@@ -8,6 +8,7 @@ import FrontPage from './containers/frontPage';
 import InTheatres from './containers/movies/upcoming/InTheatres';
 import PopularTV from './containers/television/popularTV';
 import Person from './containers/people/person';
+import PopularPeople from './containers/people/popular';
 
 class App extends Component {
 		render() {
@@ -21,6 +22,7 @@ class App extends Component {
 		                    <Route path='/in-theatre' exact component={InTheatres} />
 		                    <Route path='/discover' exact component={MovieContainer} />
 		                    <Route path='/person' exact component={Person} />
+		                    <Route path='/actors' exact component={PopularPeople} />
 		                    <Route render={() => <h1>Not found</h1>}/>
 		                </Switch>
                 </Aux>

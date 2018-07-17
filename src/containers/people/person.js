@@ -6,6 +6,7 @@ import '../style.css';
 import { dateFormatter } from '../../utility/utilityMethods';
 import imdbLogo from '../../images/imdb.png';
 import { Link } from 'react-router-dom';
+import Footer from '../footer';
 
 class People extends Component {
 
@@ -14,7 +15,7 @@ class People extends Component {
 				filmography: []
 		}
 
-		componentWillMount() {
+		componentDidMount() {
 				document.body.style.background = 'black';
 
 				let link = '/3/person/'+ this.props.location.state.people_id +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=combined_credits';
@@ -31,9 +32,10 @@ class People extends Component {
 		render() {
 
 				let personDetails = null;
-				let personDetail = '';
+				let personDetail = null;
 
 				if (this.state.people) {
+						personDetail = <div className="loader"></div>;
 						personDetails = this.state.people;
 						const profile_path = 'https://image.tmdb.org/t/p/w500/' + personDetails.profile_path; //'https://image.tmdb.org/t/p/original/' + movieDetails.backdrop_path
 						const imdbLink = 'https://www.imdb.com/name/' + personDetails.imdb_id;
@@ -104,6 +106,7 @@ class People extends Component {
 							<div className="container">
 								{personDetail}
 							</div>
+							<Footer />
 						</Aux>
 				)
 		}

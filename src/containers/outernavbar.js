@@ -99,7 +99,7 @@ class OuterNavbar extends Component {
 	                  <NavLink to="/discover" className="nav-item nav-link" exact activeStyle={{ color: 'red' }} style={{ color: 'white' }}>
 	                        Movies
 	                  </NavLink>
-                    <NavLink to="/discover" className="nav-item nav-link" exact activeStyle={{ color: 'red' }} style={{ color: 'white' }}>
+                    <NavLink to="/actors" className="nav-item nav-link" exact activeStyle={{ color: 'red' }} style={{ color: 'white' }}>
                           Actors
                     </NavLink>
 	                </div>
