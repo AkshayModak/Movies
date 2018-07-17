@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from '../../axios';
 import { connect } from 'react-redux';
-import classes from '../style.css';
+import '../style.css';
 
 var formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -53,6 +53,7 @@ class TopGrossing extends Component {
 							<td>{ result.data.title }</td>
 							<td>{ formatter.format((result.data.revenue)) }</td>
 							</tr>)
+							return '';
 				});
 				return(
 						<table className="table table-condensed">

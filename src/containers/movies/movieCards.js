@@ -34,7 +34,7 @@ class MovieCards extends Component {
               }}
             />
           }
-					<Link to={{ pathname: '/movie-details', state: { posts: this.props.data, selectedMovie: this.props.selectedMovie} }}>
+					<Link to={{ pathname: '/movie-details', state: { posts: this.props.data, selectedMovie: this.props.selectedMovie, isTv: this.props.isTv } }}>
 						<figure className="figure">
               <img style={this.state.loaded ? {} : {display: 'none'}} alt={ this.props.data.title ? this.props.data.title : this.props.data.original_name }
                   src={ this.props.data.poster_path ? poster_path : PosterPlaceholder }

@@ -4,10 +4,10 @@ import { Route, Switch } from 'react-router-dom';
 import MovieDetails from './containers/movies/movieDetails';
 import MovieContainer from './containers/movies/upcoming/movieContainer';
 import Aux from './HOCs/Aux';
-import Navbar from './containers/navbar';
 import FrontPage from './containers/frontPage';
 import InTheatres from './containers/movies/upcoming/InTheatres';
 import PopularTV from './containers/television/popularTV';
+import Person from './containers/people/person';
 
 class App extends Component {
 		render() {
@@ -20,6 +20,7 @@ class App extends Component {
 		                    <Route path='/popular-tv' exact component={PopularTV} />
 		                    <Route path='/in-theatre' exact component={InTheatres} />
 		                    <Route path='/discover' exact component={MovieContainer} />
+		                    <Route path='/person' exact component={Person} />
 		                    <Route render={() => <h1>Not found</h1>}/>
 		                </Switch>
                 </Aux>

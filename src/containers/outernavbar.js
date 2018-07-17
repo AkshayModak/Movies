@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import classes from './style.css';
-import PosterPlaceholder from '../images/poster-placeholder.png';
+import './style.css';
 import Aux from '../HOCs/Aux';
 import AppleCarousel from 'react-apple-carousel';
 
@@ -30,6 +29,7 @@ class OuterNavbar extends Component {
 												movieList.push(movie);
 												moviePosters++;
 										}
+										return '';
                 });
                 if (moviesList) {
                     const backdrop_image0 = {backgroundImage: 'url(https://image.tmdb.org/t/p/w1280/' + movieList[0].backdrop_path + ')', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}
@@ -42,7 +42,7 @@ class OuterNavbar extends Component {
                             ({ activeItemIndex, index }) => <div isActive={index === activeItemIndex} style={{ height: '600px' }}>
                                   <div className="img-cover" style={backdrop_image0}>
                                       <div className="layer">
-																				<div class="front-labels">
+																				<div className="front-labels">
                                             <h1>Welcome to Movie Cosmos!</h1>
                                             <h3>Here you can search for details regarding all the movies.</h3>
                                         </div>
@@ -52,7 +52,7 @@ class OuterNavbar extends Component {
                             ({ slide }) => <div animationValue={slide} style={{ height: '100%' }}>
                                   <div className="img-cover" style={backdrop_image1}/>
                                   <div className="layer">
-                                    <div class="front-labels">
+                                    <div className="front-labels">
 																				<h1>Upcoming Movies</h1>
                                     </div>
                                   </div>
@@ -60,7 +60,7 @@ class OuterNavbar extends Component {
                             () => <div style={{ height: '100%' }}>
                                     <div className="img-cover" style={backdrop_image2}>
 		                                    <div className="layer">
-                                            <div class="front-labels">
+                                            <div className="front-labels">
                                                 <h1>Trending Movies</h1>
                                             </div>
                                         </div>
@@ -69,7 +69,7 @@ class OuterNavbar extends Component {
                             () => <div  style={{ height: '100%' }}>
                                     <div className="img-cover" style={backdrop_image3}/>
                                     <div className="layer">
-                                      <div class="front-labels">
+                                      <div className="front-labels">
                                           <h1>In Theatres Movies</h1>
                                       </div>
                                     </div>

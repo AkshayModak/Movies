@@ -3,7 +3,6 @@ import MovieContainer from './movies/upcoming/movieContainer';
 import InTheatres from './movies/upcoming/InTheatres';
 import Aux from '../HOCs/Aux';
 import { Link } from 'react-router-dom';
-import TopGrossing from './movies/TopGrossing';
 import PopularTV from './television/popularTV';
 import Footer from './footer';
 import OuterNavbar from './outernavbar';
@@ -63,30 +62,3 @@ class FrontPage extends Component {
 }
 
 export default FrontPage;
-
-
-/*
-<div className="col-lg-3">
-							<div className="card">
-			          <div className="card-header">
-			            <ul className="list-inline margin-bottom-0">
-			              <li className="list-inline-item padding-top-7">Top Grossing</li>
-			              <li className="list-inline-item float-right"><Link to="/discover" className="btn btn-light float-right">View All</Link></li>
-			            </ul>
-			          </div>
-			          <div className="card-body padding-bottom-0">
-									<TopGrossing />
-			          </div>
-			        </div>
-			        <div className="card">
-			          <div className="card-header">
-			            <ul className="list-inline margin-bottom-0">
-			              <li className="list-inline-item padding-top-7">Highest Rated</li>
-			              <li className="list-inline-item float-right"><Link to="/discover" className="btn btn-light float-right">View All</Link></li>
-			            </ul>
-			          </div>
-			          <div className="card-body padding-bottom-0">
-
-			          </div>
-			        </div>
-						</div>*/

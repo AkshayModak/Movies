@@ -137,6 +137,11 @@
 		margin-bottom: 0 !important;
 }
 
+.padding-10 {
+		padding-top: 10px;
+		padding-bottom: 10px;
+}
+
 .navbar.bg-light {
 		background-color: black !important;
 }
@@ -221,6 +226,7 @@ li.center-align {
 
 .container {
 		background-color: white;
+		margin-top: 55px;
 }
 
 footer, footer > div.container {
@@ -271,4 +277,39 @@ footer, footer > div.container {
 		top: 25%;
 		left: 10%;
 		transform: translateY(-50%);
+}
+
+.btnlink:hover, .btnlink:focus {
+		text-decoration: none;
+		color: red;
+}
+
+#summary {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+#summary p.collapse:not(.show) {
+    height: 42px !important;
+    overflow: hidden;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+#summary p.collapsing {
+    min-height: 42px !important;
+}
+
+#summary a.collapsed:after  {
+    content: 'Read More';
+}
+
+#summary a:not(.collapsed):after {
+    content: 'Read Less';
+}
+
+#summary p {
+		margin-bottom: 0;
 }

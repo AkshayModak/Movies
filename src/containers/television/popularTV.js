@@ -62,7 +62,7 @@ class PopularTV extends Component {
 
 				return (
 						<Aux>
-							<Users movieDetails={this.state.tv} showTotal={this.props.showTotal}/>
+							<Users movieDetails={this.state.tv} showTotal={this.props.showTotal} isTv={true}/>
 							{pagination}
 						</Aux>
 				)

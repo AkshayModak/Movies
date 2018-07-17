@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Aux from '../HOCs/Aux';
 import MovieCards from './movies/movieCards';
 import { connect } from 'react-redux';
-import classes from './style.css';
+import './style.css';
 import ItemsCarousel from 'react-items-carousel';
 
 class Users extends Component {
@@ -13,12 +13,10 @@ class Users extends Component {
 		}
 
 		componentWillReceiveProps(nextProps) {
-				console.log('===nextProps===', nextProps);
         if ( nextProps.movieDetails ) {
               const movie_results = nextProps.movieDetails.results;
 
               if (movie_results && this.props.showTotal) {
-                  const showTotal = this.props.showTotal;
                   this.setState({ movies: movie_results});
               }
         }
@@ -38,10 +36,7 @@ class Users extends Component {
 
         if ( this.state.movies.length > 0 ) {
             const movie_results = this.state.movies;
-            console.log('====movie_results===', this.state.movies);
 						if (this.props.showTotal) {
-								/*movie_results.slice(0, this.props.showTotal);*/
-								const showTotal = this.props.showTotal;
 								movie_result = (
                     <ItemsCarousel
                           numberOfCards={10}
@@ -67,25 +62,25 @@ class Users extends Component {
 										      activeItemIndex={activeItemIndex}
                           activePosition={'center'}
                           children={[
-															<MovieCards data={movie_results[0]} selectedMovie={movie_results[0].id} key={movie_results[0].id} isUpcoming={this.props.isUpcoming}/>,
-															<MovieCards data={movie_results[1]} selectedMovie={movie_results[1].id} key={movie_results[1].id} isUpcoming={this.props.isUpcoming}/>,
-															<MovieCards data={movie_results[2]} selectedMovie={movie_results[2].id} key={movie_results[2].id} isUpcoming={this.props.isUpcoming}/>,
-															<MovieCards data={movie_results[3]} selectedMovie={movie_results[3].id} key={movie_results[3].id} isUpcoming={this.props.isUpcoming}/>,
-															<MovieCards data={movie_results[4]} selectedMovie={movie_results[4].id} key={movie_results[4].id} isUpcoming={this.props.isUpcoming}/>,
-															<MovieCards data={movie_results[5]} selectedMovie={movie_results[5].id} key={movie_results[5].id} isUpcoming={this.props.isUpcoming}/>,
-                              <MovieCards data={movie_results[6]} selectedMovie={movie_results[6].id} key={movie_results[6].id} isUpcoming={this.props.isUpcoming}/>,
-                              <MovieCards data={movie_results[7]} selectedMovie={movie_results[7].id} key={movie_results[7].id} isUpcoming={this.props.isUpcoming}/>,
-                              <MovieCards data={movie_results[8]} selectedMovie={movie_results[8].id} key={movie_results[8].id} isUpcoming={this.props.isUpcoming}/>,
-                              <MovieCards data={movie_results[9]} selectedMovie={movie_results[9].id} key={movie_results[9].id} isUpcoming={this.props.isUpcoming}/>,
-                              <MovieCards data={movie_results[10]} selectedMovie={movie_results[10].id} key={movie_results[10].id} isUpcoming={this.props.isUpcoming}/>,
-                              <MovieCards data={movie_results[11]} selectedMovie={movie_results[11].id} key={movie_results[11].id} isUpcoming={this.props.isUpcoming}/>,
-                              <MovieCards data={movie_results[12]} selectedMovie={movie_results[12].id} key={movie_results[12].id} isUpcoming={this.props.isUpcoming}/>,
-                              <MovieCards data={movie_results[13]} selectedMovie={movie_results[13].id} key={movie_results[13].id} isUpcoming={this.props.isUpcoming}/>,
-                              <MovieCards data={movie_results[14]} selectedMovie={movie_results[14].id} key={movie_results[14].id} isUpcoming={this.props.isUpcoming}/>,
-                              <MovieCards data={movie_results[15]} selectedMovie={movie_results[15].id} key={movie_results[15].id} isUpcoming={this.props.isUpcoming}/>,
-                              <MovieCards data={movie_results[16]} selectedMovie={movie_results[16].id} key={movie_results[16].id} isUpcoming={this.props.isUpcoming}/>,
-	                            <MovieCards data={movie_results[17]} selectedMovie={movie_results[17].id} key={movie_results[17].id} isUpcoming={this.props.isUpcoming}/>,
-	                            <MovieCards data={movie_results[18]} selectedMovie={movie_results[18].id} key={movie_results[18].id} isUpcoming={this.props.isUpcoming}/>
+															<MovieCards data={movie_results[0]} selectedMovie={movie_results[0].id} key={movie_results[0].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+															<MovieCards data={movie_results[1]} selectedMovie={movie_results[1].id} key={movie_results[1].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+															<MovieCards data={movie_results[2]} selectedMovie={movie_results[2].id} key={movie_results[2].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+															<MovieCards data={movie_results[3]} selectedMovie={movie_results[3].id} key={movie_results[3].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+															<MovieCards data={movie_results[4]} selectedMovie={movie_results[4].id} key={movie_results[4].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+															<MovieCards data={movie_results[5]} selectedMovie={movie_results[5].id} key={movie_results[5].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+                              <MovieCards data={movie_results[6]} selectedMovie={movie_results[6].id} key={movie_results[6].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+                              <MovieCards data={movie_results[7]} selectedMovie={movie_results[7].id} key={movie_results[7].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+                              <MovieCards data={movie_results[8]} selectedMovie={movie_results[8].id} key={movie_results[8].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+                              <MovieCards data={movie_results[9]} selectedMovie={movie_results[9].id} key={movie_results[9].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+                              <MovieCards data={movie_results[10]} selectedMovie={movie_results[10].id} key={movie_results[10].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+                              <MovieCards data={movie_results[11]} selectedMovie={movie_results[11].id} key={movie_results[11].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+                              <MovieCards data={movie_results[12]} selectedMovie={movie_results[12].id} key={movie_results[12].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+                              <MovieCards data={movie_results[13]} selectedMovie={movie_results[13].id} key={movie_results[13].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+                              <MovieCards data={movie_results[14]} selectedMovie={movie_results[14].id} key={movie_results[14].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+                              <MovieCards data={movie_results[15]} selectedMovie={movie_results[15].id} key={movie_results[15].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+                              <MovieCards data={movie_results[16]} selectedMovie={movie_results[16].id} key={movie_results[16].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+	                            <MovieCards data={movie_results[17]} selectedMovie={movie_results[17].id} key={movie_results[17].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+	                            <MovieCards data={movie_results[18]} selectedMovie={movie_results[18].id} key={movie_results[18].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>
                           ]}
                         />
 								)
@@ -115,21 +110,21 @@ class Users extends Component {
                             activeItemIndex={activeItemIndex}
                             activePosition={'center'}
                             children={[
-                                <MovieCards data={movie_results[0]} selectedMovie={movie_results[0].id} key={movie_results[0].id} isUpcoming={this.props.isUpcoming}/>,
-                                <MovieCards data={movie_results[1]} selectedMovie={movie_results[1].id} key={movie_results[1].id} isUpcoming={this.props.isUpcoming}/>,
-                                <MovieCards data={movie_results[2]} selectedMovie={movie_results[2].id} key={movie_results[2].id} isUpcoming={this.props.isUpcoming}/>,
-                                <MovieCards data={movie_results[3]} selectedMovie={movie_results[3].id} key={movie_results[3].id} isUpcoming={this.props.isUpcoming}/>,
-                                <MovieCards data={movie_results[4]} selectedMovie={movie_results[4].id} key={movie_results[4].id} isUpcoming={this.props.isUpcoming}/>,
-                                <MovieCards data={movie_results[5]} selectedMovie={movie_results[5].id} key={movie_results[5].id} isUpcoming={this.props.isUpcoming}/>,
-                                <MovieCards data={movie_results[6]} selectedMovie={movie_results[6].id} key={movie_results[6].id} isUpcoming={this.props.isUpcoming}/>,
-                                <MovieCards data={movie_results[7]} selectedMovie={movie_results[7].id} key={movie_results[7].id} isUpcoming={this.props.isUpcoming}/>,
-                                <MovieCards data={movie_results[8]} selectedMovie={movie_results[8].id} key={movie_results[8].id} isUpcoming={this.props.isUpcoming}/>,
-                                <MovieCards data={movie_results[9]} selectedMovie={movie_results[9].id} key={movie_results[9].id} isUpcoming={this.props.isUpcoming}/>,
-                                <MovieCards data={movie_results[10]} selectedMovie={movie_results[10].id} key={movie_results[10].id} isUpcoming={this.props.isUpcoming}/>,
-                                <MovieCards data={movie_results[11]} selectedMovie={movie_results[11].id} key={movie_results[11].id} isUpcoming={this.props.isUpcoming}/>,
-                                <MovieCards data={movie_results[12]} selectedMovie={movie_results[12].id} key={movie_results[12].id} isUpcoming={this.props.isUpcoming}/>,
-                                <MovieCards data={movie_results[13]} selectedMovie={movie_results[13].id} key={movie_results[13].id} isUpcoming={this.props.isUpcoming}/>,
-                                <MovieCards data={movie_results[14]} selectedMovie={movie_results[14].id} key={movie_results[14].id} isUpcoming={this.props.isUpcoming}/>
+                                <MovieCards data={movie_results[0]} selectedMovie={movie_results[0].id} key={movie_results[0].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+                                <MovieCards data={movie_results[1]} selectedMovie={movie_results[1].id} key={movie_results[1].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+                                <MovieCards data={movie_results[2]} selectedMovie={movie_results[2].id} key={movie_results[2].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+                                <MovieCards data={movie_results[3]} selectedMovie={movie_results[3].id} key={movie_results[3].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+                                <MovieCards data={movie_results[4]} selectedMovie={movie_results[4].id} key={movie_results[4].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+                                <MovieCards data={movie_results[5]} selectedMovie={movie_results[5].id} key={movie_results[5].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+                                <MovieCards data={movie_results[6]} selectedMovie={movie_results[6].id} key={movie_results[6].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+                                <MovieCards data={movie_results[7]} selectedMovie={movie_results[7].id} key={movie_results[7].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+                                <MovieCards data={movie_results[8]} selectedMovie={movie_results[8].id} key={movie_results[8].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+                                <MovieCards data={movie_results[9]} selectedMovie={movie_results[9].id} key={movie_results[9].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+                                <MovieCards data={movie_results[10]} selectedMovie={movie_results[10].id} key={movie_results[10].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+                                <MovieCards data={movie_results[11]} selectedMovie={movie_results[11].id} key={movie_results[11].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+                                <MovieCards data={movie_results[12]} selectedMovie={movie_results[12].id} key={movie_results[12].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+                                <MovieCards data={movie_results[13]} selectedMovie={movie_results[13].id} key={movie_results[13].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+                                <MovieCards data={movie_results[14]} selectedMovie={movie_results[14].id} key={movie_results[14].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>
                             ]}
                           />
                   )
@@ -160,33 +155,28 @@ class Users extends Component {
 	                          activeItemIndex={activeItemIndex}
 	                          activePosition={'center'}
 	                          children={[
-	                              <MovieCards data={movie_results[0]} selectedMovie={movie_results[0].id} key={movie_results[0].id} isUpcoming={this.props.isUpcoming}/>,
-	                              <MovieCards data={movie_results[1]} selectedMovie={movie_results[1].id} key={movie_results[1].id} isUpcoming={this.props.isUpcoming}/>,
-	                              <MovieCards data={movie_results[2]} selectedMovie={movie_results[2].id} key={movie_results[2].id} isUpcoming={this.props.isUpcoming}/>,
-	                              <MovieCards data={movie_results[3]} selectedMovie={movie_results[3].id} key={movie_results[3].id} isUpcoming={this.props.isUpcoming}/>,
-	                              <MovieCards data={movie_results[4]} selectedMovie={movie_results[4].id} key={movie_results[4].id} isUpcoming={this.props.isUpcoming}/>,
-	                              <MovieCards data={movie_results[5]} selectedMovie={movie_results[5].id} key={movie_results[5].id} isUpcoming={this.props.isUpcoming}/>,
-	                              <MovieCards data={movie_results[6]} selectedMovie={movie_results[6].id} key={movie_results[6].id} isUpcoming={this.props.isUpcoming}/>,
-	                              <MovieCards data={movie_results[7]} selectedMovie={movie_results[7].id} key={movie_results[7].id} isUpcoming={this.props.isUpcoming}/>,
-	                              <MovieCards data={movie_results[8]} selectedMovie={movie_results[8].id} key={movie_results[8].id} isUpcoming={this.props.isUpcoming}/>,
-	                              <MovieCards data={movie_results[9]} selectedMovie={movie_results[9].id} key={movie_results[9].id} isUpcoming={this.props.isUpcoming}/>,
-	                              <MovieCards data={movie_results[10]} selectedMovie={movie_results[10].id} key={movie_results[10].id} isUpcoming={this.props.isUpcoming}/>,
-	                              <MovieCards data={movie_results[11]} selectedMovie={movie_results[11].id} key={movie_results[11].id} isUpcoming={this.props.isUpcoming}/>,
-	                              <MovieCards data={movie_results[12]} selectedMovie={movie_results[12].id} key={movie_results[12].id} isUpcoming={this.props.isUpcoming}/>,
-	                              <MovieCards data={movie_results[13]} selectedMovie={movie_results[13].id} key={movie_results[13].id} isUpcoming={this.props.isUpcoming}/>,
-	                              <MovieCards data={movie_results[14]} selectedMovie={movie_results[14].id} key={movie_results[14].id} isUpcoming={this.props.isUpcoming}/>
+	                              <MovieCards data={movie_results[0]} selectedMovie={movie_results[0].id} key={movie_results[0].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+	                              <MovieCards data={movie_results[1]} selectedMovie={movie_results[1].id} key={movie_results[1].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+	                              <MovieCards data={movie_results[2]} selectedMovie={movie_results[2].id} key={movie_results[2].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+	                              <MovieCards data={movie_results[3]} selectedMovie={movie_results[3].id} key={movie_results[3].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+	                              <MovieCards data={movie_results[4]} selectedMovie={movie_results[4].id} key={movie_results[4].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+	                              <MovieCards data={movie_results[5]} selectedMovie={movie_results[5].id} key={movie_results[5].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+	                              <MovieCards data={movie_results[6]} selectedMovie={movie_results[6].id} key={movie_results[6].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+	                              <MovieCards data={movie_results[7]} selectedMovie={movie_results[7].id} key={movie_results[7].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+	                              <MovieCards data={movie_results[8]} selectedMovie={movie_results[8].id} key={movie_results[8].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+	                              <MovieCards data={movie_results[9]} selectedMovie={movie_results[9].id} key={movie_results[9].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+	                              <MovieCards data={movie_results[10]} selectedMovie={movie_results[10].id} key={movie_results[10].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+	                              <MovieCards data={movie_results[11]} selectedMovie={movie_results[11].id} key={movie_results[11].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+	                              <MovieCards data={movie_results[12]} selectedMovie={movie_results[12].id} key={movie_results[12].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+	                              <MovieCards data={movie_results[13]} selectedMovie={movie_results[13].id} key={movie_results[13].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>,
+	                              <MovieCards data={movie_results[14]} selectedMovie={movie_results[14].id} key={movie_results[14].id} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>
 	                          ]}
 	                        />
 	                )
-								/*movie_result = movie_results.filter((i, index) => (index < this.props.showTotal)).map( result => { //.filter((i, index) => (index < 4))
-										return (
-                        <MovieCards data={result} selectedMovie={result.id} key={result.id}/>
-										)
-                });*/
 						} else if (movie_results) {
 								movie_result = movie_results.map( result => { //.filter((i, index) => (index < 4))
                     return (
-                        <MovieCards data={result} selectedMovie={result.id} key={result.id}/>
+                        <MovieCards data={result} selectedMovie={result.id} key={result.id} isTv={this.props.isTv}/>
                     )
                 });
 						}

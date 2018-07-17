@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import classes from './style.css';
+import './style.css';
 import PosterPlaceholder from '../images/poster-placeholder.png';
 import Aux from '../HOCs/Aux';
 
@@ -19,12 +19,11 @@ class Navbar extends Component {
 
 		render() {
 				let movieBar = <div className="loader"></div>;
-				console.log('====this.state 1====', this.state);
 				if (this.state.movies) {
 						if (this.state.movies.backdrop_path) {
 								let movie = this.state.movies;
                 movie.backdrop = 'https://image.tmdb.org/t/p/w1280/' + movie.backdrop_path; //'https://image.tmdb.org/t/p/original/' + movieDetails.backdrop_path
-                var parallax = {
+                const parallax = {
                     backgroundImage: 'url(' + movie.backdrop + ')',
 
                     /* Set a specific height */
@@ -45,19 +44,13 @@ class Navbar extends Component {
                     </div>
                 )
 						} else {
-								var parallax = {
+								const parallax = {
                     backgroundImage: 'url('+ PosterPlaceholder +')',
-
-                    /* Set a specific height */
-                    height: '200px',
-
-                    /* Create the parallax scrolling effect */
                     backgroundAttachment: 'fixed',
                     backgroundPosition: 'center bottom',
                     backgroundRepeat: 'no-repeat',
                     backgroundSize: 'cover',
                     top: '-50%'
-
                 }
 
                 movieBar = (

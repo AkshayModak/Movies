@@ -71,7 +71,7 @@ class MovieContainer extends Component {
 				return (
 						<Aux>
 							{ outerNavbar }
-							<Users movieDetails={this.state.posts} showTotal={this.props.showTotal} isUpcoming={this.props.isUpcoming}/>
+							<Users movieDetails={this.state.posts} showTotal={this.props.showTotal} isUpcoming={this.props.isUpcoming} isTv={this.props.isTv}/>
 							{pagination}
 						</Aux>
 				)
