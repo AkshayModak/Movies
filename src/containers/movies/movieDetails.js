@@ -72,7 +72,9 @@ class MovieDetails extends Component {
 				let castAndCrew = null;
 
 				if (this.props.location || this.state.movies) {
-						movieDetail = <div className="loader"></div>;
+						movieDetail = (
+                <div className="backdrop"> <i class="fa fa-spinner fa-spin fa-5x fa-fw" style={{ top: '50%', left: '50%', position: 'absolute' }}/> </div>
+           );
             movieDetails = null;
 						let genres = [];
 						if (this.state.credits || this.state.movies) {
@@ -216,7 +218,7 @@ class MovieDetails extends Component {
 				return (
 							<Aux>
 								<Navbar />
-								<div className="container" style={{ "boxShadow": "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)", marginTop: '55px', opacity: '0.95', height: '100%' }}>
+								<div className="container" style={ this.props.location || this.state.movies ? {"boxShadow": "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)", opacity: '.95', marginTop: '55px', height: '100%'} : { height: '100%' } }>
 									<div>{movieDetail}</div>
 									{castAndCrew}
 								</div>

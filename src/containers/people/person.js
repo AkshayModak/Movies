@@ -12,17 +12,19 @@ class People extends Component {
 
 		state = {
 				people: [],
-				filmography: []
+				filmography: [],
+				loaded: false
 		}
 
-		componentDidMount() {
+		componentWillMount() {
 				document.body.style.background = 'black';
 
 				let link = '/3/person/'+ this.props.location.state.people_id +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=combined_credits';
 				axios.get(link)
         .then( response => {
             this.setState({
-                people : response.data
+                people : response.data,
+                loaded: true
             });
         }).catch( error => {
             console.log( error );
@@ -34,7 +36,13 @@ class People extends Component {
 				let personDetails = null;
 				let personDetail = null;
 
-				if (this.state.people) {
+        if (!this.state.loaded) {
+						personDetail = (
+                 <div className="backdrop"> <i class="fa fa-spinner fa-spin fa-5x fa-fw" style={{ marginLeft: '50%', position: 'relative', top: '50%'}}/> </div>
+            );
+        }
+
+				if (this.state.people && this.state.loaded) {
 						personDetail = <div className="loader"></div>;
 						personDetails = this.state.people;
 						const profile_path = 'https://image.tmdb.org/t/p/w500/' + personDetails.profile_path; //'https://image.tmdb.org/t/p/original/' + movieDetails.backdrop_path

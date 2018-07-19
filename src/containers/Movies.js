@@ -30,7 +30,9 @@ class Users extends Component {
           activeItemIndex
         } = this.state;
 
-				let movie_result = <div className="loader"></div>;
+				let movie_result =  (
+            <div style={{ width: '100%' }}> <i class="fa fa-spinner fa-spin fa-5x fa-fw" style={{ color: 'white', marginLeft: '50%', position: 'relative', top: '50%'}}/> </div>
+       );
 				let movie_result_small = <div className="loader"></div>
 				let movie_result_xs = <div className="loader"></div>
 

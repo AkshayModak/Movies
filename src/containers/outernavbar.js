@@ -18,7 +18,9 @@ class OuterNavbar extends Component {
 		}
 
 		render() {
-				let movieBar = <div className="loader"></div>;
+				let movieBar = (
+             <div style={{ width: '100%', height: '600px' }}> <i class="fa fa-spinner fa-spin fa-5x fa-fw" style={{ color: 'white', marginLeft: '50%', position: 'relative', top: '50%'}}/> </div>
+        );
 				if (this.state.movies) {
 						if (this.state.movies.length > 5) {
                 let moviesList = this.state.movies;
