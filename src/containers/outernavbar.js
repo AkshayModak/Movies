@@ -85,19 +85,30 @@ class OuterNavbar extends Component {
 
 				return (
 						<Aux>
-							<nav className="navbar navbar-expand-lg navbar-light bg-light">
-	              <NavLink className="navbar-brand" to="/" exact style={{ color: 'white' }}>Movie Cosmos</NavLink>
+							<nav className="navbar navbar-expand-lg fixed-top bg-light" style={{ padding: '0' }}>
+	              <NavLink className="navbar-brand" to="/" exact style={{ color: 'white', padding: '10px' }}>Movie Cosmos</NavLink>
 	              <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 	                <span className="navbar-toggler-icon"></span>
 	              </button>
 	              <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-	                <div className="navbar-nav">
+	                <div className="navbar-nav" style={{ padding: '10px' }}>
 	                  <NavLink to="/" exact className="nav-item nav-link" activeStyle={{ color: 'red'}} style={{ color: 'white' }}>
 	                    Home
 	                  </NavLink>
 	                  <NavLink to="/discover" className="nav-item nav-link" exact activeStyle={{ color: 'red' }} style={{ color: 'white' }}>
 	                        TV
 	                  </NavLink>
+	                  <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{ color: 'white' }}>
+                        Movies
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Upcoming</a>
+                        <a class="dropdown-item" href="#">In Theatres</a>
+                        <a class="dropdown-item" href="#">Top Rated</a>
+                        <a class="dropdown-item" href="#">Popular</a>
+                      </div>
+                    </li>
 	                  <NavLink to="/discover" className="nav-item nav-link" exact activeStyle={{ color: 'red' }} style={{ color: 'white' }}>
 	                        Movies
 	                  </NavLink>

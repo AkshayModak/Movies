@@ -147,7 +147,7 @@ body {
 }
 
 .navbar.bg-light {
-		background-color: black !important;
+		background: black !important;
 }
 
 .card {
@@ -338,3 +338,53 @@ footer, footer > div.container {
 .backdrop > i {
 		color: white;
 }
+
+		.dropdown .dropdown-menu {
+		    -webkit-transition: all 0.3s;
+		    -moz-transition: all 0.3s;
+		    -ms-transition: all 0.3s;
+		    -o-transition: all 0.3s;
+		    transition: all 0.3s;
+
+		    max-height: 0px;
+		    display: block;
+		    overflow: hidden;
+		    opacity: 1;
+		    background-color: rgba(999,999,999,0.9);
+		    background-color: brown;
+		    padding: 0;
+		}
+
+		.dropdown-menu, .dropdown-menu > a {
+    		opacity: 1;
+    		display: block;
+    		padding: 10px;
+    		color: white;
+    		padding-left: 20px;
+    }
+
+@media (min-width: 900px) {
+		.dropdown:hover .dropdown-menu {
+		    max-height: 200px;
+		    opacity: 1;
+		    border-radius: 5px 5px 5px 5px;
+		}
+}
+
+@media (max-width: 899px) {
+		.dropdown.show .dropdown-menu.show {
+		    max-height: 200px;
+		    opacity: 1;
+		    border-radius: 5px 5px 5px 5px;
+		}
+}
+
+
+.nav-tabs .nav-link {
+		font-weight: 900;
+}
+
+
+
+
+

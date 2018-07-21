@@ -10,6 +10,8 @@ import CircularProgressbar from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import PosterPlaceholder from '../../images/poster-placeholder.png';
 import { Link } from 'react-router-dom';
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css'; // This only needs to be imported once in your app
 
 class MovieDetails extends Component {
 
@@ -17,7 +19,11 @@ class MovieDetails extends Component {
 				credits: null,
 				hasLoaded: false,
 				movies: null,
-				movie_id: null
+				movie_id: null,
+				movieTrailers: null,
+				movieImages: null,
+				photoIndex: 0,
+				isOpen: false
 		}
 
 		componentWillMount() {
@@ -27,21 +33,25 @@ class MovieDetails extends Component {
 		componentWillUnMount() {
 				this.setState({
 						movies: null,
-						credits: null
+						credits: null,
+						isOpen: false
 				});
 		}
 
 
 		componentDidMount() {
 				if (!this.props.location.state.movie_id) {
-						let link = '/3/movie/'+ this.props.location.state.posts.id +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits';
+						let link = '/3/movie/'+ this.props.location.state.posts.id +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits,videos,images';
             if (this.props.location.state.isTv) {
                 link = '/3/tv/'+ this.props.location.state.posts.id +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits';
             }
             axios.get(link)
                     .then( response => {
+                        console.log('=====response.data====', response.data);
                         this.setState({
-                            credits : response.data
+                            credits : response.data,
+                            movieTrailers: response.data.videos,
+                            movieImages: response.data.images
                         });
                     }).catch( error => {
                         console.log( error );
@@ -49,10 +59,11 @@ class MovieDetails extends Component {
 				}
 
 				if (this.props.location.state.movie_id) {
-						let link = '/3/movie/'+ this.props.location.state.movie_id +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits';
+						let link = '/3/movie/'+ this.props.location.state.movie_id +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits,videos';
             this.setState({hasLoaded: true});
             axios.get(link)
             .then( response => {
+                console.log('=====response====', response);
                 this.setState({
                     movies : response.data,
                     credits: response.data.credits,
@@ -67,13 +78,18 @@ class MovieDetails extends Component {
 
 
 		render() {
+		    const { photoIndex, isOpen, movieImages, movieTrailers } = this.state;
+
 				let movieDetail = null;
 				let movieDetails = null;
 				let castAndCrew = null;
+				let image_lightBox = null;
+				let displayImages = null;
+				let displayMovieTrailers = null;
 
 				if (this.props.location || this.state.movies) {
 						movieDetail = (
-                <div className="backdrop"> <i class="fa fa-spinner fa-spin fa-5x fa-fw" style={{ top: '50%', left: '50%', position: 'absolute' }}/> </div>
+                <div className="backdrop"> <i className="fa fa-spinner fa-spin fa-5x fa-fw" style={{ top: '50%', left: '50%', position: 'absolute' }}/> </div>
            );
             movieDetails = null;
 						let genres = [];
@@ -109,6 +125,75 @@ class MovieDetails extends Component {
                         return '';
                     });
                 }
+
+								let images = [];
+
+								if (movieImages) {
+										const backdrops = movieImages.backdrops;
+                    const posters = movieImages.posters;
+
+                    if (backdrops) {
+                        for (var image in backdrops) {
+                            images.push('https://image.tmdb.org/t/p/w780/' + backdrops[image].file_path);
+                        }
+                    }
+                    if (posters) {
+                        for (var image in posters) {
+                            images.push('https://image.tmdb.org/t/p/w780/' + posters[image].file_path);
+                        }
+                    }
+								}
+
+								if (movieTrailers && movieTrailers.results) {
+										displayMovieTrailers = ( movieTrailers.results.filter((i, index) => (index < 4)).map( (trailers, index) => {
+                            return (
+                                <div className="col-lg-3" key={index}>
+                                    <iframe src={"https://www.youtube.com/embed/" + trailers.key} frameBorder="0" allow="autoplay; encrypted-media" style={{ maxWidth: '100%', maxHeight: '100%' }} allowFullScreen></iframe>
+                                </div>
+                            )
+                        })
+                    )
+								}
+
+                image_lightBox = (
+                    <Aux>
+                        <button className="btn btn-dark btn-lg btn-block" onClick={() => this.setState({ isOpen: true })}>
+                          Show All
+                        </button>
+
+                        {isOpen && (
+                          <Lightbox
+                            mainSrc={images[photoIndex]}
+                            nextSrc={images[(photoIndex + 1) % images.length]}
+                            prevSrc={images[(photoIndex + images.length - 1) % images.length]}
+                            onCloseRequest={() => this.setState({ isOpen: false })}
+                            onMovePrevRequest={() =>
+                              this.setState({
+                                photoIndex: (photoIndex + images.length - 1) % images.length,
+                              })
+                            }
+                            onMoveNextRequest={() =>
+                              this.setState({
+                                photoIndex: (photoIndex + 1) % images.length,
+                              })
+                            }
+                          />
+                        )}
+                    </Aux>
+                )
+
+								if (images) {
+										displayImages = (images.filter((i, index) => (index < 4)).map( (displayImage, index) => {
+                            return(
+                              <div className="col-lg-3 padding-0" key={index}>
+                                  <button className="btn btn-link" onClick={() => this.setState({ isOpen: true, photoIndex: index })} style={{ paddingRight: '0' }}>
+                                    <img src={displayImage} className="img-thumbnail" style={{ maxWidth: '100%', maxHeight: '100%' }}/>
+                                  </button>
+                              </div>
+                            );
+                        })
+                    );
+								}
 
 								const movie_language = isoLangs[movieDetails.original_language];
                 movieDetail = (
@@ -147,7 +232,7 @@ class MovieDetails extends Component {
 										currentCast = currentCast + 1;
 										if (currentCast < 7) {
 												return (
-														<div className="col-6 col-lg-2 padding-10" key={cast.id + '-' + cast.character}>
+														<div className="col-6 col-lg-2" key={cast.id + '-' + cast.character} style={{ paddingLeft: '0' }}>
 																<Link to={{ pathname: '/person', state: { people_id: cast.id } }}>
 		                                <figure className="figure">
 		                                    <img src={cast.profile_path ? 'https://image.tmdb.org/t/p/w185/' + cast.profile_path : PosterPlaceholder} className="rounded"  alt={cast.name} style={{ width: '160px', height: '240px' }}/>
@@ -172,7 +257,8 @@ class MovieDetails extends Component {
                     currentCast = currentCast + 1;
                     if (currentCast > 6) {
                         return (
-                            <div className="col-xs-12 col-lg-2 padding-10" key={ cast.id + '-' + currentCast}>
+                            <div className="col-xs-12 col-lg-2" key={ cast.id + '-' + currentCast} style={{ paddingLeft: '0' }}>
+                              <Link to={{ pathname: '/person', state: { people_id: cast.id } }}>
                                 <figure className="figure">
                                     <img src={cast.profile_path ? 'https://image.tmdb.org/t/p/w185/' + cast.profile_path : PosterPlaceholder} className="rounded"  alt={cast.name} style={{ width: '160px', height: '240px' }}/>
                                     <figcaption className="figure-caption text-center" style={{ color: 'black' }}>
@@ -182,6 +268,7 @@ class MovieDetails extends Component {
                                         { cast.character ? 'As: ' + cast.character : cast.department}
                                     </figcaption>
                                 </figure>
+                              </Link>
                             </div>
                         )
                     } else {
@@ -199,9 +286,11 @@ class MovieDetails extends Component {
                 }
 
                 castAndCrew = (
-										<div className="row">
+										<div className="row" style={{marginLeft: '5%', marginRight: '5%'}}>
                         <div className="col">
-                          <legend>Cast & Crew <a href="#demo" className="btn btn-link btnlink" data-toggle="collapse">{ seeMoreCast.length !== 0 ? 'See More' : ''}</a></legend>
+                          <div className="col padding-10">
+                            <a href="#demo" className="btn btn-dark btn-lg btn-block" data-toggle="collapse">{ seeMoreCast.length !== 0 ? 'See More' : ''}</a>
+                          </div>
                           <div className="row">
 															{ casts }
 													</div>
@@ -215,12 +304,42 @@ class MovieDetails extends Component {
                 );
 						}
 				}
+				if (this.state.movieImages) {
+						console.log('====this.state.movieImages====', this.state.movieImages.length);
+				}
 				return (
 							<Aux>
 								<Navbar />
 								<div className="container" style={ this.props.location || this.state.movies ? {"boxShadow": "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)", opacity: '.95', marginTop: '55px', height: '100%'} : { height: '100%' } }>
 									<div>{movieDetail}</div>
-									{castAndCrew}
+
+									<ul className="nav nav-tabs" id="myTab" role="tablist">
+                    <li className="nav-item">
+                      <a className="nav-link active" id="home-tab" data-toggle="tab" href="#castandcrew" role="tab" aria-controls="castandcrew" aria-selected="true">Cast & Crew</a>
+                    </li>
+                    <li className="nav-item">
+                      <a className="nav-link" id="profile-tab" data-toggle="tab" href="#images" role="tab" aria-controls="images" aria-selected="false">Images <span className="badge badge-dark">{this.state.movieImages ? this.state.movieImages.length : ''}</span></a>
+                    </li>
+                    <li className="nav-item">
+                      <a className="nav-link" id="contact-tab" data-toggle="tab" href="#trailers" role="tab" aria-controls="trailers" aria-selected="false">Trailers <span className="badge badge-dark">{this.state.movieTrailers ? this.state.movieTrailers.results.length : ''}</span></a>
+                    </li>
+                  </ul>
+                  <div className="tab-content" id="myTabContent">
+                    <div className="tab-pane fade show active" id="castandcrew" role="tabpanel" aria-labelledby="home-tab">
+                      {castAndCrew}
+                    </div>
+                    <div className="tab-pane fade" id="images" role="tabpanel" aria-labelledby="profile-tab">
+                        {image_lightBox}
+                        <div className="row">
+                          {displayImages}
+                        </div>
+                    </div>
+                    <div className="tab-pane fade" id="trailers" role="tabpanel" aria-labelledby="contact-tab">
+                      <div className="row">
+                        {displayMovieTrailers}
+                      </div>
+                    </div>
+                  </div>
 								</div>
 								<Footer />
 							</Aux>
