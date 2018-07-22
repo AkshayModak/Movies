@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './style.css';
 import Aux from '../HOCs/Aux';
@@ -19,7 +19,7 @@ class OuterNavbar extends Component {
 
 		render() {
 				let movieBar = (
-             <div style={{ width: '100%', height: '600px' }}> <i class="fa fa-spinner fa-spin fa-5x fa-fw" style={{ color: 'white', marginLeft: '50%', position: 'relative', top: '50%'}}/> </div>
+             <div style={{ width: '100%', height: '600px' }}> <i className="fa fa-spinner fa-spin fa-5x fa-fw" style={{ color: 'white', marginLeft: '50%', position: 'relative', top: '50%'}}/> </div>
         );
 				if (this.state.movies) {
 						if (this.state.movies.length > 5) {
@@ -98,20 +98,17 @@ class OuterNavbar extends Component {
 	                  <NavLink to="/discover" className="nav-item nav-link" exact activeStyle={{ color: 'red' }} style={{ color: 'white' }}>
 	                        TV
 	                  </NavLink>
-	                  <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{ color: 'white' }}>
+	                  <li className="nav-item dropdown">
+                      <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{ color: 'white' }}>
                         Movies
                       </a>
-                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Upcoming</a>
-                        <a class="dropdown-item" href="#">In Theatres</a>
-                        <a class="dropdown-item" href="#">Top Rated</a>
-                        <a class="dropdown-item" href="#">Popular</a>
+                      <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <Link className="dropdown-item" to="/discover/upcoming" href="#">Upcoming</Link>
+                        <Link className="dropdown-item" to="/discover/running" href="#">In Theatres</Link>
+                        <Link className="dropdown-item" to="/discover/top-rated" href="#">Top Rated</Link>
+                        <Link className="dropdown-item" to="/discover/popular" href="#">Popular</Link>
                       </div>
                     </li>
-	                  <NavLink to="/discover" className="nav-item nav-link" exact activeStyle={{ color: 'red' }} style={{ color: 'white' }}>
-	                        Movies
-	                  </NavLink>
                     <NavLink to="/actors" className="nav-item nav-link" exact activeStyle={{ color: 'red' }} style={{ color: 'white' }}>
                           Actors
                     </NavLink>

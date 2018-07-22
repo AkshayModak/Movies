@@ -40,7 +40,7 @@ class MovieDetails extends Component {
 
 
 		componentDidMount() {
-				if (!this.props.location.state.movie_id) {
+				if (this.props.location.state && !this.props.location.state.movie_id) {
 						let link = '/3/movie/'+ this.props.location.state.posts.id +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits,videos,images';
             if (this.props.location.state.isTv) {
                 link = '/3/tv/'+ this.props.location.state.posts.id +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits';
@@ -58,16 +58,24 @@ class MovieDetails extends Component {
                     });
 				}
 
-				if (this.props.location.state.movie_id) {
-						let link = '/3/movie/'+ this.props.location.state.movie_id +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits,videos';
+				if ((this.props.location.state && this.props.location.state.movie_id) || this.props.match.params.id) {
+						let link = '/3/movie/'+ this.props.match.params.id +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits,videos,images';
+						let movieId = this.props.match.params.id;
+						if ((this.props.location.state && this.props.location.state.movie_id)) {
+								link = '/3/movie/'+ this.props.location.state.movie_id +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits,videos,images';
+								movieId = this.props.location.state.movie_id;
+						}
             this.setState({hasLoaded: true});
+
             axios.get(link)
             .then( response => {
                 console.log('=====response====', response);
                 this.setState({
                     movies : response.data,
                     credits: response.data.credits,
-                    movie_id : this.props.location.state.movie_id
+                    movie_id : movieId,
+                    movieTrailers: response.data.videos,
+                    movieImages: response.data.images
                 });
                 this.props.fetchMovies({ posts: response.data, 'type': 'MOVIE_DETAILS' });
             }).catch( error => {

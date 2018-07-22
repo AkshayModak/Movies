@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './style.css';
-import PosterPlaceholder from '../images/poster-placeholder.png';
 import Aux from '../HOCs/Aux';
 
 class Navbar extends Component {
@@ -33,6 +32,17 @@ class Navbar extends Component {
 	                  <NavLink to="/actors" className="nav-item nav-link" exact activeStyle={{ color: '#fa923f', textDecoration: 'underline'}} style={{ color: 'white' }}>
 	                        Actors
 	                  </NavLink>
+	                  <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{ color: 'white' }}>
+                        Movies
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <Link className="dropdown-item" to="/discover/upcoming" href="#">Upcoming</Link>
+                        <Link className="dropdown-item" to="/discover/running" href="#">In Theatres</Link>
+                        <Link className="dropdown-item" to="/discover/top-rated" href="#">Top Rated</Link>
+                        <Link className="dropdown-item" to="/discover/popular" href="#">Popular</Link>
+                      </div>
+                    </li>
 	                </div>
 	              </div>
 	            </nav>
