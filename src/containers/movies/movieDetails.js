@@ -43,7 +43,10 @@ class MovieDetails extends Component {
 				if (this.props.location.state && !this.props.location.state.movie_id) {
 						let link = '/3/movie/'+ this.props.location.state.posts.id +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits,videos,images';
             if (this.props.location.state.isTv) {
-                link = '/3/tv/'+ this.props.location.state.posts.id +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits';
+                link = '/3/tv/'+ this.props.location.state.posts.id +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits,videos,images';
+            }
+            if (this.props.match.params && this.props.match.params.tvid) {
+                link = '/3/tv/'+ this.props.match.params.tvid +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits,videos,images';
             }
             axios.get(link)
                     .then( response => {
@@ -57,6 +60,21 @@ class MovieDetails extends Component {
                         console.log( error );
                     });
 				}
+
+				if (this.props.match.params && this.props.match.params.tvid) {
+            const link = '/3/tv/'+ this.props.match.params.tvid +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits';
+            axios.get(link)
+            .then( response => {
+                console.log('=====response.data====', response.data);
+                this.setState({
+                    credits : response.data,
+                    movieTrailers: response.data.videos,
+                    movieImages: response.data.images
+                });
+            }).catch( error => {
+                console.log( error );
+            });
+        }
 
 				if ((this.props.location.state && this.props.location.state.movie_id) || this.props.match.params.id) {
 						let link = '/3/movie/'+ this.props.match.params.id +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits,videos,images';
@@ -141,12 +159,12 @@ class MovieDetails extends Component {
                     const posters = movieImages.posters;
 
                     if (backdrops) {
-                        for (var image in backdrops) {
+                        for (let image in backdrops) {
                             images.push('https://image.tmdb.org/t/p/w780/' + backdrops[image].file_path);
                         }
                     }
                     if (posters) {
-                        for (var image in posters) {
+                        for (let image in posters) {
                             images.push('https://image.tmdb.org/t/p/w780/' + posters[image].file_path);
                         }
                     }
@@ -156,7 +174,7 @@ class MovieDetails extends Component {
 										displayMovieTrailers = ( movieTrailers.results.filter((i, index) => (index < 4)).map( (trailers, index) => {
                             return (
                                 <div className="col-lg-3" key={index}>
-                                    <iframe src={"https://www.youtube.com/embed/" + trailers.key} frameBorder="0" allow="autoplay; encrypted-media" style={{ maxWidth: '100%', maxHeight: '100%' }} allowFullScreen></iframe>
+                                    <iframe src={"https://www.youtube.com/embed/" + trailers.key} title={trailers.key} frameBorder="0" allow="autoplay; encrypted-media" style={{ maxWidth: '100%', maxHeight: '100%' }} allowFullScreen></iframe>
                                 </div>
                             )
                         })
@@ -195,7 +213,7 @@ class MovieDetails extends Component {
                             return(
                               <div className="col-lg-3 padding-0" key={index}>
                                   <button className="btn btn-link" onClick={() => this.setState({ isOpen: true, photoIndex: index })} style={{ paddingRight: '0' }}>
-                                    <img src={displayImage} className="img-thumbnail" style={{ maxWidth: '100%', maxHeight: '100%' }}/>
+                                    <img src={displayImage} className="img-thumbnail" style={{ maxWidth: '100%', maxHeight: '100%' }} alt={index}/>
                                   </button>
                               </div>
                             );
@@ -311,9 +329,6 @@ class MovieDetails extends Component {
                     </div>
                 );
 						}
-				}
-				if (this.state.movieImages) {
-						console.log('====this.state.movieImages====', this.state.movieImages.length);
 				}
 				return (
 							<Aux>

@@ -12,33 +12,38 @@ class Upcoming extends React.Component {
 
 		state = {
 				movieList: [],
-				currentPage: 1
+				currentPage: 1,
+				headerTitle: null
 		}
 
 		componentWillReceiveProps(newProps) {
 				this.setState({ movieList: [] });
-				this.loadPage(1);
+				this.loadPage(newProps, 1);
 		}
 
 		componentWillMount() {
 				document.body.style.background = 'black';
-				this.loadPage(1);
+				this.loadPage(this.props, 1);
 		}
 
-		loadPage(page) {
-				this.setState({ movieList : [] });
+		loadPage(props, page) {
 				let link = null;
-        if ("upcoming" === this.props.match.params.id) {
+				console.log('=====this.props.match.params.id====', props.match.params.id);
+        if ("upcoming" === props.match.params.id) {
             link = '/3/discover/movie?api_key=65324ba8898442570ac397a61cfa7f22&primary_release_date.gte=' + new Date().getTime() + '&sort_by=vote_average.desc&page=' + page;
+            this.setState({ headerTitle: 'Upcoming Movies' });
         }
-        if ("running" === this.props.match.params.id) {
+        if ("in-theatres" === props.match.params.id) {
             link = '/3/movie/now_playing?api_key=65324ba8898442570ac397a61cfa7f22&page=' + page;
+            this.setState({ headerTitle: 'In Theatres' });
         }
-        if ("top-rated" === this.props.match.params.id) {
+        if ("top-rated" === props.match.params.id) {
             link = '3/movie/top_rated?api_key=65324ba8898442570ac397a61cfa7f22&page=' + page;
+            this.setState({ headerTitle: 'Top Rated Movies' });
         }
-        if ("popular" === this.props.match.params.id) {
+        if ("popular" === props.match.params.id) {
             link = '3/movie/popular?api_key=65324ba8898442570ac397a61cfa7f22&page=' + page;
+            this.setState({ headerTitle: 'Popular Movies' });
         }
 
         axios.get(link)
@@ -57,25 +62,13 @@ class Upcoming extends React.Component {
 
         const pagination = (
             <span>
-                <nav aria-label="Page navigation example">
-                  <ul className="pagination">
-                    <li className="page-item">
-                      <a className="page-link"  onClick={this.loadPage.bind(this, this.state.currentPage - 1)} aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                        <span className="sr-only">Previous</span>
-                      </a>
-                    </li>
-                    <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.state.currentPage)}>{ this.state.currentPage }</a></li>
-                    <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.state.currentPage + 1)}>{ this.state.currentPage + 1 }</a></li>
-                    <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.state.currentPage + 2)}>{ this.state.currentPage + 2 }</a></li>
-                    <li className="page-item">
-                      <a className="page-link" onClick={this.loadPage.bind(this, this.state.currentPage + 1)} aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                        <span className="sr-only">Next</span>
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
+              <ul class="pagination pagination-lg">
+                <li class="page-item"><a class="page-link" onClick={this.loadPage.bind(this, this.state.currentPage - 1)} >Previous</a></li>
+                <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.state.currentPage)}>{ this.state.currentPage }</a></li>
+                <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.state.currentPage + 1)}>{ this.state.currentPage + 1 }</a></li>
+                <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.state.currentPage + 2)}>{ this.state.currentPage + 2 }</a></li>
+                <li class="page-item"><a onClick={this.loadPage.bind(this, this.state.currentPage + 1)} class="page-link">Next</a></li>
+              </ul>
             </span>
         );
 
@@ -101,7 +94,7 @@ class Upcoming extends React.Component {
                           <p class="card-text mb-auto"><small>{`${(movie.overview).substring(0, 150)}...`}</small></p>
                         </div>
                         <div>
-                          <img class="card-img-right flex-auto d-none d-lg-block movie-card-img" src={movie.poster_path ? 'https://image.tmdb.org/t/p/w185/' + movie.poster_path : PosterPlaceholder}/>
+                          <img class="card-img-right flex-auto d-none d-lg-block movie-card-img" src={movie.poster_path ? 'https://image.tmdb.org/t/p/w185/' + movie.poster_path : PosterPlaceholder} alt={movie.title}/>
                         </div>
                       </div>
                     </Link>
@@ -114,10 +107,11 @@ class Upcoming extends React.Component {
 						<Aux>
 							<Navbar/>
 							<div className="container container-margin">
+								<h2 className="list-title"><legend>{ this.state.headerTitle }</legend></h2>
 								<div className="row">
 									{movies}
+									{pagination}
                 </div>
-                {pagination}
 							</div>
 							<Footer />
 						</Aux>

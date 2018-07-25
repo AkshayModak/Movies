@@ -4,6 +4,7 @@ import Footer from '../footer';
 import Aux from '../../HOCs/Aux';
 import axios from '../../axios';
 import { Link } from 'react-router-dom';
+import Loader from '../../utility/loader';
 
 class Popular extends Component {
 
@@ -50,11 +51,7 @@ class Popular extends Component {
 
 				let loader = '';
 				if (this.state.showLoader) {
-						loader = (
-                <div className="backdrop">
-                  <i class="fa fa-spinner fa-spin fa-5x fa-fw" style={{ top: '50%', left: '50%', position: 'absolute' }}></i>
-                </div>
-            );
+						loader = <Loader />
 				}
 
 				if (this.state.actors) {

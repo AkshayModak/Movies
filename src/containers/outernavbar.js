@@ -41,7 +41,7 @@ class OuterNavbar extends Component {
                     movieBar = (
                         <AppleCarousel
                           renderSlides={[
-                            ({ activeItemIndex, index }) => <div isActive={index === activeItemIndex} style={{ height: '600px' }}>
+                            ({ activeItemIndex, index }) => <div style={{ height: '600px' }}>
                                   <div className="img-cover" style={backdrop_image0}>
                                       <div className="layer">
 																				<div className="front-labels">
@@ -51,7 +51,7 @@ class OuterNavbar extends Component {
                                       </div>
                                   </div>
                             </div>,
-                            ({ slide }) => <div animationValue={slide} style={{ height: '100%' }}>
+                            ({ slide }) => <div animationvalue={slide} style={{ height: '100%' }}>
                                   <div className="img-cover" style={backdrop_image1}/>
                                   <div className="layer">
                                     <div className="front-labels">
@@ -85,9 +85,9 @@ class OuterNavbar extends Component {
 
 				return (
 						<Aux>
-							<nav className="navbar navbar-expand-lg fixed-top bg-light" style={{ padding: '0' }}>
+							<nav className="navbar navbar-expand-lg fixed-top navbar-dark" style={{ padding: '0', backgroundColor: 'black' }}>
 	              <NavLink className="navbar-brand" to="/" exact style={{ color: 'white', padding: '10px' }}>Movie Cosmos</NavLink>
-	              <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+	              <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 	                <span className="navbar-toggler-icon"></span>
 	              </button>
 	              <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -95,18 +95,26 @@ class OuterNavbar extends Component {
 	                  <NavLink to="/" exact className="nav-item nav-link" activeStyle={{ color: 'red'}} style={{ color: 'white' }}>
 	                    Home
 	                  </NavLink>
-	                  <NavLink to="/discover" className="nav-item nav-link" exact activeStyle={{ color: 'red' }} style={{ color: 'white' }}>
-	                        TV
-	                  </NavLink>
 	                  <li className="nav-item dropdown">
-                      <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{ color: 'white' }}>
+	                    <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{ color: 'white' }}>
+	                      Television
+	                    </a>
+	                    <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+	                      <Link className="dropdown-item" to="/television/popular">Popular</Link>
+	                      <Link className="dropdown-item" to="/television/top-rated">Top Rated</Link>
+	                      <Link className="dropdown-item" to="/television/airing-today">Airing Today</Link>
+	                      <Link className="dropdown-item" to="/television/on-air">On Air</Link>
+	                    </div>
+	                  </li>
+	                  <li className="nav-item dropdown">
+                      <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{ color: 'white' }}>
                         Movies
                       </a>
                       <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <Link className="dropdown-item" to="/discover/upcoming" href="#">Upcoming</Link>
-                        <Link className="dropdown-item" to="/discover/running" href="#">In Theatres</Link>
-                        <Link className="dropdown-item" to="/discover/top-rated" href="#">Top Rated</Link>
-                        <Link className="dropdown-item" to="/discover/popular" href="#">Popular</Link>
+                        <Link className="dropdown-item" to="/movies/upcoming">Upcoming</Link>
+                        <Link className="dropdown-item" to="/movies/in-theatres">In Theatres</Link>
+                        <Link className="dropdown-item" to="/movies/top-rated">Top Rated</Link>
+                        <Link className="dropdown-item" to="/movies/popular">Popular</Link>
                       </div>
                     </li>
                     <NavLink to="/actors" className="nav-item nav-link" exact activeStyle={{ color: 'red' }} style={{ color: 'white' }}>

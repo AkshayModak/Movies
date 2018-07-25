@@ -69,6 +69,8 @@ class People extends Component {
 	                            <td> { castAndCrew.character } </td>
 	                          </tr>
                         );
+                    } else {
+                        return '';
                     }
                 });
 						}

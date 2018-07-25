@@ -18,10 +18,17 @@ class MovieCards extends Component {
 		render() {
 			const poster_path = 'https://image.tmdb.org/t/p/w185' + this.props.data.poster_path;
 			let release_date = "";
-			if (this.props.isUpcoming) {
+			const movie_release_date = this.props.data.release_date;
+			const today = new Date().getTime();
+			const release_date_time = new Date(movie_release_date).getTime();
+			if (release_date_time && (release_date_time > today)) {
 					release_date = (
 							<small><figcaption className="figure-caption text-center"><strong>Release Date:</strong> {dateFormatter(this.props.data.release_date)}</figcaption></small>
 					);
+			}
+			let linkPath = "/movie-details/" + this.props.data.id;
+			if (this.props.data.first_air_date) {
+				linkPath = "/tv-details/" + this.props.data.id;
 			}
 			return (
 				<Aux>
@@ -34,7 +41,7 @@ class MovieCards extends Component {
               }}
             />
           }
-					<Link to={{ pathname: '/movie-details', state: { posts: this.props.data, selectedMovie: this.props.selectedMovie, isTv: this.props.isTv } }}>
+					<Link to={linkPath}>
 						<figure className="figure">
               <img style={this.state.loaded ? {} : {display: 'none'}} alt={ this.props.data.title ? this.props.data.title : this.props.data.original_name }
                   src={ this.props.data.poster_path ? poster_path : PosterPlaceholder }

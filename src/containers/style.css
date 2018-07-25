@@ -352,7 +352,7 @@ footer, footer > div.container {
 		    overflow: hidden;
 		    opacity: 1;
 		    background-color: rgba(999,999,999,0.9);
-		    background-color: brown;
+		    background-color: crimson;
 		    padding: 0;
 		}
 
@@ -402,11 +402,39 @@ footer, footer > div.container {
 		margin-bottom: .75rem;
 		font-size: 22px;
 		font-weight: 900;
-		text-align: center;
+		text-align: right;
 		padding-top: 15px;
 }
 
 .movie-card-img {
 		width: 185px !important;
 		height: 278px !important;
+}
+
+.pagination-lg .page-item:first-child .page-link {
+		background-color: crimson;
+		color: white;
+}
+
+.pagination-lg .page-item:last-child .page-link {
+		background-color: crimson;
+		color: white;
+}
+
+.pagination { margin-left: 100% }
+
+.pagination-lg .page-item .page-link:hover {
+		background-color: crimson;
+		color: white;
+}
+
+.list-title {
+		padding-top: 25px;
+		padding-left: 10px;
+		margin-bottom: 0;
+}
+
+.list-title > legend {
+		margin-bottom: 0;
+		font-size: 26px;
 }
