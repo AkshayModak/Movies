@@ -169,14 +169,14 @@ body {
 		border-top: 0;
 }
 
-.footer {
+/*.footer {
   bottom: 0;
   width: 100%;
-  /* Set the fixed height of the footer here */
+  *//* Set the fixed height of the footer here *//*
   height: 300px;
 }
 
-/* Taller footer on small screens */
+*//* Taller footer on small screens *//*
 @media (max-width: 34em) {
     body {
       margin-bottom: 500px;
@@ -186,8 +186,8 @@ body {
     }
 }
 
-/* Sticky footer style and color
--------------------------------------------------- */
+*//* Sticky footer style and color
+-------------------------------------------------- *//*
 footer {
 	margin-top: 50px;
   padding-top: 30px;
@@ -212,7 +212,7 @@ footer .form-control {
     resize: none;
     color: #d1d2d2;
     padding: 0.7em 1em;
-}
+}*/
 
 .CircularProgressbar.inverted .CircularProgressbar-path {
   stroke: #404040;
@@ -421,8 +421,6 @@ footer, footer > div.container {
 		color: white;
 }
 
-.pagination { margin-left: 100% }
-
 .pagination-lg .page-item .page-link:hover {
 		background-color: crimson;
 		color: white;
@@ -437,4 +435,42 @@ footer, footer > div.container {
 .list-title > legend {
 		margin-bottom: 0;
 		font-size: 26px;
+}
+
+.movie-banner {
+		height: 800px;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		position: relative;
+		z-index: 10;
+}
+
+.movie-banner:before {
+		position: absolute;
+		content: '';
+		width: 100%;
+		height: 800px;
+		top: 0;
+		left: 0;
+		background-color: rgba(2, 13, 24, 0.8);
+}
+
+.movie_single {
+		background-color: #020d18;
+		padding: 100px 0;
+		display: inline-block;
+		width: 100%;
+		margin-bottom: -10px;
+		position: absolute;
+		z-index: 99;
+}
+
+.movie-single {
+		margin-top: -452px;
+}
+
+.movie-tabs a {
+		color: white;
+		margin-top: 20px;
 }

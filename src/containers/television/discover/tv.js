@@ -56,25 +56,30 @@ class Television extends React.Component {
 		}
 
 		render() {
-
+				document.title = this.state.headerTitle + ' - Nextrr';
 				const { tvList } = this.state;
-				console.log('===tvList===', tvList);
 				let tvDetails = (
             <div className="backdrop"> <i className="fa fa-spinner fa-spin fa-5x fa-fw" style={{ marginLeft: '50%', position: 'relative', top: '50%'}}/> </div>
         );
 
         const pagination = (
-            <div className="text-center">
-                <ul className="pagination pagination-lg">
-                  <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.props, 1)} >First</a></li>
-                  <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.props, this.state.currentPage - 1)} >Previous</a></li>
-                  <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.props, this.state.currentPage)}>{ this.state.currentPage }</a></li>
-                  <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.props, this.state.currentPage + 1)}>{ this.state.currentPage + 1 }</a></li>
-                  <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.props, this.state.currentPage + 2)}>{ this.state.currentPage + 2 }</a></li>
-                  <li className="page-item"><a onClick={this.loadPage.bind(this, this.props, this.state.currentPage + 1)} className="page-link">Next</a></li>
-                  <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.props, this.state.totalPages)} >Last</a></li>
-                </ul>
-            </div>
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+                <li class="page-item">
+                  <a class="page-link" onClick={this.loadPage.bind(this, this.props, 1)} tabindex="-1">First</a>
+                </li>
+                <li class="page-item disabled">
+                  <a class="page-link" onClick={this.loadPage.bind(this, this.props, this.state.currentPage - 1)} tabindex="-1"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+                </li>
+                <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.props, this.state.currentPage)}>{ this.state.currentPage }</a></li>
+                <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.props, this.state.currentPage + 1)}>{ this.state.currentPage + 1 }</a></li>
+                <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.props, this.state.currentPage + 2)}>{ this.state.currentPage + 2 }</a></li>
+                <li class="page-item"><a class="page-link" onClick={this.loadPage.bind(this, this.props, this.state.currentPage + 1)}><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
+                <li class="page-item">
+                  <a class="page-link" onClick={this.loadPage.bind(this, this.props, this.state.totalPages)}>Last</a>
+                </li>
+              </ul>
+            </nav>
         );
 
 				if (tvList) {
@@ -116,10 +121,12 @@ class Television extends React.Component {
 							<h2 className="list-title"><legend>{ this.state.headerTitle }</legend></h2>
 								<div className="row">
 									{tvDetails}
+								</div>
+								<div style={{ padding: '10px' }}>
 									{pagination}
 								</div>
 							</div>
-							<Footer />
+							<Footer style={{ display: 'block', position: 'absolute' }}/>
 						</Aux>
 				)
 		}

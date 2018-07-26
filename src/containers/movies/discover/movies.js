@@ -7,17 +7,18 @@ import axios from '../../../axios';
 import { dateFormatter } from '../../../utility/utilityMethods';
 import { Link } from 'react-router-dom';
 import StarRatingComponent from 'react-star-rating-component';
+import Loader from '../../../utility/loader';
 
-class Upcoming extends React.Component {
+class Movies extends React.Component {
 
 		state = {
 				movieList: [],
 				currentPage: 1,
-				headerTitle: null
+				headerTitle: null,
+				totalPages: 1
 		}
 
 		componentWillReceiveProps(newProps) {
-				this.setState({ movieList: [] });
 				this.loadPage(newProps, 1);
 		}
 
@@ -27,6 +28,7 @@ class Upcoming extends React.Component {
 		}
 
 		loadPage(props, page) {
+				this.setState({ movieList: [] });
 				let link = null;
 				console.log('=====this.props.match.params.id====', props.match.params.id);
         if ("upcoming" === props.match.params.id) {
@@ -48,28 +50,37 @@ class Upcoming extends React.Component {
 
         axios.get(link)
         .then( response => {
-            this.setState({ movieList: response.data, currentPage: this.state.currentPage + 1 });
+            this.setState({ movieList: response.data, currentPage: this.state.currentPage + 1, totalPages: response.data.total_pages });
         }).catch( error => {
             console.log( error );
         });
 		}
 
 		render() {
+				document.title = this.state.headerTitle + ' - Nextrr';
 				const { movieList } = this.state;
 				let movies = (
             <div className="backdrop"> <i class="fa fa-spinner fa-spin fa-5x fa-fw" style={{ marginLeft: '50%', position: 'relative', top: '50%'}}/> </div>
         );
 
         const pagination = (
-            <span>
-              <ul class="pagination pagination-lg">
-                <li class="page-item"><a class="page-link" onClick={this.loadPage.bind(this, this.state.currentPage - 1)} >Previous</a></li>
-                <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.state.currentPage)}>{ this.state.currentPage }</a></li>
-                <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.state.currentPage + 1)}>{ this.state.currentPage + 1 }</a></li>
-                <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.state.currentPage + 2)}>{ this.state.currentPage + 2 }</a></li>
-                <li class="page-item"><a onClick={this.loadPage.bind(this, this.state.currentPage + 1)} class="page-link">Next</a></li>
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+                <li class="page-item">
+                  <a class="page-link" onClick={this.loadPage.bind(this, this.props, 1)} tabindex="-1">First</a>
+                </li>
+                <li class="page-item disabled">
+                  <a class="page-link" onClick={this.loadPage.bind(this, this.props, this.state.currentPage - 1)} tabindex="-1"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+                </li>
+                <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.props, this.state.currentPage)}>{ this.state.currentPage }</a></li>
+                <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.props, this.state.currentPage + 1)}>{ this.state.currentPage + 1 }</a></li>
+                <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.props, this.state.currentPage + 2)}>{ this.state.currentPage + 2 }</a></li>
+                <li class="page-item"><a class="page-link" onClick={this.loadPage.bind(this, this.props, this.state.currentPage + 1)}><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
+                <li class="page-item">
+                  <a class="page-link" onClick={this.loadPage.bind(this, this.props, this.state.totalPages)}>Last</a>
+                </li>
               </ul>
-            </span>
+            </nav>
         );
 
 				const movieResults = movieList.results;
@@ -110,7 +121,9 @@ class Upcoming extends React.Component {
 								<h2 className="list-title"><legend>{ this.state.headerTitle }</legend></h2>
 								<div className="row">
 									{movies}
-									{pagination}
+                </div>
+                <div style={{ padding: '10px' }}>
+                  {pagination}
                 </div>
 							</div>
 							<Footer />
@@ -120,4 +133,4 @@ class Upcoming extends React.Component {
 
 }
 
-export default Upcoming;
+export default Movies;

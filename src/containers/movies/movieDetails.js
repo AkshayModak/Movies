@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import '../style.css';
-import Aux from '../../HOCs/Aux';
+import React from 'react';
 import Navbar from '../navbar';
+import Aux from '../../HOCs/Aux';
+import '../style.css';
 import axios from '../../axios';
 import Footer from '../footer';
 import isoLangs from '../../utility/isoLangs';
@@ -12,36 +11,28 @@ import PosterPlaceholder from '../../images/poster-placeholder.png';
 import { Link } from 'react-router-dom';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css'; // This only needs to be imported once in your app
+import { dateFormatter } from '../../utility/utilityMethods';
 
-class MovieDetails extends Component {
+class MovieDetails extends React.Component {
 
 		state = {
-				credits: null,
-				hasLoaded: false,
-				movies: null,
-				movie_id: null,
-				movieTrailers: null,
-				movieImages: null,
-				photoIndex: 0,
-				isOpen: false
-		}
+        credits: null,
+        hasLoaded: false,
+        movies: null,
+        movie_id: null,
+        movieTrailers: null,
+        movieImages: null,
+        photoIndex: 0,
+        isOpen: false
+    }
 
 		componentWillMount() {
-				document.body.style.background = 'black';
+				document.body.style.background = '#06151E';
 		}
-
-		componentWillUnMount() {
-				this.setState({
-						movies: null,
-						credits: null,
-						isOpen: false
-				});
-		}
-
 
 		componentDidMount() {
-				if (this.props.location.state && !this.props.location.state.movie_id) {
-						let link = '/3/movie/'+ this.props.location.state.posts.id +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits,videos,images';
+        if (this.props.location.state && !this.props.location.state.movie_id) {
+            let link = '/3/movie/'+ this.props.location.state.posts.id +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits,videos,images';
             if (this.props.location.state.isTv) {
                 link = '/3/tv/'+ this.props.location.state.posts.id +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits,videos,images';
             }
@@ -59,9 +50,9 @@ class MovieDetails extends Component {
                     }).catch( error => {
                         console.log( error );
                     });
-				}
+        }
 
-				if (this.props.match.params && this.props.match.params.tvid) {
+        if (this.props.match.params && this.props.match.params.tvid) {
             const link = '/3/tv/'+ this.props.match.params.tvid +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits';
             axios.get(link)
             .then( response => {
@@ -76,13 +67,13 @@ class MovieDetails extends Component {
             });
         }
 
-				if ((this.props.location.state && this.props.location.state.movie_id) || this.props.match.params.id) {
-						let link = '/3/movie/'+ this.props.match.params.id +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits,videos,images';
-						let movieId = this.props.match.params.id;
-						if ((this.props.location.state && this.props.location.state.movie_id)) {
-								link = '/3/movie/'+ this.props.location.state.movie_id +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits,videos,images';
-								movieId = this.props.location.state.movie_id;
-						}
+        if ((this.props.location.state && this.props.location.state.movie_id) || this.props.match.params.id) {
+            let link = '/3/movie/'+ this.props.match.params.id +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits,videos,images';
+            let movieId = this.props.match.params.id;
+            if ((this.props.location.state && this.props.location.state.movie_id)) {
+                link = '/3/movie/'+ this.props.location.state.movie_id +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits,videos,images';
+                movieId = this.props.location.state.movie_id;
+            }
             this.setState({hasLoaded: true});
 
             axios.get(link)
@@ -102,38 +93,29 @@ class MovieDetails extends Component {
         }
     }
 
-
 		render() {
-		    const { photoIndex, isOpen, movieImages, movieTrailers } = this.state;
+				const { photoIndex, isOpen, movieImages, movieTrailers } = this.state;
 
-				let movieDetail = null;
-				let movieDetails = null;
-				let castAndCrew = null;
-				let image_lightBox = null;
-				let displayImages = null;
-				let displayMovieTrailers = null;
+	      let movieDetail = null;
+	      let movieDetails = null;
+	      let castAndCrew = null;
+	      let image_lightBox = null;
+	      let displayImages = null;
+	      let displayMovieTrailers = null;
 
-				if (this.props.location || this.state.movies) {
+	      if (this.props.location || this.state.movies) {
 						movieDetail = (
                 <div className="backdrop"> <i className="fa fa-spinner fa-spin fa-5x fa-fw" style={{ top: '50%', left: '50%', position: 'absolute' }}/> </div>
-           );
+            );
             movieDetails = null;
-						let genres = [];
-						if (this.state.credits || this.state.movies) {
+            let genres = [];
+            if (this.state.credits || this.state.movies) {
 
-								if (!this.state.movie_id) {
-										movieDetails =  this.state.credits;
-								} else {
-										movieDetails =  this.state.movies;
-								}
-                movieDetails.backdrop = '';
-                movieDetails.poster = 'https://image.tmdb.org/t/p/w500/' + movieDetails.poster_path; //'https://image.tmdb.org/t/p/original/' + movieDetails.backdrop_path
-                document.body.style.background = "url(https://image.tmdb.org/t/p/original/" + movieDetails.backdrop_path +")";
-                document.body.style.height = '100%';
-                document.body.style.backgroundAttachment = 'fixed';
-                document.body.style.backgroundPosition = 'center';
-                document.body.style.backgroundRepeat = 'no-repeat';
-                document.body.style.backgroundSize = 'cover';
+                if (!this.state.movie_id) {
+                    movieDetails =  this.state.credits;
+                } else {
+                    movieDetails =  this.state.movies;
+                }
 
 								let castAndCrewMap = null;
                 if (!this.state.credits.cast) {
@@ -152,10 +134,36 @@ class MovieDetails extends Component {
                     });
                 }
 
-								let images = [];
+                const genreTags = genres.map( genre => {
+										return (
+												<li key={genre} className="list-inline-item"><span className="badge badge-danger">{genre}</span></li>
+										)
+                });
 
-								if (movieImages) {
-										const backdrops = movieImages.backdrops;
+                let director = 'N/A';
+	              let writers = [];
+	              let runTime = 'N/A';
+
+	              if (movieDetails.runtime) {
+	                  runTime = movieDetails.runtime;
+	              }
+
+	              if ('N/A' !== runTime) {
+										runTime = runTime + ' minutes';
+	              }
+
+                castAndCrewMap.map( castAndCrew => {
+										if (castAndCrew.job && 'Director' == castAndCrew.job) {
+												director = castAndCrew.name;
+										}
+										if (castAndCrew.job && 'Writer' === castAndCrew.job) {
+												writers.push(' ' + castAndCrew.name);
+										}
+                });
+
+                let images = [];
+                if (movieImages) {
+                    const backdrops = movieImages.backdrops;
                     const posters = movieImages.posters;
 
                     if (backdrops) {
@@ -168,25 +176,21 @@ class MovieDetails extends Component {
                             images.push('https://image.tmdb.org/t/p/w780/' + posters[image].file_path);
                         }
                     }
-								}
+                }
 
-								if (movieTrailers && movieTrailers.results) {
-										displayMovieTrailers = ( movieTrailers.results.filter((i, index) => (index < 4)).map( (trailers, index) => {
-                            return (
-                                <div className="col-lg-3" key={index}>
-                                    <iframe src={"https://www.youtube.com/embed/" + trailers.key} title={trailers.key} frameBorder="0" allow="autoplay; encrypted-media" style={{ maxWidth: '100%', maxHeight: '100%' }} allowFullScreen></iframe>
-                                </div>
-                            )
-                        })
-                    )
-								}
+	              if (movieTrailers && movieTrailers.results) {
+	                  displayMovieTrailers = ( movieTrailers.results.map( (trailers, index) => {
+	                          return (
+	                              <div className="col-lg-12" key={index}>
+	                                  <iframe src={"https://www.youtube.com/embed/" + trailers.key} title={trailers.key} frameBorder="0" allow="autoplay; encrypted-media" style={{ maxWidth: '100%', maxHeight: '100%' }} allowFullScreen></iframe>
+	                              </div>
+	                          )
+	                      })
+	                  )
+	              }
 
-                image_lightBox = (
+	              image_lightBox = (
                     <Aux>
-                        <button className="btn btn-dark btn-lg btn-block" onClick={() => this.setState({ isOpen: true })}>
-                          Show All
-                        </button>
-
                         {isOpen && (
                           <Lightbox
                             mainSrc={images[photoIndex]}
@@ -208,10 +212,10 @@ class MovieDetails extends Component {
                     </Aux>
                 )
 
-								if (images) {
-										displayImages = (images.filter((i, index) => (index < 4)).map( (displayImage, index) => {
+                if (images) {
+                    displayImages = (images.map( (displayImage, index) => { //(images.filter((i, index) => (index < 4)).map( (displayImage, index) => {
                             return(
-                              <div className="col-lg-3 padding-0" key={index}>
+                              <div className="col-lg-6 padding-0" key={index}>
                                   <button className="btn btn-link" onClick={() => this.setState({ isOpen: true, photoIndex: index })} style={{ paddingRight: '0' }}>
                                     <img src={displayImage} className="img-thumbnail" style={{ maxWidth: '100%', maxHeight: '100%' }} alt={index}/>
                                   </button>
@@ -219,161 +223,172 @@ class MovieDetails extends Component {
                             );
                         })
                     );
-								}
+                }
 
-								const movie_language = isoLangs[movieDetails.original_language];
-                movieDetail = (
-                    <Aux key={movieDetails.id}>
-                        <br />
-                        <div className="row">
-                            <div className="col-lg-5">
-                                <img className='img-thumbnail' src={movieDetails.poster} alt={movieDetails.title}/>
-                            </div>
-                            <div className="col-lg-7">
-                                <h1>{ movieDetails.title } { movieDetails.title === movieDetails.original_title ? '' : '(' + movieDetails.original_title + ')'}</h1>
-                                <ul className="list-inline">
-                                  <li className="list-inline-item center-align" style={{ paddingRight: '20px' }}>
-																		User Score:
-                                  </li>
-                                  <li className="list-inline-item center-align" style={{ width: '80px' }}>
-																		<CircularProgressbar className="inverted" background percentage={ movieDetails.vote_average * 10 } text={ movieDetails.vote_average * 10 + '%'} />
-                                  </li>
-                                </ul>
-                                <p><strong> {movieDetails.overview}</strong></p>
-                                <p><strong>Genre:</strong> { genres.join(",") }</p>
-                                <p><strong>Language:</strong> {movie_language.name} ({movie_language.nativeName})</p>
-                                <p><strong>Original Title:</strong> {movieDetails.original_title}</p>
-                                <p><strong>Overview:</strong> {movieDetails.overview}</p>
-                                <p><strong>Popularity:</strong> {movieDetails.popularity}</p>
-                                <p><strong>Poster Path:</strong> {movieDetails.poster_path}</p>
-                                <p><strong>Release Date:</strong> {movieDetails.release_date}</p>
-                            </div>
-                        </div>
-                        <br />
-                    </Aux>
-                );
-
-								let currentCast = 0;
-								let casts = (castAndCrewMap.map( cast => {
-										currentCast = currentCast + 1;
-										if (currentCast < 7) {
-												return (
-														<div className="col-6 col-lg-2" key={cast.id + '-' + cast.character} style={{ paddingLeft: '0' }}>
-																<Link to={{ pathname: '/person', state: { people_id: cast.id } }}>
-		                                <figure className="figure">
-		                                    <img src={cast.profile_path ? 'https://image.tmdb.org/t/p/w185/' + cast.profile_path : PosterPlaceholder} className="rounded"  alt={cast.name} style={{ width: '160px', height: '240px' }}/>
-		                                    <figcaption className="figure-caption text-center" style={{ color: 'black' }}>
-		                                        { cast.name }
-		                                    </figcaption>
-		                                    <figcaption className="figure-caption text-center" style={{ color: 'black' }}>
-		                                        As: { cast.character }
-		                                    </figcaption>
-		                                </figure>
-                                </Link>
-		                        </div>
-												)
-										} else {
-												return ''
-										}
-										})
-                )
-
-								currentCast = 0;
-                let seeMoreCast = (castAndCrewMap.map( cast => {
+                let currentCast = 0;
+                let casts = (castAndCrewMap.map( cast => {
                     currentCast = currentCast + 1;
-                    if (currentCast > 6) {
+                    if (currentCast < 5) {
                         return (
-                            <div className="col-xs-12 col-lg-2" key={ cast.id + '-' + currentCast} style={{ paddingLeft: '0' }}>
-                              <Link to={{ pathname: '/person', state: { people_id: cast.id } }}>
-                                <figure className="figure">
-                                    <img src={cast.profile_path ? 'https://image.tmdb.org/t/p/w185/' + cast.profile_path : PosterPlaceholder} className="rounded"  alt={cast.name} style={{ width: '160px', height: '240px' }}/>
-                                    <figcaption className="figure-caption text-center" style={{ color: 'black' }}>
-                                      { cast.name }
-                                    </figcaption>
-                                    <figcaption className="figure-caption text-center" style={{ color: 'black' }}>
-                                        { cast.character ? 'As: ' + cast.character : cast.department}
-                                    </figcaption>
-                                </figure>
-                              </Link>
+                            <div className="col-xs" key={cast.id + '-' + cast.character} style={{ paddingLeft: '0' }}>
+                                <Link to={{ pathname: '/person', state: { people_id: cast.id } }} style={{ textDecoration: 'none', color: 'white' }}>
+                                    <li>
+                                      <dl className="row">
+                                        <dt className="col-xs-4"><img src={"https://image.tmdb.org/t/p/w185/" + cast.profile_path} style={{ height: '80px', width: '60px' }} alt="Henry Cavill" className="card-img-top"/></dt>
+                                        <dd className="col-xs-8" style={{ margin: '22px' }}>{cast.name}</dd>
+                                      </dl>
+                                    </li>
+                                </Link>
                             </div>
                         )
                     } else {
                         return ''
                     }
+                    })
+                )
+
+                currentCast = 0;
+                let allCast = (castAndCrewMap.map( cast => {
+                    return (
+                        <li key={cast.id}>
+                            <Link to={{ pathname: '/person', state: { people_id: cast.id } }} style={{ textDecoration: 'none', color: 'white' }}>
+                              <dl className="row">
+                                <dt className="col-xs-4"><img src={"https://image.tmdb.org/t/p/w185/" + cast.profile_path} style={{ height: '80px', width: '60px' }} alt="Henry Cavill" className="card-img-top"/></dt>
+                                <dd className="col-xs-8" style={{ margin: '22px' }}>{cast.name}</dd>
+                              </dl>
+                            </Link>
+                        </li>
+                    )
+
                   })
                 )
 
                 if (castAndCrewMap.length === 0) {
-										casts = (
+                    casts = (
                         <div className="col padding-10">
-														Cast Not Available
+                            Cast Not Available
                         </div>
                     )
                 }
 
-                castAndCrew = (
-										<div className="row" style={{marginLeft: '5%', marginRight: '5%'}}>
-                        <div className="col">
-                          <div className="col padding-10">
-                            <a href="#demo" className="btn btn-dark btn-lg btn-block" data-toggle="collapse">{ seeMoreCast.length !== 0 ? 'See More' : ''}</a>
-                          </div>
-                          <div className="row">
-															{ casts }
-													</div>
-													<div id="demo" className="collapse">
-														<div className="row">
-                                { seeMoreCast }
+                const movie_language = isoLangs[movieDetails.original_language];
+                const backdrop_path = 'https://image.tmdb.org/t/p/w1280/' + movieDetails.backdrop_path;
+                const poster_path = 'https://image.tmdb.org/t/p/w342/' + movieDetails.poster_path;
+                movieDetail = (
+                    <Aux key={movieDetails.id}>
+                      <div className="movie-banner" style={{backgroundImage: 'url(' + backdrop_path + ')' }}></div>
+                      <div className="movie_single">
+                        <div className="container" style={{ background: 'transparent', color: 'white' }}>
+                          <div className="movie-single">
+                            <div className="row">
+                              <div className="col-xs col-lg-4">
+                                <img src={poster_path} className="sticky-top"/>
+                              </div>
+                              <div className="col-lg-8" style={{ padding: '38px' }}>
+                                <h3>{movieDetails.title}</h3>
+                                <nav className="nav movie-tabs">
+                                  <a className="nav-link active" id="overview-tab" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
+                                  <a className="nav-link" id="cast-tab" data-toggle="tab" href="#cast" role="tab" aria-controls="cast" aria-selected="true">Cast</a>
+                                  <a className="nav-link" href="#" id="media-tab" data-toggle="tab" href="#media" role="tab" aria-controls="media" aria-selected="true">Media</a>
+                                  <a className="nav-link disabled" href="#">Related</a>
+                                </nav>
+                                <div className="row">
+                                  <div className="col-lg-8" style={{ paddingTop: '38px' }}>
+                                    {movieDetails.overview}
+                                    <div className="tab-content" id="myTabContent">
+                                      <div id="overview" className="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
+                                        <div className="card">
+                                          <div className="card-header" style={{ backgroundColor: '#06151E', borderBottom: '1px solid grey' }}>
+                                            <ul className="list-inline">
+                                              <li className="list-inline-item padding-top-7">Cast</li>
+                                              <li className="list-inline-item float-right"><button type="submit" className="btn btn-link"><small>View all cast</small></button></li>
+                                            </ul>
+                                          </div>
+                                          <div className="card-body" style={{ backgroundColor: '#06151E' }}>
+                                            <ul className="list-unstyled">
+                                              {casts}
+                                            </ul>
+                                          </div>
+                                        </div>
+                                        <div className="card">
+                                          <div className="card-header" style={{ backgroundColor: '#06151E', borderBottom: '1px solid grey' }}>
+                                            <ul className="list-inline">
+                                              <li className="list-inline-item padding-top-7">Media</li>
+                                              <li className="list-inline-item float-right">
+                                                <nav className="nav">
+                                                  <a className="nav-link" href="#" id="media-tab" data-toggle="tab" href="#media" role="tab" aria-controls="media" aria-selected="true"><small>View all media</small></a>
+                                                </nav>
+                                              </li>
+                                            </ul>
+                                          </div>
+                                          <div className="card-body" style={{ backgroundColor: '#06151E' }}>
+                                            {displayMovieTrailers}
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div id="cast" className="tab-pane fade" role="tabpanel" aria-labelledby="cast-tab">
+
+                                        <div className="card">
+                                          <div className="card-header" style={{ backgroundColor: '#06151E', borderBottom: '1px solid grey' }}>
+                                            Cast
+                                          </div>
+                                          <div className="card-body" style={{ backgroundColor: '#06151E' }}>
+                                            <ul className="list-unstyled">
+                                              {allCast}
+                                            </ul>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div id="media" className="tab-pane fade" role="tabpanel" aria-labelledby="media-tab">
+                                        {image_lightBox}
+                                        <div className="row">
+                                          {displayMovieTrailers}
+                                          {displayImages}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+
+
+                                  <div className="col-lg-4" style={{ marginTop: '173px' }}>
+                                    <ul className="list-unstyled sticky-top" style={{ lineHeight: '2.5em' }}>
+                                      <li style={{ fontWeight: '900' }}>Director:</li>
+                                      <li>{director}</li>
+                                      <li style={{ fontWeight: '900' }}>Writer:</li>
+                                      <li>{writers.join(',')}</li>
+                                      <li style={{ fontWeight: '900' }}>Release Date:</li>
+                                      <li>{ dateFormatter(movieDetails.release_date) }</li>
+                                      <li style={{ fontWeight: '900' }}>Run Time:</li>
+                                      <li>{runTime}</li>
+                                      <li style={{ fontWeight: '900' }}>Tagline:</li>
+                                      <li>{ movieDetails.tagline }</li>
+                                      <li style={{ fontWeight: '900' }}>Genres:</li>
+                                      <li>
+                                        <ul className="list-inline">
+                                          {genreTags}
+                                        </ul>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
-                    </div>
-                );
-						}
-				}
-				return (
-							<Aux>
-								<Navbar />
-								<div className="container" style={ this.props.location || this.state.movies ? {"boxShadow": "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)", opacity: '.95', marginTop: '55px', height: '100%'} : { height: '100%' } }>
-									<div>{movieDetail}</div>
-
-									<ul className="nav nav-tabs" id="myTab" role="tablist">
-                    <li className="nav-item">
-                      <a className="nav-link active" id="home-tab" data-toggle="tab" href="#castandcrew" role="tab" aria-controls="castandcrew" aria-selected="true">Cast & Crew</a>
-                    </li>
-                    <li className="nav-item">
-                      <a className="nav-link" id="profile-tab" data-toggle="tab" href="#images" role="tab" aria-controls="images" aria-selected="false">Images <span className="badge badge-dark">{this.state.movieImages ? this.state.movieImages.length : ''}</span></a>
-                    </li>
-                    <li className="nav-item">
-                      <a className="nav-link" id="contact-tab" data-toggle="tab" href="#trailers" role="tab" aria-controls="trailers" aria-selected="false">Trailers <span className="badge badge-dark">{this.state.movieTrailers ? this.state.movieTrailers.results.length : ''}</span></a>
-                    </li>
-                  </ul>
-                  <div className="tab-content" id="myTabContent">
-                    <div className="tab-pane fade show active" id="castandcrew" role="tabpanel" aria-labelledby="home-tab">
-                      {castAndCrew}
-                    </div>
-                    <div className="tab-pane fade" id="images" role="tabpanel" aria-labelledby="profile-tab">
-                        {image_lightBox}
-                        <div className="row">
-                          {displayImages}
-                        </div>
-                    </div>
-                    <div className="tab-pane fade" id="trailers" role="tabpanel" aria-labelledby="contact-tab">
-                      <div className="row">
-                        {displayMovieTrailers}
                       </div>
-                    </div>
-                  </div>
-								</div>
-								<Footer />
-							</Aux>
+                    </Aux>
+                );
+            }
+	      }
+
+				return(
+					<Aux>
+						<Navbar />
+						{movieDetail}
+						<Footer />
+					</Aux>
 				)
 		}
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchMovies : (data) => dispatch(data)
-    }
-};
-
-export default connect(null, mapDispatchToProps)(MovieDetails);
+export default MovieDetails;

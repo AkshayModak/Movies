@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Route, Switch } from 'react-router-dom';
 import MovieDetails from './containers/movies/movieDetails';
-import DiscoverUpcoming from './containers/movies/discover/upcoming';
+import DiscoverMovies from './containers/movies/discover/movies';
 import Aux from './HOCs/Aux';
 import FrontPage from './containers/frontPage';
 import InTheatres from './containers/movies/upcoming/InTheatres';
@@ -22,7 +22,7 @@ class App extends Component {
 		                    <Route path='/tv-details/:tvid?' exact component={MovieDetails} />
 		                    <Route path='/popular-tv' exact component={PopularTV} />
 		                    <Route path='/in-theatre' exact component={InTheatres} />
-		                    <Route path='/movies/:id' exact component={DiscoverUpcoming} />
+		                    <Route path='/movies/:id' exact component={DiscoverMovies} />
 		                    <Route path='/person' exact component={Person} />
 		                    <Route path='/actors' exact component={PopularPeople} />
 		                    <Route path='/television/:id' exact component={Television} />
