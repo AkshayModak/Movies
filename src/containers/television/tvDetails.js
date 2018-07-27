@@ -241,7 +241,7 @@ class TelevisionDetails extends React.Component {
                 if (movieDetails.networks) {
                     networks = movieDetails.networks.map( network => {
 												return (
-														<li key={network.id}><img src={"https://image.tmdb.org/t/p/w92/" + network.logo_path} style={{ backgroundColor: 'white' }} alt="Henry Cavill"/></li>
+														<li key={network.id}><img src={"https://image.tmdb.org/t/p/w92/" + network.logo_path} style={{ backgroundColor: 'white', padding: '10px', marginBottom: '5px' }} alt="Henry Cavill"/></li>
 												)
                     })
                 }
@@ -250,6 +250,45 @@ class TelevisionDetails extends React.Component {
                 let poster_path = PosterPlaceholder;
                 if (movieDetails.poster_path) {
 										poster_path = 'https://image.tmdb.org/t/p/w342/' + movieDetails.poster_path;
+                }
+
+                let seasons = null;
+
+
+                if (movieDetails.seasons) {
+                    seasons = movieDetails.seasons.map( season => {
+
+												return (
+
+
+
+
+
+														<div className="row" style={{ background: 'white', marginTop: '20px' }}>
+                            <div className="card seasons-card flex-md-row box-shadow"  style={{ background: 'white', color: 'black', width: '100%', marginBottom: '0' }}>
+	                            <div className="card-body d-flex flex-column align-items-start">
+	                              <h3 className="mb-0 movie-card-title">
+	                                {season.name}
+	                              </h3>
+	                              <div className="mb-1 text-muted">{dateFormatter(season.air_date)}</div>
+	                              <div className="mb-1">Episodes Count: {season.episode_count}</div>
+	                            </div>
+	                            <div>
+	                              <img className="card-img-right flex-auto d-none d-lg-block movie-card-img" src={season.poster_path ? 'https://image.tmdb.org/t/p/w185/' + season.poster_path : PosterPlaceholder} alt={season.name}/>
+	                            </div>
+	                            <br />
+	                          </div>
+	                          { season.overview ? <div className="col-lg-12" style={{ background: 'white', color: 'black' }}><small>{season.overview}</small></div> : ''}
+	                          </div>
+
+
+
+
+
+
+
+												)
+                    });
                 }
 
                 movieDetail = (
@@ -268,7 +307,7 @@ class TelevisionDetails extends React.Component {
                                   <a className="nav-link active" id="overview-tab" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
                                   <a className="nav-link" id="cast-tab" data-toggle="tab" href="#cast" role="tab" aria-controls="cast" aria-selected="true">Cast</a>
                                   <a className="nav-link" id="media-tab" data-toggle="tab" href="#media" role="tab" aria-controls="media" aria-selected="true">Media</a>
-                                  <a className="nav-link" id="related-tab" data-toggle="tab" href="#related" role="tab" aria-controls="related" aria-selected="true">Related</a>
+                                  <a className="nav-link" id="related-tab" data-toggle="tab" href="#related" role="tab" aria-controls="related" aria-selected="true">Seasons</a>
                                 </nav>
                                 <div className="row">
                                   <div className="col-lg-8" style={{ paddingTop: '38px' }}>
@@ -326,12 +365,10 @@ class TelevisionDetails extends React.Component {
                                       <div id="related" className="tab-pane fade" role="tabpanel" aria-labelledby="media-tab">
 																				<div className="card">
                                           <div className="card-header" style={{ backgroundColor: '#06151E', borderBottom: '1px solid grey' }}>
-                                            Similar
+                                            Seasons
                                           </div>
                                           <div className="card-body" style={{ backgroundColor: '#06151E' }}>
-                                            <ul className="list-unstyled">
-                                              {similarMovies}
-                                            </ul>
+                                            {seasons}
                                           </div>
                                         </div>
                                       </div>

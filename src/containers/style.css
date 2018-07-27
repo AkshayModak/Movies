@@ -474,3 +474,11 @@ footer, footer > div.container {
 		color: white;
 		margin-top: 20px;
 }
+
+.seasons-card {
+		margin-top: 0 !important;
+}
+
+div.seasons-card ~ div {
+		padding: 20px;
+}
