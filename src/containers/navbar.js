@@ -7,7 +7,7 @@ import Aux from '../HOCs/Aux';
 const navbar = () => {
 		return (
 				<Aux>
-					<nav className="navbar navbar-expand-lg navbar-dark" style={{ padding: '0', backgroundColor: 'black' }}>
+					<nav className="navbar navbar-expand-lg navbar-dark sticky-top" style={{ padding: '0', backgroundColor: 'black' }}>
             <NavLink className="navbar-brand" to="/" exact style={{ color: 'white', padding: '10px' }}>Movie Cosmos</NavLink>
             <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>

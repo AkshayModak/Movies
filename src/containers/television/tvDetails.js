@@ -4,8 +4,6 @@ import Aux from '../../HOCs/Aux';
 import '../style.css';
 import axios from '../../axios';
 import Footer from '../footer';
-import isoLangs from '../../utility/isoLangs';
-import CircularProgressbar from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import PosterPlaceholder from '../../images/poster-placeholder.png';
 import { Link } from 'react-router-dom';
@@ -13,7 +11,7 @@ import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css'; // This only needs to be imported once in your app
 import { dateFormatter } from '../../utility/utilityMethods';
 
-class MovieDetails extends React.Component {
+class TelevisionDetails extends React.Component {
 
 		state = {
         credits: null,
@@ -38,68 +36,22 @@ class MovieDetails extends React.Component {
 		}
 
 		componentDidMount() {
-        if (this.props.location.state && !this.props.location.state.movie_id) {
-            let link = '/3/movie/'+ this.props.location.state.posts.id +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits,videos,images';
-            if (this.props.location.state.isTv) {
-                link = '/3/tv/'+ this.props.location.state.posts.id +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits,videos,images';
-            }
-            if (this.props.match.params && this.props.match.params.tvid) {
-                link = '/3/tv/'+ this.props.match.params.tvid +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits,videos,images';
-            }
-            axios.get(link)
-                    .then( response => {
-                        console.log('=====response.data====', response.data);
-                        this.setState({
-                            credits : response.data,
-                            movieTrailers: response.data.videos,
-                            movieImages: response.data.images
-                        });
-                    }).catch( error => {
-                        console.log( error );
-                    });
-        }
-
+				let link = null;
         if (this.props.match.params && this.props.match.params.tvid) {
-            const link = '/3/tv/'+ this.props.match.params.tvid +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits';
-            axios.get(link)
-            .then( response => {
-                console.log('=====response.data====', response.data);
-                this.setState({
-                    credits : response.data,
-                    movieTrailers: response.data.videos,
-                    movieImages: response.data.images
-                });
-            }).catch( error => {
-                console.log( error );
-            });
+            link = '/3/tv/'+ this.props.match.params.tvid +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits,videos,images';
         }
-
-        if ((this.props.location.state && this.props.location.state.movie_id) || this.props.match.params.id) {
-            let link = '/3/movie/'+ this.props.match.params.id +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits,videos,images,similar';
-            let movieId = this.props.match.params.id;
-            if ((this.props.location.state && this.props.location.state.movie_id)) {
-                link = '/3/movie/'+ this.props.location.state.movie_id +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits,videos,images,similar';
-                movieId = this.props.location.state.movie_id;
-            }
-            console.log('====link====', link);
-            this.setState({hasLoaded: true});
-
-            axios.get(link)
-            .then( response => {
-                console.log('=====response====', response);
-                this.setState({
-                    movies : response.data,
-                    credits: response.data.credits,
-                    movie_id : movieId,
-                    movieTrailers: response.data.videos,
-                    movieImages: response.data.images,
-                    similarMovies: response.data.similar
-                });
-                this.props.fetchMovies({ posts: response.data, 'type': 'MOVIE_DETAILS' });
-            }).catch( error => {
-                console.log( error );
+        console.log('====link====', link);
+        axios.get(link)
+        .then( response => {
+            console.log('=====response.data====', response.data);
+            this.setState({
+                credits : response.data,
+                movieTrailers: response.data.videos,
+                movieImages: response.data.images
             });
-        }
+        }).catch( error => {
+            console.log( error );
+        });
     }
 
 		render() {
@@ -107,7 +59,6 @@ class MovieDetails extends React.Component {
 
 	      let movieDetail = null;
 	      let movieDetails = null;
-	      let castAndCrew = null;
 	      let image_lightBox = null;
 	      let displayImages = null;
 	      let displayMovieTrailers = null;
@@ -153,26 +104,12 @@ class MovieDetails extends React.Component {
 										)
                 });
 
-                let director = 'N/A';
-	              let writers = [];
-	              let runTime = 'N/A';
-
-	              if (movieDetails.runtime) {
-	                  runTime = movieDetails.runtime;
+	              let runTime = [];
+	              if (movieDetails.episode_run_time) {
+	                  movieDetails.episode_run_time.map( run_time => {
+	                      runTime.push(' ' + run_time + 'mins');
+	                  })
 	              }
-
-	              if ('N/A' !== runTime) {
-										runTime = runTime + ' minutes';
-	              }
-
-                castAndCrewMap.map( castAndCrew => {
-										if (castAndCrew.job && 'Director' == castAndCrew.job) {
-												director = castAndCrew.name;
-										}
-										if (castAndCrew.job && 'Writer' === castAndCrew.job) {
-												writers.push(' ' + castAndCrew.name);
-										}
-                });
 
                 let images = [];
                 if (movieImages) {
@@ -261,10 +198,10 @@ class MovieDetails extends React.Component {
                     currentCast = currentCast + 1;
                     if (currentCast < 5) {
                         return (
-                                <li>
+                                <li key={cast.id}>
                                   <Link to={{ pathname: '/person', state: { people_id: cast.id } }} style={{ textDecoration: 'none', color: 'white' }} key={cast.id + '-' + cast.character} >
                                       <dl className="row">
-                                        <dt className="col-xs-4"><img src={"https://image.tmdb.org/t/p/w185/" + cast.profile_path} style={{ height: '80px', width: '60px' }} alt="Henry Cavill" className="card-img-top"/></dt>
+                                        <dt className="col-xs-4"><img src={ cast.profile_path ? "https://image.tmdb.org/t/p/w185/" + cast.profile_path : PosterPlaceholder } style={{ height: '80px', width: '60px' }} alt="Henry Cavill" className="card-img-top"/></dt>
                                         <dd className="col-xs-8" style={{ margin: '22px' }}>{cast.name}</dd>
                                       </dl>
                                   </Link>
@@ -282,7 +219,7 @@ class MovieDetails extends React.Component {
                         <li key={cast.id + '-' + cast.job}>
                             <Link to={{ pathname: '/person', state: { people_id: cast.id } }} style={{ textDecoration: 'none', color: 'white' }}>
                               <dl className="row">
-                                <dt className="col-xs-4"><img src={"https://image.tmdb.org/t/p/w185/" + cast.profile_path} style={{ height: '80px', width: '60px' }} alt="Henry Cavill" className="card-img-top"/></dt>
+                                <dt className="col-xs-4"><img src={  cast.profile_path ? "https://image.tmdb.org/t/p/w185/" + cast.profile_path : PosterPlaceholder  } style={{ height: '80px', width: '60px' }} alt="Henry Cavill" className="card-img-top"/></dt>
                                 <dd className="col-xs-8" style={{ margin: '22px' }}>{cast.name}</dd>
                               </dl>
                             </Link>
@@ -300,9 +237,21 @@ class MovieDetails extends React.Component {
                     )
                 }
 
-                const movie_language = isoLangs[movieDetails.original_language];
+                let networks = null;
+                if (movieDetails.networks) {
+                    networks = movieDetails.networks.map( network => {
+												return (
+														<li key={network.id}><img src={"https://image.tmdb.org/t/p/w92/" + network.logo_path} style={{ backgroundColor: 'white' }} alt="Henry Cavill"/></li>
+												)
+                    })
+                }
+
                 const backdrop_path = 'https://image.tmdb.org/t/p/w780/' + movieDetails.backdrop_path;
-                const poster_path = 'https://image.tmdb.org/t/p/w342/' + movieDetails.poster_path;
+                let poster_path = PosterPlaceholder;
+                if (movieDetails.poster_path) {
+										poster_path = 'https://image.tmdb.org/t/p/w342/' + movieDetails.poster_path;
+                }
+
                 movieDetail = (
                     <Aux key={movieDetails.id}>
                       <div className="movie-banner" style={{backgroundImage: 'url(' + backdrop_path + ')' }}></div>
@@ -311,15 +260,15 @@ class MovieDetails extends React.Component {
                           <div className="movie-single">
                             <div className="row">
                               <div className="col-xs col-lg-4">
-                                <img src={poster_path} className="sticky-top"/>
+                                <img src={poster_path ? poster_path : PosterPlaceholder} className="sticky-top" alt={movieDetails.name} style={{ width: '342px', height: '513px' }}/>
                               </div>
                               <div className="col-lg-8" style={{ padding: '38px' }}>
-                                <h3>{movieDetails.title}</h3>
+                                <h3>{movieDetails.name}</h3>
                                 <nav className="nav movie-tabs">
                                   <a className="nav-link active" id="overview-tab" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
                                   <a className="nav-link" id="cast-tab" data-toggle="tab" href="#cast" role="tab" aria-controls="cast" aria-selected="true">Cast</a>
-                                  <a className="nav-link" href="#" id="media-tab" data-toggle="tab" href="#media" role="tab" aria-controls="media" aria-selected="true">Media</a>
-                                  <a className="nav-link" href="#" id="related-tab" data-toggle="tab" href="#related" role="tab" aria-controls="related" aria-selected="true">Related</a>
+                                  <a className="nav-link" id="media-tab" data-toggle="tab" href="#media" role="tab" aria-controls="media" aria-selected="true">Media</a>
+                                  <a className="nav-link" id="related-tab" data-toggle="tab" href="#related" role="tab" aria-controls="related" aria-selected="true">Related</a>
                                 </nav>
                                 <div className="row">
                                   <div className="col-lg-8" style={{ paddingTop: '38px' }}>
@@ -345,7 +294,7 @@ class MovieDetails extends React.Component {
                                               <li className="list-inline-item padding-top-7">Media</li>
                                               <li className="list-inline-item float-right">
                                                 <nav className="nav">
-                                                  <a className="nav-link" href="#" id="media-tab" data-toggle="tab" href="#media" role="tab" aria-controls="media" aria-selected="true"><small>View all media</small></a>
+                                                  <a className="nav-link" id="media-tab" data-toggle="tab" href="#media" role="tab" aria-controls="media" aria-selected="true"><small>View all media</small></a>
                                                 </nav>
                                               </li>
                                             </ul>
@@ -392,21 +341,28 @@ class MovieDetails extends React.Component {
 
                                   <div className="col-lg-4" style={{ marginTop: '173px' }}>
                                     <ul className="list-unstyled sticky-top" style={{ lineHeight: '2.5em' }}>
-                                      <li style={{ fontWeight: '900' }}>Director:</li>
-                                      <li>{director}</li>
-                                      <li style={{ fontWeight: '900' }}>Writer:</li>
-                                      <li>{writers.join(',')}</li>
-                                      <li style={{ fontWeight: '900' }}>Release Date:</li>
-                                      <li>{ dateFormatter(movieDetails.release_date) }</li>
+                                      <li style={{ fontWeight: '900' }}>Network:</li>
+                                      <li>
+                                        <ul className="list-unstyled">
+																					{networks}
+                                        </ul>
+                                      </li>
+                                      <li style={{ fontWeight: '900' }}>First Aired On:</li>
+                                      <li>{ dateFormatter(movieDetails.first_air_date) }</li>
                                       <li style={{ fontWeight: '900' }}>Run Time:</li>
-                                      <li>{runTime}</li>
-                                      <li style={{ fontWeight: '900' }}>Tagline:</li>
-                                      <li>{ movieDetails.tagline }</li>
+                                      <li>{runTime.join(',')}</li>
+                                      <li style={{ fontWeight: '900' }}>Number of Episodes:</li>
+                                      <li>{movieDetails.number_of_episodes}</li>
+                                      <li style={{ fontWeight: '900' }}>Number of Seasons:</li>
+                                      <li>{movieDetails.number_of_seasons}</li>
                                       <li style={{ fontWeight: '900' }}>Genres:</li>
                                       <li>
                                         <ul className="list-inline">
                                           {genreTags}
                                         </ul>
+                                      </li>
+                                      <li style={{ fontWeight: '900' }}>
+																				<a href={ movieDetails.homepage } style={{ textDecoration: 'none', color: 'white' }} target='_blank'>Home Page</a>
                                       </li>
                                     </ul>
                                   </div>
@@ -431,4 +387,4 @@ class MovieDetails extends React.Component {
 		}
 }
 
-export default MovieDetails;
+export default TelevisionDetails;
