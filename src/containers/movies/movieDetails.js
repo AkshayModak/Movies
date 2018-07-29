@@ -423,6 +423,7 @@ class MovieDetails extends React.Component {
                                 </div>
                               </div>
                             </div>
+                            <Footer />
                           </div>
                         </Aux>
                     );
@@ -434,7 +435,6 @@ class MovieDetails extends React.Component {
 					<Aux>
 						<Navbar />
 						{movieDetail}
-						<Footer />
 					</Aux>
 				)
 		}

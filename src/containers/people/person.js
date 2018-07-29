@@ -321,16 +321,13 @@ class Person extends React.Component {
                                   <a className="nav-link" id="media-tab" data-toggle="tab" href="#media" role="tab" aria-controls="media" aria-selected="true">Media</a>
                                 </nav>
                                 <div className="row">
-                                  <div className="col-lg-8" style={{ paddingTop: '38px' }}>
+                                  <div className="col-lg-8">
                                     <div className="tab-content" id="myTabContent">
-                                      <div id="overview" className="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
+                                      <div id="overview" className="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab" style={{ marginTop: '50px' }}>
                                           { personDetails.biography }
                                       </div>
                                       <div id="movies" className="tab-pane fade" role="tabpanel" aria-labelledby="movies-tab">
                                         <div className="card">
-                                          <div className="card-header" style={{ backgroundColor: '#06151E', borderBottom: '1px solid grey' }}>
-                                            Movies
-                                          </div>
                                           <div className="card-body" style={{ backgroundColor: '#06151E' }}>
                                               {movieCredits}
                                           </div>
@@ -338,9 +335,6 @@ class Person extends React.Component {
                                       </div>
                                       <div id="television" className="tab-pane fade" role="tabpanel" aria-labelledby="television-tab">
                                         <div className="card">
-                                          <div className="card-header" style={{ backgroundColor: '#06151E', borderBottom: '1px solid grey' }}>
-                                            Television
-                                          </div>
                                           <div className="card-body" style={{ backgroundColor: '#06151E' }}>
                                             {tvCredits}
                                           </div>
@@ -393,15 +387,11 @@ class Person extends React.Component {
 	                                        </ul>
 	                                      </li>
                                       </Aux> : ''}
-                                      <li style={{ fontWeight: '900' }}>Genres:</li>
-                                      <li>
-                                        <ul className="list-inline">
-                                          Genre Tags
-                                        </ul>
-                                      </li>
-                                      <li style={{ fontWeight: '900' }}>
-
-                                      </li>
+                                      { personDetails.homepage ?
+																				<li style={{ fontWeight: '900' }}>
+                                          <a href={ personDetails.homepage } style={{ textDecoration: 'none', color: 'white' }} target='_blank'>Home Page</a>
+                                        </li> : ''
+                                      }
                                     </ul>
                                   </div>
                                 </div>
@@ -409,6 +399,7 @@ class Person extends React.Component {
                             </div>
                           </div>
                         </div>
+                        <Footer />
                       </div>
                     </Aux>
                 );
@@ -418,7 +409,6 @@ class Person extends React.Component {
               <Aux>
                 <Navbar />
                 {movieDetail}
-                <Footer />
               </Aux>
             )
 	      }
