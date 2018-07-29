@@ -20,7 +20,6 @@ class Popular extends Component {
 
 		loadActorsByPage(page) {
 				this.setState({showLoader: true});
-				document.body.style.background = 'black';
         let link = '/3/person/popular?api_key=65324ba8898442570ac397a61cfa7f22&page=' + page;
         axios.get(link)
         .then( response => {
@@ -62,7 +61,7 @@ class Popular extends Component {
 								personDetail = personDetails.map( details => {
 										return (
 											<div className="col-sm-6 col-lg-3">
-												<Link to={{ pathname: '/person', state: { people_id: details.id } }} style={{ textDecoration: 'none', color: 'black', fontWeight: '900' }}>
+												<Link to={ '/person/' + details.id } style={{ textDecoration: 'none', color: 'black', fontWeight: '900' }}>
 		                      <div className="card actors-card">
 	                          <img src={ 'https://image.tmdb.org/t/p/w500/' + details.profile_path } alt={details.name} className="card-img-top"/>
 	                          <div className="card-body">
@@ -105,7 +104,7 @@ class Popular extends Component {
 				return (
 					<Aux>
 						<Navbar />
-						<div className="container">
+						<div className="container" style={{ backgroundColor: '#06151E' }}>
 							<div className="row">
                 {personDetail}
                 {pagination}

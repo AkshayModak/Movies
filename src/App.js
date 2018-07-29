@@ -11,8 +11,15 @@ import Person from './containers/people/person';
 import PopularPeople from './containers/people/popular';
 import Television from './containers/television/discover/tv';
 import TelevisionDetails from './containers/television/tvDetails';
+import SearchByGenre from './containers/television/discover/genres';
+import SearchByNetwork from './containers/television/discover/searchByNetwork';
 
 class App extends Component {
+
+		componentWillMount() {
+				document.body.style.background = '#06151E';
+		}
+
 		render() {
 				return(
 						<BrowserRouter>
@@ -24,9 +31,11 @@ class App extends Component {
 		                    <Route path='/popular-tv' exact component={PopularTV} />
 		                    <Route path='/in-theatre' exact component={InTheatres} />
 		                    <Route path='/movies/:id' exact component={DiscoverMovies} />
-		                    <Route path='/person' exact component={Person} />
+		                    <Route path='/person/:id' exact component={Person} />
 		                    <Route path='/actors' exact component={PopularPeople} />
 		                    <Route path='/television/:id' exact component={Television} />
+		                    <Route path='/television/genre/:id' exact component={SearchByGenre} />
+		                    <Route path='/television/network/:id' exact component={SearchByNetwork} />
 		                    <Route render={() => <h1>Not found</h1>}/>
 		                </Switch>
                 </Aux>

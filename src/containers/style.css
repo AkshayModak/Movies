@@ -2,8 +2,23 @@
 		background-color: #383838;
 }*/
 
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
 body {
-   height:100%;
+     position: relative;
+     margin: 0;
+     padding-bottom: 6rem;
+     min-height: 100%;
+     font-family: "Helvetica Neue", Arial, sans-serif;
 }
 
 .user {
@@ -176,7 +191,7 @@ body {
   height: 300px;
 }
 
-*//* Taller footer on small screens *//*
+*//* Taller footer on small screens */
 @media (max-width: 34em) {
     body {
       margin-bottom: 500px;
@@ -186,11 +201,13 @@ body {
     }
 }
 
-*//* Sticky footer style and color
--------------------------------------------------- *//*
+/* Sticky footer style and color
+-------------------------------------------------- */
 footer {
-	margin-top: 50px;
-  padding-top: 30px;
+	position: absolute;
+	right: 0;
+  bottom: 0;
+  left: 0;
   background-color: #292c2f;
   color: #bbb;
 }
@@ -212,7 +229,7 @@ footer .form-control {
     resize: none;
     color: #d1d2d2;
     padding: 0.7em 1em;
-}*/
+}
 
 .CircularProgressbar.inverted .CircularProgressbar-path {
   stroke: #404040;
@@ -234,7 +251,7 @@ li.center-align {
 }
 
 footer, footer > div.container {
-		background-color: black;
+		background-color: #06151E;
 		color: white;
 }
 
@@ -271,7 +288,7 @@ footer, footer > div.container {
     height: 100%;
     width: 100%;
     color: white;
-    background-color: black;
+    background-color: #06151E;
     opacity: 0.85;
 }
 
@@ -294,7 +311,7 @@ footer, footer > div.container {
 }
 
 #summary p.collapse:not(.show) {
-    height: 42px !important;
+    height: 150px !important;
     overflow: hidden;
 
     display: -webkit-box;
@@ -303,7 +320,7 @@ footer, footer > div.container {
 }
 
 #summary p.collapsing {
-    min-height: 42px !important;
+    min-height: 150px !important;
     width: 100%;
 }
 
@@ -387,6 +404,7 @@ footer, footer > div.container {
 
 .container-margin {
 		margin-top: 55px;
+		margin-bottom: 200px;
 }
 
 .movie-cards {
@@ -427,8 +445,6 @@ footer, footer > div.container {
 }
 
 .list-title {
-		padding-top: 25px;
-		padding-left: 10px;
 		margin-bottom: 0;
 }
 
@@ -473,6 +489,7 @@ footer, footer > div.container {
 .movie-tabs a {
 		color: white;
 		margin-top: 20px;
+		font-weight: 900;
 }
 
 .seasons-card {
@@ -481,4 +498,31 @@ footer, footer > div.container {
 
 div.seasons-card ~ div {
 		padding: 20px;
+}
+
+.movie-tabs .active {
+		color: crimson !important;
+		border-bottom:2px solid white;
+    padding-bottom:2px;
+}
+
+.navbar-brand { color: white !important; border: 0; }
+
+.person-details {
+		background-color: #020d18;
+		display: inline-block;
+		width: 100%;
+		margin-bottom: -10px;
+		position: absolute;
+		z-index: 99;
+}
+
+.person {
+		margin-top: 0px;
+}
+
+.movie-tabs a {
+		color: white;
+		margin-top: 20px;
+		font-weight: 900;
 }

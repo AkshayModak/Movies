@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import StarRatingComponent from 'react-star-rating-component';
 import Footer from '../../footer';
 
-class Television extends React.Component {
+class SearchByNetwork extends React.Component {
 
 		state = {
 				tvList : [],
@@ -27,26 +27,11 @@ class Television extends React.Component {
     }
 
 		loadPage(props, page) {
-				let link = null;
-        if ("airing-today" === props.match.params.id) {
-            this.setState({ headerTitle: 'Airing Today' });
-            link = '/3/tv/airing_today?api_key=65324ba8898442570ac397a61cfa7f22&page=' + page;
-        }
-        if ("top-rated" === props.match.params.id) {
-		        this.setState({ headerTitle: 'Top Rated' });
-            link = '3/tv/top_rated?api_key=65324ba8898442570ac397a61cfa7f22&page=' + page;
-        }
-        if ("popular" === props.match.params.id) {
-            this.setState({ headerTitle: 'Popular Shows' });
-            link = '3/tv/popular?api_key=65324ba8898442570ac397a61cfa7f22&page=' + page;
-        }
-        if ("on-air" === props.match.params.id) {
-            this.setState({ headerTitle: 'On Air' });
-            link = '/3/tv/on_the_air?api_key=65324ba8898442570ac397a61cfa7f22&page=' + page;
-        }
+				const link = '/3/discover/tv?api_key=65324ba8898442570ac397a61cfa7f22&with_networks=' + props.match.params.id + '&page=' + page;
 
         axios.get(link)
         .then( response => {
+            console.log('=====response.data====', response.data);
             this.setState({ tvList: response.data, currentPage: page, totalPages: response.data.total_pages });
         }).catch( error => {
             console.log( error );
@@ -131,4 +116,4 @@ class Television extends React.Component {
 		}
 }
 
-export default Television;
+export default SearchByNetwork;

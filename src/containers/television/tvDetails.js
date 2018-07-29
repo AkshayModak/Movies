@@ -25,10 +25,6 @@ class TelevisionDetails extends React.Component {
         similarMovies: null
     }
 
-		componentWillMount() {
-				document.body.style.background = '#06151E';
-		}
-
 		componentWillReceiveProps(newProps) {
 				this.props = newProps;
 				this.setState({ movies: null });
@@ -67,6 +63,7 @@ class TelevisionDetails extends React.Component {
             <div className="backdrop"> <i className="fa fa-spinner fa-spin fa-5x fa-fw" style={{ top: '50%', left: '50%', position: 'absolute' }}/> </div>
         );
 
+
 	      if (this.props.location || this.state.movies) {
 						movieDetail = (
                 <div className="backdrop"> <i className="fa fa-spinner fa-spin fa-5x fa-fw" style={{ top: '50%', left: '50%', position: 'absolute' }}/> </div>
@@ -80,27 +77,30 @@ class TelevisionDetails extends React.Component {
                 } else {
                     movieDetails =  this.state.movies;
                 }
+                document.title = movieDetails.name + ' - Nextrr';
 
 								let castAndCrewMap = null;
                 if (!this.state.credits.cast) {
                     let castMap = this.state.credits.credits.cast;
                     castAndCrewMap = castMap.concat(this.state.credits.credits.crew);
                     this.state.credits.genres.map( genre => {
-                        genres.push(' ' + genre.name);
+                        genres.push(genre);
                         return '';
                     });
                 } else {
                     let castMap = this.state.credits.cast;
                     castAndCrewMap = castMap.concat(this.state.credits.crew);
                     this.state.movies.genres.map( genre => {
-                        genres.push(' ' + genre.name);
+                        genres.push(genre);
                         return '';
                     });
                 }
 
                 const genreTags = genres.map( genre => {
 										return (
-												<li key={genre} className="list-inline-item"><span className="badge badge-danger">{genre}</span></li>
+												<li key={genre} className="list-inline-item"><span className="badge badge-danger">
+												<Link to={'/television/genre/'+genre.id} style={{ color: 'white', textDecoration: 'none' }}>{genre.name}</Link>
+												</span></li>
 										)
                 });
 
@@ -199,7 +199,7 @@ class TelevisionDetails extends React.Component {
                     if (currentCast < 5) {
                         return (
                                 <li key={cast.id}>
-                                  <Link to={{ pathname: '/person', state: { people_id: cast.id } }} style={{ textDecoration: 'none', color: 'white' }} key={cast.id + '-' + cast.character} >
+                                  <Link to={'/person/' + cast.id } style={{ textDecoration: 'none', color: 'white' }} key={cast.id + '-' + cast.character} >
                                       <dl className="row">
                                         <dt className="col-xs-4"><img src={ cast.profile_path ? "https://image.tmdb.org/t/p/w185/" + cast.profile_path : PosterPlaceholder } style={{ height: '80px', width: '60px' }} alt="Henry Cavill" className="card-img-top"/></dt>
                                         <dd className="col-xs-8" style={{ margin: '22px' }}>{cast.name}</dd>
@@ -217,7 +217,7 @@ class TelevisionDetails extends React.Component {
                 let allCast = (castAndCrewMap.map( cast => {
                     return (
                         <li key={cast.id + '-' + cast.job}>
-                            <Link to={{ pathname: '/person', state: { people_id: cast.id } }} style={{ textDecoration: 'none', color: 'white' }}>
+                            <Link to={'/person/' + cast.id } style={{ textDecoration: 'none', color: 'white' }}>
                               <dl className="row">
                                 <dt className="col-xs-4"><img src={  cast.profile_path ? "https://image.tmdb.org/t/p/w185/" + cast.profile_path : PosterPlaceholder  } style={{ height: '80px', width: '60px' }} alt="Henry Cavill" className="card-img-top"/></dt>
                                 <dd className="col-xs-8" style={{ margin: '22px' }}>{cast.name}</dd>
@@ -241,7 +241,7 @@ class TelevisionDetails extends React.Component {
                 if (movieDetails.networks) {
                     networks = movieDetails.networks.map( network => {
 												return (
-														<li key={network.id}><img src={"https://image.tmdb.org/t/p/w92/" + network.logo_path} style={{ backgroundColor: 'white', padding: '10px', marginBottom: '5px' }} alt="Henry Cavill"/></li>
+														<li key={network.id}><Link to={'/television/network/'+network.id}><img src={"https://image.tmdb.org/t/p/w92/" + network.logo_path} style={{ backgroundColor: 'white', padding: '10px', marginBottom: '5px' }} alt="Henry Cavill"/></Link></li>
 												)
                     })
                 }
@@ -333,7 +333,7 @@ class TelevisionDetails extends React.Component {
                                               <li className="list-inline-item padding-top-7">Media</li>
                                               <li className="list-inline-item float-right">
                                                 <nav className="nav">
-                                                  <a className="nav-link" id="media-tab" data-toggle="tab" href="#media" role="tab" aria-controls="media" aria-selected="true"><small>View all media</small></a>
+                                                  <a href="#" id="show-more-media-tab" onClick={this.showAllMedia}><small>View all media</small></a>
                                                 </nav>
                                               </li>
                                             </ul>
@@ -356,10 +356,17 @@ class TelevisionDetails extends React.Component {
                                         </div>
                                       </div>
                                       <div id="media" className="tab-pane fade" role="tabpanel" aria-labelledby="media-tab">
-                                        {image_lightBox}
-                                        <div className="row">
-                                          {displayMovieTrailers}
-                                          {displayImages}
+                                        <div className="card">
+                                          <div className="card-header" style={{ backgroundColor: '#06151E', borderBottom: '1px solid grey' }}>
+                                            Media
+                                          </div>
+                                          <div className="card-body" style={{ backgroundColor: '#06151E' }}>
+                                            {image_lightBox}
+                                            <div className="row">
+                                              {displayMovieTrailers}
+                                              {displayImages}
+                                            </div>
+                                          </div>
                                         </div>
                                       </div>
                                       <div id="related" className="tab-pane fade" role="tabpanel" aria-labelledby="media-tab">

@@ -23,7 +23,6 @@ class MovieContainer extends Component {
             this.setState({
                 posts : response.data
             });
-            document.body.style.background = 'black';
 
             this.props.fetchMovies({ posts: response.data, 'type': 'MOVIE_DETAILS' });
         }).catch( error => {

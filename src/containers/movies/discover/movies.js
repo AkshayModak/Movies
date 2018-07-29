@@ -23,7 +23,6 @@ class Movies extends React.Component {
 		}
 
 		componentWillMount() {
-				document.body.style.background = 'black';
 				this.loadPage(this.props, 1);
 		}
 
@@ -117,8 +116,8 @@ class Movies extends React.Component {
 				return(
 						<Aux>
 							<Navbar/>
-							<div className="container container-margin">
-								<h2 className="list-title"><legend>{ this.state.headerTitle }</legend></h2>
+							<div className="container container-margin" style={{ backgroundColor: '#06151E' }}>
+								<h2 className="list-title" style={{ color: 'white', fontWeight: '900' }}><legend>{ this.state.headerTitle }</legend></h2>
 								<div className="row">
 									{movies}
                 </div>

@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import StarRatingComponent from 'react-star-rating-component';
 import Footer from '../../footer';
 
-class Television extends React.Component {
+class SearchByGenre extends React.Component {
 
 		state = {
 				tvList : [],
@@ -27,26 +27,11 @@ class Television extends React.Component {
     }
 
 		loadPage(props, page) {
-				let link = null;
-        if ("airing-today" === props.match.params.id) {
-            this.setState({ headerTitle: 'Airing Today' });
-            link = '/3/tv/airing_today?api_key=65324ba8898442570ac397a61cfa7f22&page=' + page;
-        }
-        if ("top-rated" === props.match.params.id) {
-		        this.setState({ headerTitle: 'Top Rated' });
-            link = '3/tv/top_rated?api_key=65324ba8898442570ac397a61cfa7f22&page=' + page;
-        }
-        if ("popular" === props.match.params.id) {
-            this.setState({ headerTitle: 'Popular Shows' });
-            link = '3/tv/popular?api_key=65324ba8898442570ac397a61cfa7f22&page=' + page;
-        }
-        if ("on-air" === props.match.params.id) {
-            this.setState({ headerTitle: 'On Air' });
-            link = '/3/tv/on_the_air?api_key=65324ba8898442570ac397a61cfa7f22&page=' + page;
-        }
+				const link = '/3/discover/tv?api_key=65324ba8898442570ac397a61cfa7f22&with_genres=' + props.match.params.id + '&page=' + page;
 
         axios.get(link)
         .then( response => {
+            console.log('=====response.data====', response.data);
             this.setState({ tvList: response.data, currentPage: page, totalPages: response.data.total_pages });
         }).catch( error => {
             console.log( error );
@@ -55,7 +40,6 @@ class Television extends React.Component {
 		}
 
 		render() {
-				document.title = this.state.headerTitle + ' - Nextrr';
 				const { tvList } = this.state;
 				let tvDetails = (
             <div className="backdrop"> <i className="fa fa-spinner fa-spin fa-5x fa-fw" style={{ marginLeft: '50%', position: 'relative', top: '50%'}}/> </div>
@@ -83,6 +67,7 @@ class Television extends React.Component {
 
 				if (tvList) {
 						if (tvList.results) {
+								document.title = 'Television Shows - Nextrr';
 								tvDetails = tvList.results.map( tv => {
                     return (
                         <div className="col-lg-6" key={tv.id}>
@@ -131,4 +116,4 @@ class Television extends React.Component {
 		}
 }
 
-export default Television;
+export default SearchByGenre;
