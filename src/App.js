@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { BrowserRouter } from 'react-router-dom';
 import { Route, Switch } from 'react-router-dom';
 import MovieDetails from './containers/movies/movieDetails';
 import DiscoverMovies from './containers/movies/discover/movies';
@@ -13,17 +12,22 @@ import Television from './containers/television/discover/tv';
 import TelevisionDetails from './containers/television/tvDetails';
 import SearchByGenre from './containers/television/discover/genres';
 import SearchByNetwork from './containers/television/discover/searchByNetwork';
+import Error from './error';
+import Navbar from './containers/navbar';
+import ReactGA from 'react-ga';
 
 class App extends Component {
 
-		componentWillMount() {
+		componentDidMount() {
 				document.body.style.background = '#06151E';
+				ReactGA.initialize('UA-123163652-1');
 		}
 
 		render() {
+        ReactGA.pageview(window.location.pathname);
 				return(
-						<BrowserRouter>
 								<Aux>
+										<Navbar />
 										<Switch>
 												<Route path='/' exact component={FrontPage} />
 		                    <Route path='/movie-details/:id?' exact component={MovieDetails} />
@@ -36,10 +40,9 @@ class App extends Component {
 		                    <Route path='/television/:id' exact component={Television} />
 		                    <Route path='/television/genre/:id' exact component={SearchByGenre} />
 		                    <Route path='/television/network/:id' exact component={SearchByNetwork} />
-		                    <Route render={() => <h1>Not found</h1>}/>
+		                    <Route component={Error}/>
 		                </Switch>
                 </Aux>
-						</BrowserRouter>
 				);
 		}
 }

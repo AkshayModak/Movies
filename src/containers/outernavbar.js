@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './style.css';
 import Aux from '../HOCs/Aux';
 import AppleCarousel from 'react-apple-carousel';
-import Navbar from './navbar';
 
 class OuterNavbar extends Component {
 
@@ -46,7 +44,7 @@ class OuterNavbar extends Component {
                                   <div className="img-cover" style={backdrop_image0}>
                                       <div className="layer">
 																				<div className="front-labels">
-                                            <h1>Welcome to Movie Cosmos!</h1>
+                                            <h1>Welcome to Nextrr!</h1>
                                             <h3>Here you can search for details regarding all the movies.</h3>
                                         </div>
                                       </div>
@@ -86,7 +84,6 @@ class OuterNavbar extends Component {
 
 				return (
 						<Aux>
-							<Navbar />
 	            <div className="row margin-0">
                 {movieBar}
               </div>

@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from '../../navbar';
 import Aux from '../../../HOCs/Aux';
 import axios from '../../../axios';
 import PosterPlaceholder from '../../../images/poster-placeholder.png';
@@ -31,10 +30,10 @@ class SearchByNetwork extends React.Component {
 
         axios.get(link)
         .then( response => {
-            console.log('=====response.data====', response.data);
             this.setState({ tvList: response.data, currentPage: page, totalPages: response.data.total_pages });
         }).catch( error => {
             console.log( error );
+            this.props.history.push("/");
         });
 
 		}
@@ -48,19 +47,19 @@ class SearchByNetwork extends React.Component {
 
         const pagination = (
             <nav aria-label="Page navigation example">
-              <ul class="pagination justify-content-center">
-                <li class="page-item">
-                  <a class="page-link" onClick={this.loadPage.bind(this, this.props, 1)} tabindex="-1">First</a>
+              <ul className="pagination justify-content-center">
+                <li className="page-item">
+                  <a className="page-link" onClick={this.loadPage.bind(this, this.props, 1)} tabIndex="-1">First</a>
                 </li>
-                <li class="page-item disabled">
-                  <a class="page-link" onClick={this.loadPage.bind(this, this.props, this.state.currentPage - 1)} tabindex="-1"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+                <li className="page-item">
+                  <a className="page-link" onClick={this.loadPage.bind(this, this.props, this.state.currentPage - 1)} tabIndex="-1"><i className="fa fa-angle-double-left" aria-hidden="true"></i></a>
                 </li>
                 <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.props, this.state.currentPage)}>{ this.state.currentPage }</a></li>
                 <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.props, this.state.currentPage + 1)}>{ this.state.currentPage + 1 }</a></li>
                 <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.props, this.state.currentPage + 2)}>{ this.state.currentPage + 2 }</a></li>
-                <li class="page-item"><a class="page-link" onClick={this.loadPage.bind(this, this.props, this.state.currentPage + 1)}><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
-                <li class="page-item">
-                  <a class="page-link" onClick={this.loadPage.bind(this, this.props, this.state.totalPages)}>Last</a>
+                <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.props, this.state.currentPage + 1)}><i className="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
+                <li className="page-item">
+                  <a className="page-link" onClick={this.loadPage.bind(this, this.props, this.state.totalPages)}>Last</a>
                 </li>
               </ul>
             </nav>
@@ -100,7 +99,6 @@ class SearchByNetwork extends React.Component {
 
 				return (
 						<Aux>
-							<Navbar />
 							<div className="container container-margin" style={{ backgroundColor: '#06151E' }}>
 							<h2 className="list-title" style={{ color: 'white', fontWeight: '900' }}><legend>{ this.state.headerTitle }</legend></h2>
 								<div className="row">

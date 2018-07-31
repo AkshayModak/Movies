@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from '../navbar';
 import Aux from '../../HOCs/Aux';
 import '../style.css';
 import axios from '../../axios';
@@ -36,10 +35,8 @@ class TelevisionDetails extends React.Component {
         if (this.props.match.params && this.props.match.params.tvid) {
             link = '/3/tv/'+ this.props.match.params.tvid +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits,videos,images';
         }
-        console.log('====link====', link);
         axios.get(link)
         .then( response => {
-            console.log('=====response.data====', response.data);
             this.setState({
                 credits : response.data,
                 movieTrailers: response.data.videos,
@@ -47,6 +44,7 @@ class TelevisionDetails extends React.Component {
             });
         }).catch( error => {
             console.log( error );
+            this.props.history.push("/");
         });
     }
 
@@ -98,7 +96,7 @@ class TelevisionDetails extends React.Component {
 
                 const genreTags = genres.map( genre => {
 										return (
-												<li key={genre} className="list-inline-item"><span className="badge badge-danger">
+												<li key={genre.id} className="list-inline-item"><span className="badge badge-danger">
 												<Link to={'/television/genre/'+genre.id} style={{ color: 'white', textDecoration: 'none' }}>{genre.name}</Link>
 												</span></li>
 										)
@@ -108,6 +106,7 @@ class TelevisionDetails extends React.Component {
 	              if (movieDetails.episode_run_time) {
 	                  movieDetails.episode_run_time.map( run_time => {
 	                      runTime.push(' ' + run_time + 'mins');
+	                      return '';
 	                  })
 	              }
 
@@ -173,24 +172,6 @@ class TelevisionDetails extends React.Component {
                             );
                         })
                     );
-                }
-
-								let similarMovies = 'Not Available';
-                if (this.state.similarMovies) {
-										similarMovies = this.state.similarMovies.results.map( similarMovie => {
-												return (
-                            <div className="col-xs" key={similarMovie.id} style={{ paddingLeft: '0' }}>
-                                <Link to={'/movie-details/'+similarMovie.id} style={{ textDecoration: 'none', color: 'white' }}>
-                                    <li>
-                                      <dl className="row">
-                                        <dt className="col-xs-4"><img src={"https://image.tmdb.org/t/p/w185/" + similarMovie.poster_path} style={{ height: '80px', width: '60px' }} alt="Henry Cavill" className="card-img-top"/></dt>
-                                        <dd className="col-xs-8" style={{ margin: '22px' }}>{similarMovie.title}</dd>
-                                      </dl>
-                                    </li>
-                                </Link>
-                            </div>
-                        )
-										});
                 }
 
                 let currentCast = 0;
@@ -259,34 +240,22 @@ class TelevisionDetails extends React.Component {
                     seasons = movieDetails.seasons.map( season => {
 
 												return (
-
-
-
-
-
-														<div className="row" style={{ background: 'white', marginTop: '20px' }}>
-                            <div className="card seasons-card flex-md-row box-shadow"  style={{ background: 'white', color: 'black', width: '100%', marginBottom: '0' }}>
-	                            <div className="card-body d-flex flex-column align-items-start">
-	                              <h3 className="mb-0 movie-card-title">
-	                                {season.name}
-	                              </h3>
-	                              <div className="mb-1 text-muted">{dateFormatter(season.air_date)}</div>
-	                              <div className="mb-1">Episodes Count: {season.episode_count}</div>
-	                            </div>
-	                            <div>
-	                              <img className="card-img-right flex-auto d-none d-lg-block movie-card-img" src={season.poster_path ? 'https://image.tmdb.org/t/p/w185/' + season.poster_path : PosterPlaceholder} alt={season.name}/>
-	                            </div>
-	                            <br />
+														<div className="row" style={{ background: 'white', marginTop: '20px' }} key={season.id}>
+	                            <div className="card seasons-card flex-md-row box-shadow"  style={{ background: 'white', color: 'black', width: '100%', marginBottom: '0' }}>
+		                            <div className="card-body d-flex flex-column align-items-start">
+		                              <h3 className="mb-0 movie-card-title">
+		                                {season.name}
+		                              </h3>
+		                              <div className="mb-1 text-muted">{dateFormatter(season.air_date)}</div>
+		                              <div className="mb-1">Episodes Count: {season.episode_count}</div>
+		                            </div>
+		                            <div>
+		                              <img className="card-img-right flex-auto d-none d-lg-block movie-card-img" src={season.poster_path ? 'https://image.tmdb.org/t/p/w185/' + season.poster_path : PosterPlaceholder} alt={season.name}/>
+		                            </div>
+		                            <br />
+		                          </div>
+		                          { season.overview ? <div className="col-lg-12" style={{ background: 'white', color: 'black' }}><small>{season.overview}</small></div> : ''}
 	                          </div>
-	                          { season.overview ? <div className="col-lg-12" style={{ background: 'white', color: 'black' }}><small>{season.overview}</small></div> : ''}
-	                          </div>
-
-
-
-
-
-
-
 												)
                     });
                 }
@@ -310,10 +279,10 @@ class TelevisionDetails extends React.Component {
                                   <a className="nav-link" id="related-tab" data-toggle="tab" href="#related" role="tab" aria-controls="related" aria-selected="true">Seasons</a>
                                 </nav>
                                 <div className="row">
-                                  <div className="col-lg-8" style={{ paddingTop: '38px' }}>
-                                    {movieDetails.overview}
+                                  <div className="col-lg-8">
                                     <div className="tab-content" id="myTabContent">
-                                      <div id="overview" className="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
+                                      <div id="overview" className="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab" style={{ paddingTop: '38px' }}>
+                                        {movieDetails.overview}
                                         <div className="card">
                                           <div className="card-header" style={{ backgroundColor: '#06151E', borderBottom: '1px solid grey' }}>
                                             <ul className="list-inline">
@@ -333,7 +302,7 @@ class TelevisionDetails extends React.Component {
                                               <li className="list-inline-item padding-top-7">Media</li>
                                               <li className="list-inline-item float-right">
                                                 <nav className="nav">
-                                                  <a href="#" id="show-more-media-tab" onClick={this.showAllMedia}><small>View all media</small></a>
+                                                  <a id="show-more-media-tab" onClick={this.showAllMedia}><small>View all media</small></a>
                                                 </nav>
                                               </li>
                                             </ul>
@@ -423,7 +392,6 @@ class TelevisionDetails extends React.Component {
 
 				return(
 					<Aux>
-						<Navbar />
 						{movieDetail}
 						<Footer />
 					</Aux>

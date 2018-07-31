@@ -519,3 +519,11 @@ div.seasons-card ~ div {
 		margin-top: 20px;
 		font-weight: 900;
 }
+
+.center {
+position: relative;
+float: left;
+top: 50%;
+left: 50%;
+transform: translate(-50%, 50%);
+}

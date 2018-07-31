@@ -8,6 +8,11 @@ import Footer from './footer';
 import OuterNavbar from './outernavbar';
 
 class FrontPage extends Component {
+
+		componentWillMount() {
+				document.title = 'Home - Nextrr';
+		}
+
 		render() {
 			return (
 				<Aux>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Navbar from '../navbar';
 import Footer from '../footer';
 import Aux from '../../HOCs/Aux';
 import axios from '../../axios';
@@ -38,12 +37,12 @@ class Popular extends Component {
             }
         }).catch( error => {
             console.log( error );
+            this.props.history.push("/");
         });
 		}
 
 		render() {
 
-				console.log('====this.state.actors====', this.state.actors);
 				let personDetails = null;
 				let personDetail = null;
 				let pagination = null;
@@ -57,10 +56,9 @@ class Popular extends Component {
 						personDetails = this.state.actors.results;
 
 						if (personDetails) {
-								console.log('====personDetails====',personDetails);
 								personDetail = personDetails.map( details => {
 										return (
-											<div className="col-sm-6 col-lg-3">
+											<div className="col-sm-6 col-lg-3" key={details.id}>
 												<Link to={ '/person/' + details.id } style={{ textDecoration: 'none', color: 'black', fontWeight: '900' }}>
 		                      <div className="card actors-card">
 	                          <img src={ 'https://image.tmdb.org/t/p/w500/' + details.profile_path } alt={details.name} className="card-img-top"/>
@@ -103,7 +101,6 @@ class Popular extends Component {
 
 				return (
 					<Aux>
-						<Navbar />
 						<div className="container" style={{ backgroundColor: '#06151E' }}>
 							<div className="row">
                 {personDetail}

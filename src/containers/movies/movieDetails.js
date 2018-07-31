@@ -1,11 +1,8 @@
 import React from 'react';
-import Navbar from '../navbar';
 import Aux from '../../HOCs/Aux';
 import '../style.css';
 import axios from '../../axios';
 import Footer from '../footer';
-import isoLangs from '../../utility/isoLangs';
-import CircularProgressbar from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import PosterPlaceholder from '../../images/poster-placeholder.png';
 import { Link } from 'react-router-dom';
@@ -44,7 +41,6 @@ class MovieDetails extends React.Component {
             }
             axios.get(link)
                     .then( response => {
-                        console.log('=====response.data====', response.data);
                         this.setState({
                             credits : response.data,
                             movieTrailers: response.data.videos,
@@ -52,6 +48,7 @@ class MovieDetails extends React.Component {
                         });
                     }).catch( error => {
                         console.log( error );
+                        this.props.history.push("/");
                     });
         }
 
@@ -59,7 +56,6 @@ class MovieDetails extends React.Component {
             const link = '/3/tv/'+ this.props.match.params.tvid +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits';
             axios.get(link)
             .then( response => {
-                console.log('=====response.data====', response.data);
                 this.setState({
                     credits : response.data,
                     movieTrailers: response.data.videos,
@@ -67,6 +63,7 @@ class MovieDetails extends React.Component {
                 });
             }).catch( error => {
                 console.log( error );
+                this.props.history.push("/");
             });
         }
 
@@ -77,12 +74,10 @@ class MovieDetails extends React.Component {
                 link = '/3/movie/'+ this.props.location.state.movie_id +'?api_key=65324ba8898442570ac397a61cfa7f22&append_to_response=credits,videos,images,similar';
                 movieId = this.props.location.state.movie_id;
             }
-            console.log('====link====', link);
             this.setState({hasLoaded: true});
 
             axios.get(link)
             .then( response => {
-                console.log('=====response====', response);
                 this.setState({
                     movies : response.data,
                     credits: response.data.credits,
@@ -91,9 +86,9 @@ class MovieDetails extends React.Component {
                     movieImages: response.data.images,
                     similarMovies: response.data.similar
                 });
-                this.props.fetchMovies({ posts: response.data, 'type': 'MOVIE_DETAILS' });
             }).catch( error => {
                 console.log( error );
+                this.props.history.push("/");
             });
         }
     }
@@ -107,7 +102,6 @@ class MovieDetails extends React.Component {
 
 	      let movieDetail = null;
 	      let movieDetails = null;
-	      let castAndCrew = null;
 	      let image_lightBox = null;
 	      let displayImages = null;
 	      let displayMovieTrailers = null;
@@ -131,6 +125,7 @@ class MovieDetails extends React.Component {
                 }
 
 								if (movieDetails) {
+										document.title = movieDetails.title + ' - Nextrr';
 										let castAndCrewMap = null;
                     if (!this.state.credits.cast) {
                         let castMap = this.state.credits.credits.cast;
@@ -185,6 +180,18 @@ class MovieDetails extends React.Component {
 
                     if (movieTrailers && movieTrailers.results) {
                         displayMovieTrailers = ( movieTrailers.results.map( (trailers, index) => {
+                                return (
+                                    <div className="col-lg-12" key={index}>
+                                        <iframe src={"https://www.youtube.com/embed/" + trailers.key} title={trailers.key} frameBorder="0" allow="autoplay; encrypted-media" style={{ maxWidth: '100%', maxHeight: '100%' }} allowFullScreen></iframe>
+                                    </div>
+                                )
+                            })
+                        )
+                    }
+
+										let displayMovieTrailersOnOverview = null;
+                    if (movieTrailers && movieTrailers.results) {
+                        displayMovieTrailersOnOverview = ( movieTrailers.results.filter((i, index) => (index < 3)).map( (trailers, index) => {
                                 return (
                                     <div className="col-lg-12" key={index}>
                                         <iframe src={"https://www.youtube.com/embed/" + trailers.key} title={trailers.key} frameBorder="0" allow="autoplay; encrypted-media" style={{ maxWidth: '100%', maxHeight: '100%' }} allowFullScreen></iframe>
@@ -253,19 +260,20 @@ class MovieDetails extends React.Component {
                     let allCast = null;
                     if (castAndCrewMap) {
                         castAndCrewMap.map( castAndCrew => {
-                            if (castAndCrew.job && 'Director' == castAndCrew.job) {
+                            if (castAndCrew.job && 'Director' === castAndCrew.job) {
                                 director = castAndCrew.name;
                             }
                             if (castAndCrew.job && 'Writer' === castAndCrew.job) {
                                 writers.push(' ' + castAndCrew.name);
                             }
+                            return '';
                         });
 
                         casts = (castAndCrewMap.map( cast => {
                             currentCast = currentCast + 1;
                             if (currentCast < 5) {
                                 return (
-                                        <li>
+                                        <li key={cast.id}>
                                           <Link to={'/person/' + cast.id } style={{ textDecoration: 'none', color: 'white' }} key={cast.id + '-' + cast.character} >
                                               <dl className="row">
                                                 <dt className="col-xs-4"><img src={"https://image.tmdb.org/t/p/w185/" + cast.profile_path} style={{ height: '80px', width: '60px' }} alt="Henry Cavill" className="card-img-top"/></dt>
@@ -297,9 +305,6 @@ class MovieDetails extends React.Component {
                         )
                     }
 
-
-
-
                     if (!castAndCrewMap || castAndCrewMap.length === 0) {
                         casts = (
                             <div className="col padding-10">
@@ -308,7 +313,6 @@ class MovieDetails extends React.Component {
                         )
                     }
 
-                    const movie_language = isoLangs[movieDetails.original_language];
                     const backdrop_path = 'https://image.tmdb.org/t/p/w780/' + movieDetails.backdrop_path;
                     const poster_path = 'https://image.tmdb.org/t/p/w342/' + movieDetails.poster_path;
                     movieDetail = (
@@ -319,21 +323,21 @@ class MovieDetails extends React.Component {
                               <div className="movie-single">
                                 <div className="row">
                                   <div className="col-xs col-lg-4">
-                                    <img src={poster_path} className="sticky-top"/>
+                                    <img src={poster_path} className="sticky-top" alt={movieDetails.title}/>
                                   </div>
                                   <div className="col-lg-8" style={{ padding: '38px' }}>
                                     <h3>{movieDetails.title}</h3>
                                     <nav className="nav movie-tabs">
                                       <a className="nav-link active" id="overview-tab" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
                                       <a className="nav-link" id="cast-tab" data-toggle="tab" href="#cast" role="tab" aria-controls="cast" aria-selected="true">Cast</a>
-                                      <a className="nav-link" href="#" id="media-tab" data-toggle="tab" href="#media" role="tab" aria-controls="media" aria-selected="true">Media</a>
-                                      <a className="nav-link" href="#" id="related-tab" data-toggle="tab" href="#related" role="tab" aria-controls="related" aria-selected="true">Related</a>
+                                      <a className="nav-link" id="media-tab" data-toggle="tab" href="#media" role="tab" aria-controls="media" aria-selected="true">Media</a>
+                                      <a className="nav-link" id="related-tab" data-toggle="tab" href="#related" role="tab" aria-controls="related" aria-selected="true">Related</a>
                                     </nav>
                                     <div className="row">
-                                      <div className="col-lg-8" style={{ paddingTop: '38px' }}>
-                                        {movieDetails.overview}
+                                      <div className="col-lg-8">
                                         <div className="tab-content" id="myTabContent">
-                                          <div id="overview" className="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
+                                          <div id="overview" className="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab" style={{ paddingTop: '38px' }}>
+                                            {movieDetails.overview}
                                             <div className="card">
                                               <div className="card-header" style={{ backgroundColor: '#06151E', borderBottom: '1px solid grey' }}>
                                                 <ul className="list-inline">
@@ -353,13 +357,13 @@ class MovieDetails extends React.Component {
                                                   <li className="list-inline-item padding-top-7">Media</li>
                                                   <li className="list-inline-item float-right">
                                                     <nav className="nav">
-                                                      <a className="nav-link" href="#" id="media-tab" data-toggle="tab" href="#media" role="tab" aria-controls="media" aria-selected="true"><small>View all media</small></a>
+                                                      <a className="nav-link" id="media-tab" data-toggle="tab" href="#media" role="tab" aria-controls="media" aria-selected="true"><small>View all media</small></a>
                                                     </nav>
                                                   </li>
                                                 </ul>
                                               </div>
                                               <div className="card-body" style={{ backgroundColor: '#06151E' }}>
-                                                {displayMovieTrailers}
+                                                {displayMovieTrailersOnOverview}
                                               </div>
                                             </div>
                                           </div>
@@ -376,10 +380,17 @@ class MovieDetails extends React.Component {
                                             </div>
                                           </div>
                                           <div id="media" className="tab-pane fade" role="tabpanel" aria-labelledby="media-tab">
-                                            {image_lightBox}
-                                            <div className="row">
-                                              {displayMovieTrailers}
-                                              {displayImages}
+                                            <div className="card">
+                                              <div className="card-header" style={{ backgroundColor: '#06151E', borderBottom: '1px solid grey' }}>
+                                                Media
+                                              </div>
+                                              <div className="card-body" style={{ backgroundColor: '#06151E' }}>
+                                                {image_lightBox}
+                                                <div className="row">
+                                                  {displayMovieTrailers}
+                                                  {displayImages}
+                                                </div>
+                                              </div>
                                             </div>
                                           </div>
                                           <div id="related" className="tab-pane fade" role="tabpanel" aria-labelledby="media-tab">
@@ -433,7 +444,6 @@ class MovieDetails extends React.Component {
 
 				return(
 					<Aux>
-						<Navbar />
 						{movieDetail}
 					</Aux>
 				)

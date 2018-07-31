@@ -8,7 +8,7 @@ const navbar = () => {
 		return (
 				<Aux>
 					<nav className="navbar navbar-expand-lg navbar-dark sticky-top" style={{ padding: '0', backgroundColor: '#06151E' }}>
-            <NavLink className="navbar-brand" to="/" exact style={{ color: 'white', padding: '10px' }}>Movie Cosmos</NavLink>
+            <NavLink className="navbar-brand" to="/" exact style={{ color: 'white', padding: '10px' }}>Nextrr</NavLink>
             <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>

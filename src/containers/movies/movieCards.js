@@ -11,10 +11,6 @@ class MovieCards extends Component {
         this.state = {loaded: false};
       }
 
-		componentDidMount(){
-        document.title = "Movie Details";
-    }
-
 		render() {
 			const poster_path = 'https://image.tmdb.org/t/p/w185' + this.props.data.poster_path;
 			let release_date = "";
