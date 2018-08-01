@@ -500,7 +500,13 @@ div.seasons-card ~ div {
     padding-bottom:2px;
 }
 
-.navbar-brand { color: white !important; border: 0; }
+.navbar-brand {
+		color: white !important;
+		border: 0;
+		font-family: 'Shadows Into Light', cursive;
+		padding-left: 10px;
+		font-size: 35px;
+}
 
 .person-details {
 		background-color: #020d18;
@@ -552,4 +558,33 @@ transform: translate(-50%, 50%);
 
 .btn-outline-secondary:hover {
 		background: rgb(6, 21, 30);
+}
+
+/* Front page stylings */
+
+.nav-item {
+		font-family: 'Acme', sans-serif;
+		padding-right: 10px !important;
+		padding-left: 10px !important;
+		font-size: 20px;
+}
+
+.front-cards {
+		border: 0;
+}
+
+.front-cards > .card-header {
+		background: #06151E;
+		padding-bottom: 0;
+		font-size: 20px;
+		font-weight: 900;
+		border: 0;
+}
+
+.front-cards > .card-header > ul > li {
+		font-family: 'Roboto', sans-serif;
+}
+
+.front-cards > div.card-header + div {
+		background-color: #06151E;
 }

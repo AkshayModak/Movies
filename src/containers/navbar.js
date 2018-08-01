@@ -25,13 +25,13 @@ class Navbar extends React.Component {
 						<Aux>
 							<nav className="navbar navbar-expand-lg navbar-dark fixed-top" style={{ padding: '0', backgroundColor: '#06151E'}}>
 								<div className="container" style={{ marginTop: '0', backgroundColor: '#06151E' }}>
-			            <NavLink className="navbar-brand" to="/" exact style={{ color: 'white', padding: '10px' }}>Nextrr</NavLink>
+			            <NavLink className="navbar-brand" to="/">Nextrr</NavLink>
 			            <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 			              <span className="navbar-toggler-icon"></span>
 			            </button>
 			            <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-			              <ul className="navbar-nav" style={{ padding: '10px', width: '100%' }}>
-			                <NavLink to="/" exact className="nav-item nav-link" activeStyle={{ color: 'red'}} style={{ color: 'white' }}>
+			              <ul className="navbar-nav">
+			                <NavLink to="/" exact className="nav-link nav-item" activeStyle={{ color: 'red'}} style={{ color: 'white' }}>
 			                  Home
 			                </NavLink>
 			                <li className="nav-item dropdown">

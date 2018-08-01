@@ -9,31 +9,22 @@ class Footer extends Component {
 		                <div className="container">
 		                    <div className="row">
 		                        <div className="col-md-5">
-		                            <h5><i className="fa fa-road"></i> Movies</h5>
 		                            <div className="row">
-		                                <div className="col-6">
+		                                <div className="col-12 offset-md-3">
+		                                    <h3>Nextrr</h3>
 		                                    <ul className="list-unstyled">
-		                                        <li><a href="">Product</a></li>
-		                                        <li><a href="">Benefits</a></li>
-		                                        <li><a href="">Partners</a></li>
-		                                        <li><a href="">Team</a></li>
+		                                        <li><a href="">Disclaimer</a></li>
+		                                        <li><a href="">Credits</a></li>
+		                                        <li><a href="">Contact Us</a></li>
 		                                    </ul>
-		                                </div>
-		                                <div className="col-6">
-		                                    <ul className="list-unstyled">
-		                                        <li><a href="">Documentation</a></li>
-		                                        <li><a href="">Support</a></li>
-		                                        <li><a href="">Legal Terms</a></li>
-		                                        <li><a href="">About</a></li>
-		                                    </ul>
+		                                    <ul className="nav">
+                                            <li className="nav-item"><a href="" className="nav-link pl-0"><i className="fa fa-facebook fa-lg"></i></a></li>
+                                            <li className="nav-item"><a href="" className="nav-link"><i className="fa fa-twitter fa-lg"></i></a></li>
+                                            <li className="nav-item"><a href="" className="nav-link"><i className="fa fa-github fa-lg"></i></a></li>
+                                            <li className="nav-item"><a href="" className="nav-link"><i className="fa fa-instagram fa-lg"></i></a></li>
+                                        </ul>
 		                                </div>
 		                            </div>
-		                            <ul className="nav">
-		                                <li className="nav-item"><a href="" className="nav-link pl-0"><i className="fa fa-facebook fa-lg"></i></a></li>
-		                                <li className="nav-item"><a href="" className="nav-link"><i className="fa fa-twitter fa-lg"></i></a></li>
-		                                <li className="nav-item"><a href="" className="nav-link"><i className="fa fa-github fa-lg"></i></a></li>
-		                                <li className="nav-item"><a href="" className="nav-link"><i className="fa fa-instagram fa-lg"></i></a></li>
-		                            </ul>
 		                            <br />
 		                        </div>
 		                        <div className="col-md-2">
