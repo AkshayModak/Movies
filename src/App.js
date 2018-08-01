@@ -15,6 +15,7 @@ import SearchByNetwork from './containers/television/discover/searchByNetwork';
 import Error from './error';
 import Navbar from './containers/navbar';
 import ReactGA from 'react-ga';
+import Search from './containers/search';
 
 class App extends Component {
 
@@ -40,6 +41,7 @@ class App extends Component {
 		                    <Route path='/television/:id' exact component={Television} />
 		                    <Route path='/television/genre/:id' exact component={SearchByGenre} />
 		                    <Route path='/television/network/:id' exact component={SearchByNetwork} />
+		                    <Route path='/search/:query' exact component={Search} />
 		                    <Route component={Error}/>
 		                </Switch>
                 </Aux>

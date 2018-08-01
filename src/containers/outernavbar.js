@@ -38,7 +38,7 @@ class OuterNavbar extends Component {
                     const backdrop_image2 = {backgroundImage: 'url(https://image.tmdb.org/t/p/w1280/' + movieList[2].backdrop_path + ')', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}
                     const backdrop_image3 = {backgroundImage: 'url(https://image.tmdb.org/t/p/w1280/' + movieList[3].backdrop_path + ')', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}
                     movieBar = (
-                        <AppleCarousel
+                        <AppleCarousel enableTimer={false}
                           renderSlides={[
                             ({ activeItemIndex, index }) => <div style={{ height: '600px' }}>
                                   <div className="img-cover" style={backdrop_image0}>
@@ -84,7 +84,7 @@ class OuterNavbar extends Component {
 
 				return (
 						<Aux>
-	            <div className="row margin-0">
+	            <div className="row margin-0" style={{ marginTop: '100px' }}>
                 {movieBar}
               </div>
             </Aux>

@@ -86,8 +86,8 @@ class Users extends Component {
                             numberOfPlaceholderItems={6}
                             appShellItem={'<div></div>'}
 
-                            rightChevron={<i className="fa fa-chevron-right"></i>}
-                            leftChevron={<i className="fa fa-chevron-left"></i>}
+                            rightChevron={<i className="fa fa-chevron-right" style={{ color: 'white' }}></i>}
+                            leftChevron={<i className="fa fa-chevron-left" style={{ color: 'white' }}></i>}
                             chevronWidth={20}
                             outsideChevron={true}
 
@@ -115,8 +115,8 @@ class Users extends Component {
 	                          numberOfPlaceholderItems={6}
 	                          appShellItem={'<div></div>'}
 
-	                          rightChevron={<i className="fa fa-chevron-right"></i>}
-	                          leftChevron={<i className="fa fa-chevron-left"></i>}
+	                          rightChevron={<i className="fa fa-chevron-right" style={{ color: 'white' }}></i>}
+	                          leftChevron={<i className="fa fa-chevron-left" style={{ color: 'white' }}></i>}
 	                          chevronWidth={20}
 	                          outsideChevron={true}
 

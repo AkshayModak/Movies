@@ -138,6 +138,18 @@ class TelevisionDetails extends React.Component {
 	                  )
 	              }
 
+	              let displayTvTrailersOnOverview = null;
+                if (movieTrailers && movieTrailers.results) {
+                    displayTvTrailersOnOverview = ( movieTrailers.results.filter((i, index) => (index < 3)).map( (trailers, index) => {
+                            return (
+                                <div className="col-lg-12" key={index}>
+                                    <iframe src={"https://www.youtube.com/embed/" + trailers.key} title={trailers.key} frameBorder="0" allow="autoplay; encrypted-media" style={{ maxWidth: '100%', maxHeight: '100%' }} allowFullScreen></iframe>
+                                </div>
+                            )
+                        })
+                    )
+                }
+
 	              image_lightBox = (
                     <Aux>
                         {isOpen && (
@@ -308,7 +320,7 @@ class TelevisionDetails extends React.Component {
                                             </ul>
                                           </div>
                                           <div className="card-body" style={{ backgroundColor: '#06151E' }}>
-                                            {displayMovieTrailers}
+                                            {displayTvTrailersOnOverview}
                                           </div>
                                         </div>
                                       </div>
@@ -384,6 +396,7 @@ class TelevisionDetails extends React.Component {
                             </div>
                           </div>
                         </div>
+                        <Footer />
                       </div>
                     </Aux>
                 );
@@ -393,7 +406,6 @@ class TelevisionDetails extends React.Component {
 				return(
 					<Aux>
 						{movieDetail}
-						<Footer />
 					</Aux>
 				)
 		}
