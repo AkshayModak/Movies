@@ -107,13 +107,10 @@ class MovieDetails extends React.Component {
 	      let displayMovieTrailers = null;
 
 				movieDetail = (
-            <div className="backdrop"> <i className="fa fa-spinner fa-spin fa-5x fa-fw" style={{ top: '50%', left: '50%', position: 'absolute' }}/> </div>
+            <div className="backdrop"> <i className="fa fa-spinner fa-spin fa-5x fa-fw"/> </div>
         );
 
 	      if (this.props.location || this.state.movies) {
-						movieDetail = (
-                <div className="backdrop"> <i className="fa fa-spinner fa-spin fa-5x fa-fw" style={{ top: '50%', left: '50%', position: 'absolute' }}/> </div>
-            );
             movieDetails = null;
             let genres = [];
             if (this.state.credits || this.state.movies) {
@@ -228,8 +225,8 @@ class MovieDetails extends React.Component {
                         displayImages = (images.map( (displayImage, index) => { //(images.filter((i, index) => (index < 4)).map( (displayImage, index) => {
                                 return(
                                   <div className="col-lg-6 padding-0" key={index}>
-                                      <button className="btn btn-link" onClick={() => this.setState({ isOpen: true, photoIndex: index })} style={{ paddingRight: '0' }}>
-                                        <img src={displayImage} className="img-thumbnail" style={{ maxWidth: '100%', maxHeight: '100%' }} alt={index}/>
+                                      <button className="btn btn-link" onClick={() => this.setState({ isOpen: true, photoIndex: index })}>
+                                        <img src={displayImage} className="img-thumbnail" alt={index}/>
                                       </button>
                                   </div>
                                 );
@@ -241,12 +238,12 @@ class MovieDetails extends React.Component {
                     if (this.state.similarMovies) {
                         similarMovies = this.state.similarMovies.results.map( similarMovie => {
                             return (
-                                <div className="col-xs" key={similarMovie.id} style={{ paddingLeft: '0' }}>
-                                    <Link to={'/movie-details/'+similarMovie.id} style={{ textDecoration: 'none', color: 'white' }}>
+                                <div className="col-xs" key={similarMovie.id}>
+                                    <Link to={'/movie-details/'+similarMovie.id} className="no-decoration">
                                         <li>
-                                          <dl className="row">
-                                            <dt className="col-xs-4"><img src={"https://image.tmdb.org/t/p/w185/" + similarMovie.poster_path} style={{ height: '80px', width: '60px' }} alt="Henry Cavill" className="card-img-top"/></dt>
-                                            <dd className="col-xs-8" style={{ margin: '22px' }}>{similarMovie.title}</dd>
+                                          <dl className="row cast">
+                                            <dt className="col-xs-4"><img src={"https://image.tmdb.org/t/p/w185/" + similarMovie.poster_path} alt={similarMovie.title} className="card-img-top"/></dt>
+                                            <dd className="col-xs-8">{similarMovie.title}</dd>
                                           </dl>
                                         </li>
                                     </Link>
@@ -274,10 +271,10 @@ class MovieDetails extends React.Component {
                             if (currentCast < 5) {
                                 return (
                                         <li key={cast.id}>
-                                          <Link to={'/person/' + cast.id } style={{ textDecoration: 'none', color: 'white' }} key={cast.id + '-' + cast.character} >
-                                              <dl className="row">
-                                                <dt className="col-xs-4"><img src={"https://image.tmdb.org/t/p/w185/" + cast.profile_path} style={{ height: '80px', width: '60px' }} alt="Henry Cavill" className="card-img-top"/></dt>
-                                                <dd className="col-xs-8" style={{ margin: '22px' }}>{cast.name}</dd>
+                                          <Link to={'/person/' + cast.id } className="no-decoration" key={cast.id + '-' + cast.character} >
+                                              <dl className="row cast">
+                                                <dt className="col-xs-4"><img src={"https://image.tmdb.org/t/p/w185/" + cast.profile_path} alt={cast.name} className="card-img-top"/></dt>
+                                                <dd className="col-xs-8">{cast.name}</dd>
                                               </dl>
                                           </Link>
                                         </li>
@@ -292,10 +289,10 @@ class MovieDetails extends React.Component {
                         allCast = (castAndCrewMap.map( cast => {
                             return (
                                 <li key={cast.id + '-' + cast.job}>
-                                    <Link to={'/person/' + cast.id } style={{ textDecoration: 'none', color: 'white' }}>
-                                      <dl className="row">
-                                        <dt className="col-xs-4"><img src={"https://image.tmdb.org/t/p/w185/" + cast.profile_path} style={{ height: '80px', width: '60px' }} alt="Henry Cavill" className="card-img-top"/></dt>
-                                        <dd className="col-xs-8" style={{ margin: '22px' }}>{cast.name}</dd>
+                                    <Link to={'/person/' + cast.id } className="no-decoration">
+                                      <dl className="row cast">
+                                        <dt className="col-xs-4"><img src={"https://image.tmdb.org/t/p/w185/" + cast.profile_path} alt={cast.name} className="card-img-top"/></dt>
+                                        <dd className="col-xs-8">{cast.name}</dd>
                                       </dl>
                                     </Link>
                                 </li>
@@ -319,13 +316,13 @@ class MovieDetails extends React.Component {
                         <Aux key={movieDetails.id}>
                           <div className="movie-banner" style={{backgroundImage: 'url(' + backdrop_path + ')' }}></div>
                           <div className="movie_single">
-                            <div className="container" style={{ background: 'transparent', color: 'white' }}>
+                            <div className="container">
                               <div className="movie-single">
                                 <div className="row">
                                   <div className="col-xs col-lg-4">
-                                    <img src={poster_path} className="sticky-top" alt={movieDetails.title}/>
+                                    <img src={poster_path} className="sticky-top poster" alt={movieDetails.title}/>
                                   </div>
-                                  <div className="col-lg-8" style={{ padding: '38px' }}>
+                                  <div className="col-lg-8 primary-bar">
                                     <h3>{movieDetails.title}</h3>
                                     <nav className="nav movie-tabs">
                                       <a className="nav-link active" id="overview-tab" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
@@ -336,23 +333,23 @@ class MovieDetails extends React.Component {
                                     <div className="row">
                                       <div className="col-lg-8">
                                         <div className="tab-content" id="myTabContent">
-                                          <div id="overview" className="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab" style={{ paddingTop: '38px' }}>
+                                          <div id="overview" className="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
                                             {movieDetails.overview}
                                             <div className="card">
-                                              <div className="card-header" style={{ backgroundColor: '#06151E', borderBottom: '1px solid grey' }}>
+                                              <div className="card-header">
                                                 <ul className="list-inline">
                                                   <li className="list-inline-item padding-top-7">Cast</li>
                                                   <li className="list-inline-item float-right"><button type="submit" className="btn btn-link"><small>View all cast</small></button></li>
                                                 </ul>
                                               </div>
-                                              <div className="card-body" style={{ backgroundColor: '#06151E' }}>
+                                              <div className="card-body">
                                                 <ul className="list-unstyled">
                                                   {casts}
                                                 </ul>
                                               </div>
                                             </div>
                                             <div className="card">
-                                              <div className="card-header" style={{ backgroundColor: '#06151E', borderBottom: '1px solid grey' }}>
+                                              <div className="card-header">
                                                 <ul className="list-inline">
                                                   <li className="list-inline-item padding-top-7">Media</li>
                                                   <li className="list-inline-item float-right">
@@ -362,17 +359,17 @@ class MovieDetails extends React.Component {
                                                   </li>
                                                 </ul>
                                               </div>
-                                              <div className="card-body" style={{ backgroundColor: '#06151E' }}>
+                                              <div className="card-body">
                                                 {displayMovieTrailersOnOverview}
                                               </div>
                                             </div>
                                           </div>
                                           <div id="cast" className="tab-pane fade" role="tabpanel" aria-labelledby="cast-tab">
                                             <div className="card">
-                                              <div className="card-header" style={{ backgroundColor: '#06151E', borderBottom: '1px solid grey' }}>
+                                              <div className="card-header">
                                                 Cast
                                               </div>
-                                              <div className="card-body" style={{ backgroundColor: '#06151E' }}>
+                                              <div className="card-body">
                                                 <ul className="list-unstyled">
                                                   {allCast}
                                                 </ul>
@@ -381,10 +378,10 @@ class MovieDetails extends React.Component {
                                           </div>
                                           <div id="media" className="tab-pane fade" role="tabpanel" aria-labelledby="media-tab">
                                             <div className="card">
-                                              <div className="card-header" style={{ backgroundColor: '#06151E', borderBottom: '1px solid grey' }}>
+                                              <div className="card-header">
                                                 Media
                                               </div>
-                                              <div className="card-body" style={{ backgroundColor: '#06151E' }}>
+                                              <div className="card-body">
                                                 {image_lightBox}
                                                 <div className="row">
                                                   {displayMovieTrailers}
@@ -395,10 +392,10 @@ class MovieDetails extends React.Component {
                                           </div>
                                           <div id="related" className="tab-pane fade" role="tabpanel" aria-labelledby="media-tab">
                                             <div className="card">
-                                              <div className="card-header" style={{ backgroundColor: '#06151E', borderBottom: '1px solid grey' }}>
+                                              <div className="card-header">
                                                 Similar
                                               </div>
-                                              <div className="card-body" style={{ backgroundColor: '#06151E' }}>
+                                              <div className="card-body">
                                                 <ul className="list-unstyled">
                                                   {similarMovies}
                                                 </ul>
@@ -409,19 +406,19 @@ class MovieDetails extends React.Component {
                                       </div>
 
 
-                                      <div className="col-lg-4" style={{ marginTop: '173px' }}>
-                                        <ul className="list-unstyled sticky-top" style={{ lineHeight: '2.5em' }}>
-                                          <li style={{ fontWeight: '900' }}>Director:</li>
+                                      <div className="col-lg-4">
+                                        <ul className="list-unstyled sticky-top secondary-bar">
+                                          <li>Director:</li>
                                           <li>{director}</li>
-                                          <li style={{ fontWeight: '900' }}>Writer:</li>
+                                          <li>Writer:</li>
                                           <li>{writers.join(',')}</li>
-                                          <li style={{ fontWeight: '900' }}>Release Date:</li>
+                                          <li>Release Date:</li>
                                           <li>{ dateFormatter(movieDetails.release_date) }</li>
-                                          <li style={{ fontWeight: '900' }}>Run Time:</li>
+                                          <li>Run Time:</li>
                                           <li>{runTime}</li>
-                                          <li style={{ fontWeight: '900' }}>Tagline:</li>
+                                          <li>Tagline:</li>
                                           <li>{ movieDetails.tagline }</li>
-                                          <li style={{ fontWeight: '900' }}>Genres:</li>
+                                          <li>Genres:</li>
                                           <li>
                                             <ul className="list-inline">
                                               {genreTags}
