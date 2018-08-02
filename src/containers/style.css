@@ -524,9 +524,14 @@ div.seasons-card ~ div {
 		background-color: #020d18;
 		display: inline-block;
 		width: 100%;
-		margin-bottom: -10px;
+		margin-bottom: 10px;
 		position: absolute;
 		z-index: 99;
+		margin-top: 100px;
+}
+
+.person-details .container {
+		margin-bottom: 50px;
 }
 
 .person {
@@ -648,7 +653,7 @@ a.no-decoration:hover {
 		margin-bottom: 5px;
 }
 
-.tv-seasons {
+.detailed-card {
 		background: white;
 		margin-top: 20px;
 }
@@ -680,7 +685,7 @@ a.no-decoration:hover {
 		padding-top: 40px;
 }
 
-
+/* TV Styles s*/
 .secondary-bar {
 		line-height: 2.0em;
 }
@@ -705,4 +710,10 @@ a.no-decoration:hover {
 
 .primary-bar .movie-tabs {
 		font-family: 'Roboto Condensed', sans-serif;
+}
+
+/* Person styles */
+.person-externals {
+		color: white;
+		padding-right: 10px;
 }

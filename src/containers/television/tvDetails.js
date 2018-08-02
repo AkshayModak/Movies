@@ -248,7 +248,7 @@ class TelevisionDetails extends React.Component {
                     seasons = movieDetails.seasons.map( season => {
 
 												return (
-														<div className="row tv-seasons" key={season.id}>
+														<div className="row detailed-card" key={season.id}>
 	                            <div className="card seasons-card flex-md-row box-shadow">
 		                            <div className="card-body d-flex flex-column align-items-start bg-white">
 		                              <h3 className="mb-0 movie-card-title">
@@ -272,7 +272,7 @@ class TelevisionDetails extends React.Component {
                     <Aux key={movieDetails.id}>
                       <div className="movie-banner" style={{backgroundImage: 'url(' + backdrop_path + ')' }}></div>
                       <div className="movie_single">
-                        <div className="container transparent-bg">
+                        <div className="container">
                           <div className="movie-single">
                             <div className="row">
                               <div className="col-xs col-lg-4">
