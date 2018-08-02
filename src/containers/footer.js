@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Aux from '../HOCs/Aux';
+import { Link } from 'react-router-dom';
 
 class Footer extends Component {
 		render() {
@@ -13,7 +14,7 @@ class Footer extends Component {
 		                                <div className="col-12 offset-md-3">
 		                                    <h3>Nextrr</h3>
 		                                    <ul className="list-unstyled">
-		                                        <li><a href="">Disclaimer</a></li>
+		                                        <li><Link to="disclaimer">Disclaimer</Link></li>
 		                                        <li><a href="">Credits</a></li>
 		                                        <li><a href="">Contact Us</a></li>
 		                                    </ul>

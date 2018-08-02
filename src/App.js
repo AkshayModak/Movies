@@ -16,6 +16,7 @@ import Error from './error';
 import Navbar from './containers/navbar';
 import ReactGA from 'react-ga';
 import Search from './containers/search';
+import Disclaimer from './static/disclaimer';
 
 class App extends Component {
 
@@ -42,6 +43,7 @@ class App extends Component {
 		                    <Route path='/television/genre/:id' exact component={SearchByGenre} />
 		                    <Route path='/television/network/:id/:name?' exact component={SearchByNetwork} />
 		                    <Route path='/search/:query' exact component={Search} />
+		                    <Route path='/disclaimer' exact component={Disclaimer} />
 		                    <Route component={Error}/>
 		                </Switch>
                 </Aux>

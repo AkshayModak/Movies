@@ -745,3 +745,45 @@ a.no-decoration:hover {
 		background-color: crimson;
 		color: white;
 }
+
+.disclaimer h3 {
+  font-weight: bold;
+  display: inline-block;
+  padding-bottom: 5px;
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+}
+.disclaimer h3:before{
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 1px;
+    bottom: 0;
+    left: 0%;
+    border-bottom: 3px solid crimson;
+}
+
+div.disclaimer  h1 {
+    font-size: 60px;
+    display:block;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}
+
+div.disclaimer p {
+    font-size: 20px;
+    display:block;
+    font-family: 'Roboto', sans-serif;
+}
+
+div.disclaimer li {
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+div.disclaimer h1:before {
+    font-size: 60px;
+    display:block;
+    border-bottom: 0;
+    font-family: 'Roboto', sans-serif;
+}
