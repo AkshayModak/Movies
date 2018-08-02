@@ -15,8 +15,8 @@ class Footer extends Component {
 		                                    <h3>Nextrr</h3>
 		                                    <ul className="list-unstyled">
 		                                        <li><Link to="disclaimer">Disclaimer</Link></li>
-		                                        <li><a href="">Credits</a></li>
-		                                        <li><a href="">Contact Us</a></li>
+		                                        <li><Link to="credits">Credits</Link></li>
+		                                        <li><Link to="about">Contact Us</Link></li>
 		                                    </ul>
 		                                    <ul className="nav">
                                             <li className="nav-item"><a href="" className="nav-link pl-0"><i className="fa fa-facebook fa-lg"></i></a></li>

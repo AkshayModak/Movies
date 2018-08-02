@@ -5,7 +5,7 @@ import Aux from '../HOCs/Aux';
 const disclaimer = () => {
 		return (
 			<Aux>
-				<div className="container disclaimer" style={{ marginTop: '100px', background: 'white', color: 'black', padding: '50px' }}>
+				<div className="container disclaimer">
 						<h1>Disclaimer</h1>
 	          <h3>No warranties</h3>
 	          <p>This website is provided “as is” without any representations or warranties, express or implied. nextrr.in makes no representations or warranties in relation to this website or the information and materials provided on this website.</p>

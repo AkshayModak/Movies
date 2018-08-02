@@ -17,6 +17,8 @@ import Navbar from './containers/navbar';
 import ReactGA from 'react-ga';
 import Search from './containers/search';
 import Disclaimer from './static/disclaimer';
+import Credits from './static/credits';
+import About from './static/aboutus';
 
 class App extends Component {
 
@@ -44,6 +46,8 @@ class App extends Component {
 		                    <Route path='/television/network/:id/:name?' exact component={SearchByNetwork} />
 		                    <Route path='/search/:query' exact component={Search} />
 		                    <Route path='/disclaimer' exact component={Disclaimer} />
+		                    <Route path='/credits' exact component={Credits} />
+		                    <Route path='/about' exact component={About} />
 		                    <Route component={Error}/>
 		                </Switch>
                 </Aux>
