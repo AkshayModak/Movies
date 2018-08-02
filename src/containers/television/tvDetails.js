@@ -262,7 +262,7 @@ class TelevisionDetails extends React.Component {
 		                            </div>
 		                            <br />
 		                          </div>
-		                          { season.overview ? <div className="col-lg-12 white-bg"><small>{season.overview}</small></div> : ''}
+		                          <span className="season-overview">{ season.overview ? <div className="col-lg-12 white-bg"><small>{season.overview}</small></div> : ''}</span>
 	                          </div>
 												)
                     });
@@ -290,7 +290,7 @@ class TelevisionDetails extends React.Component {
                                   <div className="col-lg-8">
                                     <div className="tab-content" id="myTabContent">
                                       <div id="overview" className="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
-                                        {movieDetails.overview}
+                                        <span>{movieDetails.overview}</span>
                                         <div className="card">
                                           <div className="card-header">
                                             <ul className="list-inline">
