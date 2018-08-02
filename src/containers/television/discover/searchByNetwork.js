@@ -30,7 +30,8 @@ class SearchByNetwork extends React.Component {
 
         axios.get(link)
         .then( response => {
-            this.setState({ tvList: response.data, currentPage: page, totalPages: response.data.total_pages });
+            this.setState({ tvList: response.data, currentPage: page, totalPages: response.data.total_pages, headerTitle: props.match.params.name });
+            console.log('====response.data====', response.data);
         }).catch( error => {
             console.log( error );
             this.props.history.push("/");
@@ -70,7 +71,7 @@ class SearchByNetwork extends React.Component {
 								tvDetails = tvList.results.map( tv => {
                     return (
                         <div className="col-lg-6" key={tv.id}>
-                          <Link to={"/tv-details/" + tv.id} style={{ textDecoration: 'none', color: 'black' }}>
+                          <Link to={"/tv-details/" + tv.id} className="no-card-decoration">
                             <div className="card flex-md-row mb-4 box-shadow h-md-250 movie-cards">
                               <div className="card-body d-flex flex-column align-items-start">
                                 <h3 className="mb-0 movie-card-title">
@@ -84,7 +85,7 @@ class SearchByNetwork extends React.Component {
                                     value={tv.vote_average}
                                   />
                                 </strong>
-                                <p className="card-text mb-auto"><small>{`${(tv.overview).substring(0, 150)}...`}</small></p>
+                                <p className="card-text mb-auto">{`${(tv.overview).substring(0, 200)}...`}</p>
                               </div>
                               <div>
                                 <img className="card-img-right flex-auto d-none d-lg-block movie-card-img" src={tv.poster_path ? 'https://image.tmdb.org/t/p/w185/' + tv.poster_path : PosterPlaceholder} alt={tv.name}/>
@@ -99,8 +100,8 @@ class SearchByNetwork extends React.Component {
 
 				return (
 						<Aux>
-							<div className="container container-margin" style={{ backgroundColor: '#06151E' }}>
-							<h2 className="list-title" style={{ color: 'white', fontWeight: '900' }}><legend>{ this.state.headerTitle }</legend></h2>
+							<div className="container card-list">
+							<h2 className="list-title"><legend>Search By Network - '{ this.state.headerTitle }'</legend></h2>
 								<div className="row">
 									{tvDetails}
 								</div>
@@ -108,7 +109,7 @@ class SearchByNetwork extends React.Component {
 									{pagination}
 								</div>
 							</div>
-							<Footer style={{ display: 'block', position: 'absolute' }}/>
+							<Footer/>
 						</Aux>
 				)
 		}

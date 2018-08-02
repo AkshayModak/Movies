@@ -230,7 +230,7 @@ class TelevisionDetails extends React.Component {
                 if (movieDetails.networks) {
                     networks = movieDetails.networks.map( network => {
 												return (
-														<li key={network.id}><Link to={'/television/network/'+network.id}><img src={"https://image.tmdb.org/t/p/w92/" + network.logo_path} alt={network.name} className="network-logo"/></Link></li>
+														<li key={network.id}><Link to={'/television/network/'+network.id+'/'+network.name}><img src={"https://image.tmdb.org/t/p/w92/" + network.logo_path} alt={network.name} className="network-logo"/></Link></li>
 												)
                     })
                 }

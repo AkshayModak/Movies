@@ -40,7 +40,7 @@ class App extends Component {
 		                    <Route path='/actors' exact component={PopularPeople} />
 		                    <Route path='/television/:id' exact component={Television} />
 		                    <Route path='/television/genre/:id' exact component={SearchByGenre} />
-		                    <Route path='/television/network/:id' exact component={SearchByNetwork} />
+		                    <Route path='/television/network/:id/:name?' exact component={SearchByNetwork} />
 		                    <Route path='/search/:query' exact component={Search} />
 		                    <Route component={Error}/>
 		                </Switch>
