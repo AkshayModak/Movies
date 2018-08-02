@@ -245,8 +245,9 @@ li.center-align {
 }
 
 .container {
-		background-color: white;
+		background: transparent;
 		margin-top: 55px;
+		color: white;
 }
 
 footer, footer > div.container {
@@ -354,6 +355,9 @@ footer, footer > div.container {
 
 .backdrop > i {
 		color: white;
+		top: 50%;
+		left: 50%;
+		position: absolute;
 }
 
 		.dropdown .dropdown-menu {
@@ -488,6 +492,10 @@ footer, footer > div.container {
 
 .seasons-card {
 		margin-top: 0 !important;
+		background: white;
+		color: black;
+		width: 100%;
+		marginBottom: 0;
 }
 
 div.seasons-card ~ div {
@@ -563,7 +571,7 @@ transform: translate(-50%, 50%);
 /* Front page stylings */
 
 .nav-item {
-		font-family: 'Acme', sans-serif;
+		font-family: 'Boogaloo', cursive;
 		padding-right: 10px !important;
 		padding-left: 10px !important;
 		font-size: 20px;
@@ -582,9 +590,96 @@ transform: translate(-50%, 50%);
 }
 
 .front-cards > .card-header > ul > li {
-		font-family: 'Roboto', sans-serif;
+		font-family: 'Boogaloo', cursive;
+		font-size: 25px;
+		text-decoration: underline;
 }
 
 .front-cards > div.card-header + div {
 		background-color: #06151E;
+}
+
+.figure-caption {
+		font-family: 'Roboto Condensed', sans-serif;
+		font-weight: normal;
+}
+
+/* Footer styling */
+
+footer h3 {
+		font-family: 'Shadows Into Light', cursive;
+		font-size: 35px;
+		font-weight: bold;
+}
+
+footer a, h5 {
+		font-family: 'Boogaloo', regular;
+		font-weight: normal;
+		font-size: 18px;
+}
+
+/* utility classes */
+.no-decoration {
+		color: white;
+		text-decoration: none;
+}
+
+a.no-decoration:hover {
+		color: grey;
+		text-decoration: none;
+}
+
+.cast dt {
+		height: 80px;
+		width: 60px;
+}
+
+.cast dd {
+		margin: 22px;
+}
+
+.network-logo {
+		background-color: white;
+		padding: 10px;
+		margin-bottom: 5px;
+}
+
+.tv-seasons {
+		background: white;
+		margin-top: 20px;
+}
+
+.white-bg {
+		background: white;
+		color: black;
+}
+
+.poster {
+		width: 342px;
+		height: 513px;
+}
+
+.tab-content div.card-header {
+		background-color: #06151E !important;
+		border-bottom: 1px solid grey;
+}
+
+.tab-content div.card-body {
+		background-color: #06151E;
+}
+
+.tab-content #overview {
+		padding-top: 40px;
+}
+
+.secondary-bar {
+		line-height: 2.5em;
+}
+
+.secondary-bar li:nth-child(odd) {
+		font-weight: bold;
+}
+
+.primary-bar {
+		padding: 40px;
 }

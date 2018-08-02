@@ -58,14 +58,10 @@ class TelevisionDetails extends React.Component {
 	      let displayMovieTrailers = null;
 
 				movieDetail = (
-            <div className="backdrop"> <i className="fa fa-spinner fa-spin fa-5x fa-fw" style={{ top: '50%', left: '50%', position: 'absolute' }}/> </div>
+            <div className="backdrop"> <i className="fa fa-spinner fa-spin fa-5x fa-fw"/> </div>
         );
 
-
 	      if (this.props.location || this.state.movies) {
-						movieDetail = (
-                <div className="backdrop"> <i className="fa fa-spinner fa-spin fa-5x fa-fw" style={{ top: '50%', left: '50%', position: 'absolute' }}/> </div>
-            );
             movieDetails = null;
             let genres = [];
             if (this.state.credits || this.state.movies) {
@@ -97,7 +93,7 @@ class TelevisionDetails extends React.Component {
                 const genreTags = genres.map( genre => {
 										return (
 												<li key={genre.id} className="list-inline-item"><span className="badge badge-danger">
-												<Link to={'/television/genre/'+genre.id} style={{ color: 'white', textDecoration: 'none' }}>{genre.name}</Link>
+												<Link to={'/television/genre/'+genre.id} className="no-decoration">{genre.name}</Link>
 												</span></li>
 										)
                 });
@@ -177,8 +173,8 @@ class TelevisionDetails extends React.Component {
                     displayImages = (images.map( (displayImage, index) => { //(images.filter((i, index) => (index < 4)).map( (displayImage, index) => {
                             return(
                               <div className="col-lg-6 padding-0" key={index}>
-                                  <button className="btn btn-link" onClick={() => this.setState({ isOpen: true, photoIndex: index })} style={{ paddingRight: '0' }}>
-                                    <img src={displayImage} className="img-thumbnail" style={{ maxWidth: '100%', maxHeight: '100%' }} alt={index}/>
+                                  <button className="btn btn-link" onClick={() => this.setState({ isOpen: true, photoIndex: index })}>
+                                    <img src={displayImage} className="img-thumbnail" alt={index}/>
                                   </button>
                               </div>
                             );
@@ -192,10 +188,10 @@ class TelevisionDetails extends React.Component {
                     if (currentCast < 5) {
                         return (
                                 <li key={cast.id}>
-                                  <Link to={'/person/' + cast.id } style={{ textDecoration: 'none', color: 'white' }} key={cast.id + '-' + cast.character} >
-                                      <dl className="row">
-                                        <dt className="col-xs-4"><img src={ cast.profile_path ? "https://image.tmdb.org/t/p/w185/" + cast.profile_path : PosterPlaceholder } style={{ height: '80px', width: '60px' }} alt="Henry Cavill" className="card-img-top"/></dt>
-                                        <dd className="col-xs-8" style={{ margin: '22px' }}>{cast.name}</dd>
+                                  <Link to={'/person/' + cast.id } key={cast.id + '-' + cast.character} className="no-decoration">
+                                      <dl className="row cast">
+                                        <dt className="col-xs-4"><img src={ cast.profile_path ? "https://image.tmdb.org/t/p/w185/" + cast.profile_path : PosterPlaceholder } alt={cast.name} className="card-img-top"/></dt>
+                                        <dd className="col-xs-8">{cast.name}</dd>
                                       </dl>
                                   </Link>
                                 </li>
@@ -210,10 +206,10 @@ class TelevisionDetails extends React.Component {
                 let allCast = (castAndCrewMap.map( cast => {
                     return (
                         <li key={cast.id + '-' + cast.job}>
-                            <Link to={'/person/' + cast.id } style={{ textDecoration: 'none', color: 'white' }}>
-                              <dl className="row">
-                                <dt className="col-xs-4"><img src={  cast.profile_path ? "https://image.tmdb.org/t/p/w185/" + cast.profile_path : PosterPlaceholder  } style={{ height: '80px', width: '60px' }} alt="Henry Cavill" className="card-img-top"/></dt>
-                                <dd className="col-xs-8" style={{ margin: '22px' }}>{cast.name}</dd>
+                            <Link to={'/person/' + cast.id } className="no-decoration">
+                              <dl className="row cast">
+                                <dt className="col-xs-4"><img src={  cast.profile_path ? "https://image.tmdb.org/t/p/w185/" + cast.profile_path : PosterPlaceholder  } alt={cast.name} className="card-img-top"/></dt>
+                                <dd className="col-xs-8">{cast.name}</dd>
                               </dl>
                             </Link>
                         </li>
@@ -234,7 +230,7 @@ class TelevisionDetails extends React.Component {
                 if (movieDetails.networks) {
                     networks = movieDetails.networks.map( network => {
 												return (
-														<li key={network.id}><Link to={'/television/network/'+network.id}><img src={"https://image.tmdb.org/t/p/w92/" + network.logo_path} style={{ backgroundColor: 'white', padding: '10px', marginBottom: '5px' }} alt="Henry Cavill"/></Link></li>
+														<li key={network.id}><Link to={'/television/network/'+network.id}><img src={"https://image.tmdb.org/t/p/w92/" + network.logo_path} alt={network.name} className="network-logo"/></Link></li>
 												)
                     })
                 }
@@ -252,9 +248,9 @@ class TelevisionDetails extends React.Component {
                     seasons = movieDetails.seasons.map( season => {
 
 												return (
-														<div className="row" style={{ background: 'white', marginTop: '20px' }} key={season.id}>
-	                            <div className="card seasons-card flex-md-row box-shadow"  style={{ background: 'white', color: 'black', width: '100%', marginBottom: '0' }}>
-		                            <div className="card-body d-flex flex-column align-items-start">
+														<div className="row tv-seasons" key={season.id}>
+	                            <div className="card seasons-card flex-md-row box-shadow">
+		                            <div className="card-body d-flex flex-column align-items-start bg-white">
 		                              <h3 className="mb-0 movie-card-title">
 		                                {season.name}
 		                              </h3>
@@ -266,7 +262,7 @@ class TelevisionDetails extends React.Component {
 		                            </div>
 		                            <br />
 		                          </div>
-		                          { season.overview ? <div className="col-lg-12" style={{ background: 'white', color: 'black' }}><small>{season.overview}</small></div> : ''}
+		                          { season.overview ? <div className="col-lg-12 white-bg"><small>{season.overview}</small></div> : ''}
 	                          </div>
 												)
                     });
@@ -276,13 +272,13 @@ class TelevisionDetails extends React.Component {
                     <Aux key={movieDetails.id}>
                       <div className="movie-banner" style={{backgroundImage: 'url(' + backdrop_path + ')' }}></div>
                       <div className="movie_single">
-                        <div className="container" style={{ background: 'transparent', color: 'white' }}>
+                        <div className="container transparent-bg">
                           <div className="movie-single">
                             <div className="row">
                               <div className="col-xs col-lg-4">
-                                <img src={poster_path ? poster_path : PosterPlaceholder} className="sticky-top" alt={movieDetails.name} style={{ width: '342px', height: '513px' }}/>
+                                <img src={poster_path ? poster_path : PosterPlaceholder} className="sticky-top poster" alt={movieDetails.name}/>
                               </div>
-                              <div className="col-lg-8" style={{ padding: '38px' }}>
+                              <div className="col-lg-8 primary-bar">
                                 <h3>{movieDetails.name}</h3>
                                 <nav className="nav movie-tabs">
                                   <a className="nav-link active" id="overview-tab" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
@@ -293,23 +289,23 @@ class TelevisionDetails extends React.Component {
                                 <div className="row">
                                   <div className="col-lg-8">
                                     <div className="tab-content" id="myTabContent">
-                                      <div id="overview" className="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab" style={{ paddingTop: '38px' }}>
+                                      <div id="overview" className="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
                                         {movieDetails.overview}
                                         <div className="card">
-                                          <div className="card-header" style={{ backgroundColor: '#06151E', borderBottom: '1px solid grey' }}>
+                                          <div className="card-header">
                                             <ul className="list-inline">
                                               <li className="list-inline-item padding-top-7">Cast</li>
                                               <li className="list-inline-item float-right"><button type="submit" className="btn btn-link"><small>View all cast</small></button></li>
                                             </ul>
                                           </div>
-                                          <div className="card-body" style={{ backgroundColor: '#06151E' }}>
+                                          <div className="card-body">
                                             <ul className="list-unstyled">
                                               {casts}
                                             </ul>
                                           </div>
                                         </div>
                                         <div className="card">
-                                          <div className="card-header" style={{ backgroundColor: '#06151E', borderBottom: '1px solid grey' }}>
+                                          <div className="card-header">
                                             <ul className="list-inline">
                                               <li className="list-inline-item padding-top-7">Media</li>
                                               <li className="list-inline-item float-right">
@@ -319,17 +315,17 @@ class TelevisionDetails extends React.Component {
                                               </li>
                                             </ul>
                                           </div>
-                                          <div className="card-body" style={{ backgroundColor: '#06151E' }}>
+                                          <div className="card-body">
                                             {displayTvTrailersOnOverview}
                                           </div>
                                         </div>
                                       </div>
                                       <div id="cast" className="tab-pane fade" role="tabpanel" aria-labelledby="cast-tab">
                                         <div className="card">
-                                          <div className="card-header" style={{ backgroundColor: '#06151E', borderBottom: '1px solid grey' }}>
+                                          <div className="card-header">
                                             Cast
                                           </div>
-                                          <div className="card-body" style={{ backgroundColor: '#06151E' }}>
+                                          <div className="card-body">
                                             <ul className="list-unstyled">
                                               {allCast}
                                             </ul>
@@ -338,10 +334,10 @@ class TelevisionDetails extends React.Component {
                                       </div>
                                       <div id="media" className="tab-pane fade" role="tabpanel" aria-labelledby="media-tab">
                                         <div className="card">
-                                          <div className="card-header" style={{ backgroundColor: '#06151E', borderBottom: '1px solid grey' }}>
+                                          <div className="card-header">
                                             Media
                                           </div>
-                                          <div className="card-body" style={{ backgroundColor: '#06151E' }}>
+                                          <div className="card-body">
                                             {image_lightBox}
                                             <div className="row">
                                               {displayMovieTrailers}
@@ -352,10 +348,10 @@ class TelevisionDetails extends React.Component {
                                       </div>
                                       <div id="related" className="tab-pane fade" role="tabpanel" aria-labelledby="media-tab">
 																				<div className="card">
-                                          <div className="card-header" style={{ backgroundColor: '#06151E', borderBottom: '1px solid grey' }}>
+                                          <div className="card-header">
                                             Seasons
                                           </div>
-                                          <div className="card-body" style={{ backgroundColor: '#06151E' }}>
+                                          <div className="card-body">
                                             {seasons}
                                           </div>
                                         </div>
@@ -363,31 +359,30 @@ class TelevisionDetails extends React.Component {
                                     </div>
                                   </div>
 
-
-                                  <div className="col-lg-4" style={{ marginTop: '173px' }}>
-                                    <ul className="list-unstyled sticky-top" style={{ lineHeight: '2.5em' }}>
-                                      <li style={{ fontWeight: '900' }}>Network:</li>
+                                  <div className="col-lg-4">
+                                    <ul className="list-unstyled sticky-top secondary-bar">
+                                      <li>Network:</li>
                                       <li>
                                         <ul className="list-unstyled">
 																					{networks}
                                         </ul>
                                       </li>
-                                      <li style={{ fontWeight: '900' }}>First Aired On:</li>
+                                      <li>First Aired On:</li>
                                       <li>{ dateFormatter(movieDetails.first_air_date) }</li>
-                                      <li style={{ fontWeight: '900' }}>Run Time:</li>
+                                      <li>Run Time:</li>
                                       <li>{runTime.join(',')}</li>
-                                      <li style={{ fontWeight: '900' }}>Number of Episodes:</li>
+                                      <li>Number of Episodes:</li>
                                       <li>{movieDetails.number_of_episodes}</li>
-                                      <li style={{ fontWeight: '900' }}>Number of Seasons:</li>
+                                      <li>Number of Seasons:</li>
                                       <li>{movieDetails.number_of_seasons}</li>
-                                      <li style={{ fontWeight: '900' }}>Genres:</li>
+                                      <li>Genres:</li>
                                       <li>
                                         <ul className="list-inline">
                                           {genreTags}
                                         </ul>
                                       </li>
-                                      <li style={{ fontWeight: '900' }}>
-																				<a href={ movieDetails.homepage } style={{ textDecoration: 'none', color: 'white' }} target='_blank'>Home Page</a>
+                                      <li>
+																				<a href={ movieDetails.homepage } className="no-decoration" target='_blank'>Home Page</a>
                                       </li>
                                     </ul>
                                   </div>
