@@ -57,16 +57,16 @@ class Television extends React.Component {
 				document.title = this.state.headerTitle + ' - Nextrr';
 				const { tvList } = this.state;
 				let tvDetails = (
-            <div className="backdrop"> <i className="fa fa-spinner fa-spin fa-5x fa-fw" style={{ marginLeft: '50%', position: 'relative', top: '50%'}}/> </div>
+            <div className="backdrop"> <i className="fa fa-spinner fa-spin fa-5x fa-fw"/> </div>
         );
 
         const pagination = (
-            <nav aria-label="Page navigation example">
+            <nav aria-label="Page navigation">
               <ul className="pagination justify-content-center">
                 <li className="page-item">
                   <a className="page-link" onClick={this.loadPage.bind(this, this.props, 1)} tabIndex="-1">First</a>
                 </li>
-                <li className="page-item disabled">
+                <li className="page-item">
                   <a className="page-link" onClick={this.loadPage.bind(this, this.props, this.state.currentPage - 1)} tabIndex="-1"><i className="fa fa-angle-double-left" aria-hidden="true"></i></a>
                 </li>
                 <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.props, this.state.currentPage)}>{ this.state.currentPage }</a></li>
@@ -85,7 +85,7 @@ class Television extends React.Component {
 								tvDetails = tvList.results.map( tv => {
                     return (
                         <div className="col-lg-6" key={tv.id}>
-                          <Link to={"/tv-details/" + tv.id} style={{ textDecoration: 'none', color: 'black' }}>
+                          <Link to={"/tv-details/" + tv.id} className="no-card-decoration">
                             <div className="card flex-md-row mb-4 box-shadow h-md-250 movie-cards">
                               <div className="card-body d-flex flex-column align-items-start">
                                 <h3 className="mb-0 movie-card-title">
@@ -99,7 +99,7 @@ class Television extends React.Component {
                                     value={tv.vote_average}
                                   />
                                 </strong>
-                                <p className="card-text mb-auto"><small>{`${(tv.overview).substring(0, 150)}...`}</small></p>
+                                <p className="card-text mb-auto">{`${(tv.overview).substring(0, 200)}...`}</p>
                               </div>
                               <div>
                                 <img className="card-img-right flex-auto d-none d-lg-block movie-card-img" src={tv.poster_path ? 'https://image.tmdb.org/t/p/w185/' + tv.poster_path : PosterPlaceholder} alt={tv.name}/>
@@ -114,8 +114,8 @@ class Television extends React.Component {
 
 				return (
 						<Aux>
-							<div className="container container-margin" style={{ backgroundColor: '#06151E' }}>
-							<h2 className="list-title" style={{ color: 'white', fontWeight: '900' }}><legend>{ this.state.headerTitle }</legend></h2>
+							<div className="container card-list">
+							<h2 className="list-title"><legend>{ this.state.headerTitle }</legend></h2>
 								<div className="row">
 									{tvDetails}
 								</div>
@@ -123,7 +123,7 @@ class Television extends React.Component {
 									{pagination}
 								</div>
 							</div>
-							<Footer style={{ display: 'block', position: 'absolute' }}/>
+							<Footer/>
 						</Aux>
 				)
 		}

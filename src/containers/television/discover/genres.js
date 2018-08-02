@@ -6,6 +6,7 @@ import { dateFormatter } from '../../../utility/utilityMethods';
 import { Link } from 'react-router-dom';
 import StarRatingComponent from 'react-star-rating-component';
 import Footer from '../../footer';
+import genreList from '../../../utility/genreIdToname';
 
 class SearchByGenre extends React.Component {
 
@@ -13,7 +14,8 @@ class SearchByGenre extends React.Component {
 				tvList : [],
 				currentPage : 1,
 				headerTitle: null,
-				totalPages: null
+				totalPages: null,
+				genreName: null
 		}
 
     componentWillReceiveProps(newProps) {
@@ -27,10 +29,9 @@ class SearchByGenre extends React.Component {
 
 		loadPage(props, page) {
 				const link = '/3/discover/tv?api_key=65324ba8898442570ac397a61cfa7f22&with_genres=' + props.match.params.id + '&page=' + page;
-
         axios.get(link)
         .then( response => {
-            this.setState({ tvList: response.data, currentPage: page, totalPages: response.data.total_pages });
+            this.setState({ tvList: response.data, currentPage: page, totalPages: response.data.total_pages, genreName: genreList[props.match.params.id].name });
         }).catch( error => {
             console.log( error );
             this.props.history.push("/");
@@ -45,7 +46,7 @@ class SearchByGenre extends React.Component {
         );
 
         const pagination = (
-            <nav aria-label="Page navigation example">
+            <nav aria-label="Page navigation">
               <ul className="pagination justify-content-center">
                 <li className="page-item">
                   <a className="page-link" onClick={this.loadPage.bind(this, this.props, 1)} tabIndex="-1">First</a>
@@ -99,8 +100,8 @@ class SearchByGenre extends React.Component {
 
 				return (
 						<Aux>
-							<div className="container container-margin" style={{ backgroundColor: '#06151E' }}>
-							<h2 className="list-title" style={{ color: 'white', fontWeight: '900' }}><legend>{ this.state.headerTitle }</legend></h2>
+							<div className="container card-list">
+							<h2 className="list-title"><legend>{ this.state.genreName }</legend></h2>
 								<div className="row">
 									{tvDetails}
 								</div>

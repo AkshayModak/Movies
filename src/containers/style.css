@@ -717,3 +717,31 @@ a.no-decoration:hover {
 		color: white;
 		padding-right: 10px;
 }
+
+/* search styles */
+
+.card-list {
+		margin-top: 130px;
+		font-family: 'Roboto Condensed', sans-serif;
+}
+
+.no-card-decoration {
+		text-decoration: none;
+		color: black;
+}
+
+.no-card-decoration:hover {
+		text-decoration: none;
+		color: black;
+}
+
+.pagination .page-item .page-link {
+		color: black;
+		border: 0;
+		padding: 15px;
+}
+
+.pagination .page-item .page-link:hover {
+		background-color: crimson;
+		color: white;
+}
