@@ -44,8 +44,8 @@ class OuterNavbar extends Component {
                                   <div className="img-cover" style={backdrop_image0}>
                                       <div className="layer">
 																				<div className="front-labels">
-                                            <h1>Welcome to Nextrr!</h1>
-                                            <h3>Here you can search for details regarding all the movies.</h3>
+                                            <h1></h1>
+                                            <h3></h3>
                                         </div>
                                       </div>
                                   </div>
@@ -54,7 +54,7 @@ class OuterNavbar extends Component {
                                   <div className="img-cover" style={backdrop_image1}/>
                                   <div className="layer">
                                     <div className="front-labels">
-																				<h1>Upcoming Movies</h1>
+																				<h1></h1>
                                     </div>
                                   </div>
                             </div>,
@@ -62,7 +62,7 @@ class OuterNavbar extends Component {
                                     <div className="img-cover" style={backdrop_image2}>
 		                                    <div className="layer">
                                             <div className="front-labels">
-                                                <h1>Trending Movies</h1>
+                                                <h1></h1>
                                             </div>
                                         </div>
                                     </div>
@@ -71,7 +71,7 @@ class OuterNavbar extends Component {
                                     <div className="img-cover" style={backdrop_image3}/>
                                     <div className="layer">
                                       <div className="front-labels">
-                                          <h1>In Theatres Movies</h1>
+                                          <h1></h1>
                                       </div>
                                     </div>
                                 </div>,
