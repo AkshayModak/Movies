@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css'; // This only needs to be imported once in your app
 import { dateFormatter } from '../../utility/utilityMethods';
+import Loader from '../../utility/loader';
 
 class MovieDetails extends React.Component {
 
@@ -107,7 +108,7 @@ class MovieDetails extends React.Component {
 	      let displayMovieTrailers = null;
 
 				movieDetail = (
-            <div className="backdrop"> <i className="fa fa-spinner fa-spin fa-5x fa-fw"/> </div>
+            <Loader />
         );
 
 	      if (this.props.location || this.state.movies) {
@@ -242,7 +243,7 @@ class MovieDetails extends React.Component {
                                     <Link to={'/movie-details/'+similarMovie.id} className="no-decoration">
                                         <li>
                                           <dl className="row cast">
-                                            <dt className="col-xs-4"><img src={"https://image.tmdb.org/t/p/w185/" + similarMovie.poster_path} alt={similarMovie.title} className="card-img-top"/></dt>
+                                            <dt className="col-xs-4"><img src={ similarMovie.poster_path ? "https://image.tmdb.org/t/p/w185/" + similarMovie.poster_path : PosterPlaceholder} alt={similarMovie.title} className="card-img-top"/></dt>
                                             <dd className="col-xs-8">{similarMovie.title}</dd>
                                           </dl>
                                         </li>
@@ -273,7 +274,7 @@ class MovieDetails extends React.Component {
                                         <li key={cast.id}>
                                           <Link to={'/person/' + cast.id } className="no-decoration" key={cast.id + '-' + cast.character} >
                                               <dl className="row cast">
-                                                <dt className="col-xs-4"><img src={"https://image.tmdb.org/t/p/w185/" + cast.profile_path} alt={cast.name} className="card-img-top"/></dt>
+                                                <dt className="col-xs-4"><img src={ cast.profile_path ? "https://image.tmdb.org/t/p/w185/" + cast.profile_path : PosterPlaceholder} alt={cast.name} className="card-img-top"/></dt>
                                                 <dd className="col-xs-8">{cast.name}</dd>
                                               </dl>
                                           </Link>
@@ -291,7 +292,7 @@ class MovieDetails extends React.Component {
                                 <li key={cast.id + '-' + cast.job}>
                                     <Link to={'/person/' + cast.id } className="no-decoration">
                                       <dl className="row cast">
-                                        <dt className="col-xs-4"><img src={"https://image.tmdb.org/t/p/w185/" + cast.profile_path} alt={cast.name} className="card-img-top"/></dt>
+                                        <dt className="col-xs-4"><img src={ cast.profile_path ? "https://image.tmdb.org/t/p/w185/" + cast.profile_path : PosterPlaceholder} alt={cast.name} className="card-img-top"/></dt>
                                         <dd className="col-xs-8">{cast.name}</dd>
                                       </dl>
                                     </Link>

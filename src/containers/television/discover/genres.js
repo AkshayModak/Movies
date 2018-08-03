@@ -3,6 +3,7 @@ import Aux from '../../../HOCs/Aux';
 import axios from '../../../axios';
 import PosterPlaceholder from '../../../images/poster-placeholder.png';
 import { dateFormatter } from '../../../utility/utilityMethods';
+import Loader from '../../../utility/loader';
 import { Link } from 'react-router-dom';
 import StarRatingComponent from 'react-star-rating-component';
 import Footer from '../../footer';
@@ -41,9 +42,7 @@ class SearchByGenre extends React.Component {
 
 		render() {
 				const { tvList } = this.state;
-				let tvDetails = (
-            <div className="backdrop"> <i className="fa fa-spinner fa-spin fa-5x fa-fw" style={{ marginLeft: '50%', position: 'relative', top: '50%'}}/> </div>
-        );
+				let tvDetails = (<Loader />);
 
         const pagination = (
             <nav aria-label="Page navigation">

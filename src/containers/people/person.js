@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css'; // This only needs to be imported once in your app
 import { dateFormatter } from '../../utility/utilityMethods';
+import Loader from '../../utility/loader';
 import StarRatingComponent from 'react-star-rating-component';
 
 class Person extends React.Component {
@@ -42,9 +43,7 @@ class Person extends React.Component {
 	      let displayImages = null;
 	      let displayMovieTrailers = null;
 
-				personDetail = (
-            <div className="backdrop"> <i className="fa fa-spinner fa-spin fa-5x fa-fw"/> </div>
-        );
+				personDetail = (<Loader />);
 
 	      if (this.state.people) {
             personDetails = this.state.people;

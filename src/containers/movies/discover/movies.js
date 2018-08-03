@@ -4,6 +4,7 @@ import Aux from '../../../HOCs/Aux';
 import PosterPlaceholder from '../../../images/poster-placeholder.png';
 import axios from '../../../axios';
 import { dateFormatter } from '../../../utility/utilityMethods';
+import Loader from '../../../utility/loader';
 import { Link } from 'react-router-dom';
 import StarRatingComponent from 'react-star-rating-component';
 
@@ -56,9 +57,7 @@ class Movies extends React.Component {
 		render() {
 				document.title = this.state.headerTitle + ' - Nextrr';
 				const { movieList } = this.state;
-				let movies = (
-            <div className="backdrop"> <i className="fa fa-spinner fa-spin fa-5x fa-fw"/> </div>
-        );
+				let movies = (<Loader />);
 
         const pagination = (
             <nav aria-label="Page navigation">

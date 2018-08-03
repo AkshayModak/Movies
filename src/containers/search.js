@@ -4,6 +4,7 @@ import axios from '../axios';
 
 import PosterPlaceholder from '../images/poster-placeholder.png';
 import { dateFormatter } from '../utility/utilityMethods';
+import Loader from '../utility/loader';
 import { Link } from 'react-router-dom';
 import StarRatingComponent from 'react-star-rating-component';
 import Footer from './footer';
@@ -40,7 +41,7 @@ class Search extends React.Component {
 
 		render() {
 
-				let searchResult = ( <div className="backdrop"> <i className="fa fa-spinner fa-spin fa-5x fa-fw" style={{ marginLeft: '50%', position: 'relative', top: '50%'}}/> </div> );
+				let searchResult = (<Loader />);
 				let searchResults = this.state.searchResults;
 				let pagination = null;
 
