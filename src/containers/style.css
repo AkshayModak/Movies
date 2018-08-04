@@ -294,9 +294,13 @@ footer, footer > div.container {
 
 .front-labels {
 		position: relative;
-		top: 25%;
-		left: 10%;
+		top: 50%;
 		transform: translateY(-50%);
+		font-family: 'Boogaloo', regular;
+}
+
+.front-labels p {
+		font-size: 20px;
 }
 
 .btnlink:hover, .btnlink:focus {

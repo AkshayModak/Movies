@@ -24,7 +24,7 @@ class InTheatres extends Component {
             this.setState({
                 posts : response.data
             });
-            this.props.fetchMovies({ posts: response.data, 'type': 'IN_THEATRES' });
+            this.props.fetchMovies({ posts: response.data, 'type': 'MOVIE_DETAILS' });
         }).catch( error => {
             console.log( error );
         });
