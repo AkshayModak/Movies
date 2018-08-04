@@ -206,10 +206,8 @@ class Person extends React.Component {
                                           Media
                                         </div>
                                         <div className="card-body">
-                                          image_lightBox
                                           <div className="row">
-                                            Display Movie Trailer
-                                            Display Images
+                                            Media Not Available
                                           </div>
                                         </div>
                                       </div>
