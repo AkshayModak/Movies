@@ -1,5 +1,4 @@
 import React from 'react';
-import Footer from '../containers/footer';
 import Aux from '../HOCs/Aux';
 import { Link } from 'react-router-dom';
 

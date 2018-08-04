@@ -1,7 +1,7 @@
 import React from 'react';
 import Aux from '../HOCs/Aux';
 import axios from '../axios';
-
+import NoResult from '../static/noresult';
 import PosterPlaceholder from '../images/poster-placeholder.png';
 import { dateFormatter } from '../utility/utilityMethods';
 import Loader from '../utility/loader';
@@ -14,7 +14,8 @@ class Search extends React.Component {
 		state = {
 				searchResults : [],
 				totalPages: null,
-				currentPage: 1
+				currentPage: 1,
+				hasLoaded: false
 		}
 
 		componentWillMount() {
@@ -32,7 +33,7 @@ class Search extends React.Component {
 						let link = '/3/search/multi?api_key=65324ba8898442570ac397a61cfa7f22&query=' + query + '&page=' + page;
             axios.get(link)
             .then( response => {
-                this.setState({ searchResults : response.data.results, totalPages : response.data.total_pages, currentPage: page });
+                this.setState({ searchResults : response.data.results, totalPages : response.data.total_pages, currentPage: page, hasLoaded: true });
             }).catch( error => {
                 console.log( error );
             });
@@ -44,9 +45,9 @@ class Search extends React.Component {
 				let searchResult = (<Loader />);
 				let searchResults = this.state.searchResults;
 				let pagination = null;
+				let noresults = false;
 
-				if (searchResults && searchResults.length > 0) {
-
+				if (this.state.hasLoaded && searchResults && searchResults.length > 0) {
 						pagination = (
                 <nav aria-label="Page navigation example">
                   <ul className="pagination justify-content-center">
@@ -135,13 +136,15 @@ class Search extends React.Component {
                     </div>
 								)
             });
-
+				} else if (this.state.hasLoaded && !(searchResults && searchResults.length > 0)){
+						noresults = true;
+						searchResult = '';
 				}
 
 				return(
 						<Aux>
               <div className="container" style={{ backgroundColor: '#06151E', marginTop: '120px' }}>
-                <h2 className="list-title" style={{ color: 'white', fontWeight: '900' }}><legend>Search Result(s) For '{this.props.match.params.query}'</legend></h2>
+                <h2 className="list-title" style={{ color: 'white', fontWeight: '900' }}><legend>{ noresults ? 'No' : 'Search' } Result(s) For '{this.props.match.params.query}'</legend></h2>
                 <div className="row">
                   {searchResult}
                 </div>
@@ -149,7 +152,7 @@ class Search extends React.Component {
                   {pagination}
                 </div>
               </div>
-              <Footer style={{ display: 'block', position: 'absolute' }}/>
+              <Footer/>
             </Aux>
 				);
 		}

@@ -129,21 +129,25 @@ class MovieDetails extends React.Component {
                         let castMap = this.state.credits.credits.cast;
                         castAndCrewMap = castMap.concat(this.state.credits.credits.crew);
                         this.state.credits.genres.map( genre => {
-                            genres.push(' ' + genre.name);
+                            genres.push(genre);
                             return '';
                         });
                     } else if ( this.state.movies && this.state.movies.genres ) {
                         let castMap = this.state.credits.cast;
                         castAndCrewMap = castMap.concat(this.state.credits.crew);
                         this.state.movies.genres.map( genre => {
-                            genres.push(' ' + genre.name);
+                            genres.push(genre);
                             return '';
                         });
                     }
 
                     const genreTags = genres.map( genre => {
                         return (
-                            <li key={genre} className="list-inline-item"><span className="badge badge-danger">{genre}</span></li>
+                            <li key={genre} className="list-inline-item"><span className="badge badge-danger">
+	                            <Link to={'/television/genre/'+genre.id} className="no-decoration">
+	                            {genre.name}
+	                            </Link>
+                            </span></li>
                         )
                     });
 

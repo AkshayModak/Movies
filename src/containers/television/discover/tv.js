@@ -18,7 +18,6 @@ class Television extends React.Component {
 		}
 
     componentWillReceiveProps(newProps) {
-        this.setState({ tvList: [] });
         this.loadPage(newProps, 1);
     }
 
@@ -27,6 +26,10 @@ class Television extends React.Component {
     }
 
 		loadPage(props, page) {
+				if (page > 1000) {
+						page = 1000;
+				}
+				this.setState({ tvList: [] });
 				let link = null;
         if ("airing-today" === props.match.params.id) {
             this.setState({ headerTitle: 'Airing Today' });
@@ -68,7 +71,7 @@ class Television extends React.Component {
                 <li className="page-item">
                   <a className="page-link" onClick={this.loadPage.bind(this, this.props, this.state.currentPage - 1)} tabIndex="-1"><i className="fa fa-angle-double-left" aria-hidden="true"></i></a>
                 </li>
-                <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.props, this.state.currentPage)}>{ this.state.currentPage }</a></li>
+                <li className="page-item"><a className="page-link" style={{ background: 'crimson', color: 'white' }} onClick={this.loadPage.bind(this, this.props, this.state.currentPage)}>{ this.state.currentPage }</a></li>
                 <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.props, this.state.currentPage + 1)}>{ this.state.currentPage + 1 }</a></li>
                 <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.props, this.state.currentPage + 2)}>{ this.state.currentPage + 2 }</a></li>
                 <li className="page-item"><a className="page-link" onClick={this.loadPage.bind(this, this.props, this.state.currentPage + 1)}><i className="fa fa-angle-double-right" aria-hidden="true"></i></a></li>

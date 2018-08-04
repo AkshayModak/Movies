@@ -63,13 +63,13 @@ class Navbar extends React.Component {
 			            </div>
 		            </div>
 		          </nav>
-		          <nav class="navbar navbar-toggleable-sm bg-inverse navbar-inverse fixed-top" style={{ marginTop: '60px', backgroundColor: 'white', padding: '0', zIndex: 998 }}>
+		          <nav className="navbar navbar-toggleable-sm bg-inverse navbar-inverse fixed-top" style={{ marginTop: '60px', backgroundColor: 'white', padding: '0', zIndex: 998 }}>
 		            <div className="container"  style={{ marginTop: '0' }}>
 		              <form onSubmit={this.formHandler.bind(this)} style={{ width: '100%' }}>
 		                <div style={{ width: '100%' }} className="input-group">
-			                <input type="text" onChange={this.handleChange.bind(this)} class="form-control rounded-0 search" id="ser-input" placeholder="Search for movies, television shows, people...." style={{ border:'0' }} autocomplete="off"/>
-			                <div class="input-group-append">
-			                  <Link to={"/search/" + this.state.searchQuery} class="btn btn-outline-secondary" style={{ border: '0' }}><i class="fa fa-search" aria-hidden="true"></i></Link>
+			                <input type="text" onChange={this.handleChange.bind(this)} className="form-control rounded-0 search" id="ser-input" placeholder="Search for movies, television shows, people...." style={{ border:'0' }} autoComplete="off"/>
+			                <div className="input-group-append">
+			                  <Link to={"/search/" + this.state.searchQuery} className="btn btn-outline-secondary" style={{ border: '0' }}><i className="fa fa-search" aria-hidden="true"></i></Link>
 			                </div>
 		                </div>
 	                </form>
