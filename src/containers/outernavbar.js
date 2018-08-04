@@ -52,7 +52,7 @@ class OuterNavbar extends Component {
 																				<div className="col-12 col-md-6 front-labels">
                                             <h1>{firstSlide.title}</h1>
 																						<p>{firstSlide.overview}</p>
-																						<Link className="btn btn-dark" to={"/movie-details/" + firstSlide.id}>More Details</Link>
+																						<Link className="btn btn-danger" to={"/movie-details/" + firstSlide.id}>More Details</Link>
                                         </div>
                                       </div>
                                   </div>
@@ -63,7 +63,7 @@ class OuterNavbar extends Component {
                                     <div className="col-12 col-md-6 front-labels">
 																			<h1>{secondSlide.title}</h1>
                                       <p>{secondSlide.overview}</p>
-                                      <Link className="btn btn-dark" to={"/movie-details/" + secondSlide.id}>More Details</Link>
+                                      <Link className="btn btn-danger" to={"/movie-details/" + secondSlide.id}>More Details</Link>
                                     </div>
                                   </div>
                             </div>,
@@ -73,7 +73,7 @@ class OuterNavbar extends Component {
                                             <div className="col-12 col-md-6 front-labels">
                                               <h1>{thirdSlide.title}</h1>
                                               <p>{thirdSlide.overview}</p>
-                                              <Link className="btn btn-dark" to={"/movie-details/" + thirdSlide.id}>More Details</Link>
+                                              <Link className="btn btn-danger" to={"/movie-details/" + thirdSlide.id}>More Details</Link>
                                             </div>
                                         </div>
                                     </div>
@@ -84,7 +84,7 @@ class OuterNavbar extends Component {
                                       <div className="col-12 col-md-6 front-labels">
                                         <h1>{fourthSlide.title}</h1>
                                         <p>{fourthSlide.overview}</p>
-                                        <Link className="btn btn-dark" to={"/movie-details/" + fourthSlide.id}>More Details</Link>
+                                        <Link className="btn btn-danger" to={"/movie-details/" + fourthSlide.id}>More Details</Link>
                                       </div>
                                     </div>
                                 </div>,

@@ -303,6 +303,16 @@ footer, footer > div.container {
 		font-size: 20px;
 }
 
+.btn-danger {
+		background-color: crimson;
+		border-color: crimson;
+}
+
+.btn-danger:hover {
+		background-color: darkred;
+		border-color: darkred;
+}
+
 .btnlink:hover, .btnlink:focus {
 		text-decoration: none;
 		color: red;

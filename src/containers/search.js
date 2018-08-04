@@ -49,7 +49,7 @@ class Search extends React.Component {
 
 				if (this.state.hasLoaded && searchResults && searchResults.length > 0) {
 						pagination = (
-                <nav aria-label="Page navigation example">
+                <nav aria-label="Page navigation">
                   <ul className="pagination justify-content-center">
                     <li className="page-item">
                       <a className="page-link" onClick={this.loadPage.bind(this, this.props, 1)} tabIndex="-1">First</a>

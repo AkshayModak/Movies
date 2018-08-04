@@ -19,17 +19,6 @@ class FrontPage extends Component {
 					<OuterNavbar />
 					<div className="row margin-0">
 						<div className="col-xl-12">
-							<div className="card front-cards">
-					      <div className="card-header">
-					        <ul className="list-inline margin-bottom-0">
-										<li className="list-inline-item padding-top-7">Upcoming Movies</li>
-										<li className="list-inline-item float-right"><Link to="/movies/upcoming" className="btn btn-light float-right">View All</Link></li>
-					        </ul>
-					      </div>
-					      <div className="card-body padding-bottom-0">
-					        <MovieContainer showTotal={6} hidePagination={true} isUpcoming={true}/>
-					      </div>
-					    </div>
 			        <div className="card front-cards">
 			          <div className="card-header">
 			            <ul className="list-inline margin-bottom-0">
@@ -41,6 +30,17 @@ class FrontPage extends Component {
 			            <InTheatres showTotal={6} hidePagination={true}/>
 			          </div>
 			        </div>
+			        <div className="card front-cards">
+                <div className="card-header">
+                  <ul className="list-inline margin-bottom-0">
+                    <li className="list-inline-item padding-top-7">Upcoming Movies</li>
+                    <li className="list-inline-item float-right"><Link to="/movies/upcoming" className="btn btn-light float-right">View All</Link></li>
+                  </ul>
+                </div>
+                <div className="card-body padding-bottom-0">
+                  <MovieContainer showTotal={6} hidePagination={true} isUpcoming={true}/>
+                </div>
+              </div>
 			        <div className="card front-cards">
 			          <div className="card-header">
 			            <ul className="list-inline margin-bottom-0">
