@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Users from '../../Movies';
 import { connect } from 'react-redux';
 import axios from '../../../axios';
-import Aux from '../../../HOCs/Aux';
+import Aux from '../../../HOCs/Aux1';
 import OuterNavbar from '../../outernavbar';
 
 class MovieContainer extends Component {

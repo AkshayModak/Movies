@@ -1,5 +1,5 @@
 import React from 'react';
-import Aux from './HOCs/Aux';
+import Aux from './HOCs/Aux1';
 import Navbar from './containers/navbar';
 import Footer from './containers/footer';
 import { Link } from 'react-router-dom';

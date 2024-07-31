@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PosterPlaceholder from '../../images/poster-placeholder.png';
-import Aux from '../../HOCs/Aux';
+import Aux from '../../HOCs/Aux1';
 import { dateFormatter } from '../../utility/utilityMethods';
 
 class MovieCards extends Component {

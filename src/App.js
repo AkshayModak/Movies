@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Route, Switch } from 'react-router-dom';
 import MovieDetails from './containers/movies/movieDetails';
 import DiscoverMovies from './containers/movies/discover/movies';
-import Aux from './HOCs/Aux';
+import Aux from './HOCs/Aux1';
 import FrontPage from './containers/frontPage';
 import InTheatres from './containers/movies/upcoming/InTheatres';
 import PopularTV from './containers/television/popularTV';

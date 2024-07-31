@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Aux from '../HOCs/Aux';
+import Aux from '../HOCs/Aux1';
 import { Link } from 'react-router-dom';
 
 class Footer extends Component {

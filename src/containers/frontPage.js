@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MovieContainer from './movies/upcoming/movieContainer';
 import InTheatres from './movies/upcoming/InTheatres';
-import Aux from '../HOCs/Aux';
+import Aux from '../HOCs/Aux1';
 import { Link } from 'react-router-dom';
 import PopularTV from './television/popularTV';
 import Footer from './footer';

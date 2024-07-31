@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './style.css';
-import Aux from '../HOCs/Aux';
+import Aux from '../HOCs/Aux1';
 import AppleCarousel from 'react-apple-carousel';
 import Loader from '../utility/loader';
 import { Link } from 'react-router-dom';
