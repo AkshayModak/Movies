@@ -6,7 +6,7 @@ name: Build and deploy Node.js app to Azure Web App - akshaysapp
 on:
   push:
     branches:
-      - feature/temporary_fix
+      - master
   workflow_dispatch:
 
 jobs:
