@@ -164,7 +164,7 @@ class Person extends React.Component {
                         <div className="person">
                           <div className="row">
                             <div className="col-xs col-lg-4">
-                              <img src={poster_path ? poster_path : PosterPlaceholder} className="sticky-top poster"/>
+                              <img alt="Poster" src={poster_path ? poster_path : PosterPlaceholder} className="sticky-top poster"/>
                             </div>
                             <div className="col-lg-8 primary-bar">
                               <h3>{personDetails.name}</h3>
