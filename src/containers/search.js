@@ -1,5 +1,5 @@
 import React from 'react';
-import Aux from '../HOCs/Aux';
+import Aux from '../HOCs/Aux1';
 import axios from '../axios';
 import NoResult from '../static/noresult';
 import PosterPlaceholder from '../images/poster-placeholder.png';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, Link, withRouter } from 'react-router-dom';
 import './style.css';
-import Aux from '../HOCs/Aux';
+import Aux from '../HOCs/Aux1';
 
 
 class Navbar extends React.Component {

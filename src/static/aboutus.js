@@ -1,6 +1,6 @@
 import React from 'react';
 import Footer from '../containers/footer';
-import Aux from '../HOCs/Aux';
+import Aux from '../HOCs/Aux1';
 
 const about = () => {
 		return (

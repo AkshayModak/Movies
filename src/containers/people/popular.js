@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Footer from '../footer';
-import Aux from '../../HOCs/Aux';
+import Aux from '../../HOCs/Aux1';
 import axios from '../../axios';
 import { Link } from 'react-router-dom';
 import Loader from '../../utility/loader';

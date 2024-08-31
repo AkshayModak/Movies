@@ -1,6 +1,6 @@
 import React from 'react';
 import Footer from '../../footer';
-import Aux from '../../../HOCs/Aux';
+import Aux from '../../../HOCs/Aux1';
 import PosterPlaceholder from '../../../images/poster-placeholder.png';
 import axios from '../../../axios';
 import { dateFormatter } from '../../../utility/utilityMethods';

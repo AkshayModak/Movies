@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Aux from '../HOCs/Aux';
+import Aux from '../HOCs/Aux1';
 import MovieCards from './movies/movieCards';
 import { connect } from 'react-redux';
 import './style.css';

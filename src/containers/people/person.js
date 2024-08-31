@@ -1,5 +1,5 @@
 import React from 'react';
-import Aux from '../../HOCs/Aux';
+import Aux from '../../HOCs/Aux1';
 import '../style.css';
 import axios from '../../axios';
 import Footer from '../footer';
